@@ -18,6 +18,8 @@ public class PlayerControl : MonoBehaviour
 	public float extraJumpForce;
 	public float delayToExtraJumpForce;
 
+	public GameController gameController;
+
 
 
 	private Transform groundCheck;			// A position marking where to check if the player is grounded.
@@ -118,12 +120,8 @@ public class PlayerControl : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
-	public void reset(){
-		transform.position = new Vector3 (0.0f, 0.0f, 0.0f);
-	}
 
 	public void death(){
-		reset ();
+		gameController.RebornPlayer ();
 	}
-		
 }

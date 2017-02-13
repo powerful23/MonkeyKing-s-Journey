@@ -8,13 +8,12 @@ public class WheelSpawner : MonoBehaviour {
 	public float speed = 2f;				// The speed the rocket will fire at.
 	public Transform parent;
 
-	private Animator anim;					// Reference to the Animator component.
+
 
 
 	void Awake()
 	{
 		// Setting up the references.
-		anim = transform.root.gameObject.GetComponent<Animator>();
 		InvokeRepeating("Spawn",  0, spawnTime);
 	}
 
