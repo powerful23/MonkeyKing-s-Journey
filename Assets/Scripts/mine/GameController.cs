@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour {
 	public GameObject camera;				// get the MainCamera
 	public Transform playerPos;				// get the player's transform
 	public Transform[] checkPoints;			// get the transforms of all checkPoints
+	public Transform[] rebornPoints;
 	public GameObject wall;					// the "PREFAB" wall which will be instantiated when player arrives the checkPoint
 	public GameObject missionComplete;		// mission complete title
 
@@ -18,6 +19,8 @@ public class GameController : MonoBehaviour {
 	private float cameraWidth;				// the width size of the camera
 	private bool inCheckPoint;				// whether the player in a checkPoint event
 
+	private int curRebornPoint;
+
 
 	// Use this for initialization
 	void Start () {
@@ -27,8 +30,9 @@ public class GameController : MonoBehaviour {
 		cameraWidth = camera.GetComponent<Camera> ().aspect * camera.GetComponent<Camera> ().orthographicSize;
 		inCheckPoint = false;
 		enemySurvivedNum = 0;
+		curRebornPoint = 0;
 	}
-	
+		
 	// Update is called once per frame
 	void Update () {
 		// if a player is in a checkPoint and find that all enemies are destroyed
@@ -123,5 +127,10 @@ public class GameController : MonoBehaviour {
 	void StopCameraMoving(){
 		SetInvisWall ();
 		camera.GetComponent<CameraFollow> ().fixedPos = true;
+	}
+
+	public void RebornPlayer(){
+		Transform tmp = rebornPoints [curRebornPoint];
+		playerPos.Translate (new Vector3(tmp.position.x, tmp.position.y, tmp.position.z));
 	}
 }

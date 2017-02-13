@@ -14,7 +14,6 @@ public class ShootingSpawner : MonoBehaviour {
 	void Awake()
 	{
 		// Setting up the references.
-		anim = transform.root.gameObject.GetComponent<Animator>();
 		InvokeRepeating("Spawn",  0, spawnTime);
 	}
 	
