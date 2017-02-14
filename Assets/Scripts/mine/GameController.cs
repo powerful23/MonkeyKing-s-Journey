@@ -131,6 +131,6 @@ public class GameController : MonoBehaviour {
 
 	public void RebornPlayer(){
 		Transform tmp = rebornPoints [curRebornPoint];
-		playerPos.Translate (new Vector3(tmp.position.x, tmp.position.y, tmp.position.z));
+		playerPos.position = tmp.position;
 	}
 }

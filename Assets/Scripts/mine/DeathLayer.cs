@@ -2,8 +2,6 @@
 using System.Collections;
 
 public class DeathLayer : MonoBehaviour {
-	public PlayerControl playerControl; 
-	// Use this for initialization
 	void Start () {
 	
 	}
@@ -15,8 +13,8 @@ public class DeathLayer : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.tag == "Player"){
-			Debug.Log ("hit");
-			playerControl.death ();
+			col.GetComponent<PlayerControl> ().death ();
+		//	playerControl.death ();
 		}
 	}
 }

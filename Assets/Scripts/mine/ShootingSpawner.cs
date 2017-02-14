@@ -8,7 +8,6 @@ public class ShootingSpawner : MonoBehaviour {
 	public float speed = 2f;				// The speed the rocket will fire at.
 	public int direction = 3;
 
-	private Animator anim;					// Reference to the Animator component.
 
 
 	void Awake()
