@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour {
 	private float cameraWidth;				// the width size of the camera
 	private bool inCheckPoint;				// whether the player in a checkPoint event
 
-	private int curRebornPoint;
+	private int pendingRebornPoint;
 
 
 	// Use this for initialization
@@ -30,7 +30,7 @@ public class GameController : MonoBehaviour {
 		cameraWidth = camera.GetComponent<Camera> ().aspect * camera.GetComponent<Camera> ().orthographicSize;
 		inCheckPoint = false;
 		enemySurvivedNum = 0;
-		curRebornPoint = 0;
+		pendingRebornPoint = 0;
 	}
 		
 	// Update is called once per frame
@@ -63,6 +63,10 @@ public class GameController : MonoBehaviour {
 					MissionComplete ();
 				}
 			}
+		}
+
+		if (pendingRebornPoint < rebornPoints.Length && playerPos.position.x > rebornPoints [pendingRebornPoint].position.x) {
+			++pendingRebornPoint;
 		}
 
 
@@ -130,7 +134,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void RebornPlayer(){
-		Transform tmp = rebornPoints [curRebornPoint];
+		Transform tmp = rebornPoints [pendingRebornPoint - 1];
 		playerPos.position = tmp.position;
 	}
 }
