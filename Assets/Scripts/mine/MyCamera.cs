@@ -9,13 +9,16 @@ public class MyCamera : MonoBehaviour {
 	public Vector2 minXAndY;		// The minimum x and y coordinates the camera can have.
 
 	public bool fixedPos = false;   // whether the camera is stopped or not
-
-
 	private Transform player;		// Reference to the player's transform.
 
 	private float xSmooth;		// How smoothly the camera catches up with it's target movement in the x axis.
 	private float ySmooth = 2f;		// How smoothly the camera catches up with it's target movement in the y axis.
 	private float smoothFactor;	// relate smooth value to chracter's speed
+
+	private bool inPreviewMode; // whether in preview mode
+	private Transform previewTarget;
+	private float previewStartTime;
+	private float previewTime;
 
 	// Use this for initialization
 	void Start()
@@ -68,6 +71,7 @@ public class MyCamera : MonoBehaviour {
 		// Setting up the reference.
 		player = GameObject.FindGameObjectWithTag("Player").transform;
 		fixedPos = false;
+		inPreviewMode = false;
 		smoothFactor = 2.0f / 75.0f;
 		xSmooth = smoothFactor * player.gameObject.GetComponent<PlayerControl> ().maxSpeed;
 	}
@@ -89,7 +93,9 @@ public class MyCamera : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		//if the camera is not stopped, track the player
-		if (!fixedPos)	TrackPlayer();
+		if (!fixedPos && !inPreviewMode)	TrackPlayer();
+		if (inPreviewMode)
+			moveCameraInPreviewMode ();
 	}
 
 
@@ -115,5 +121,27 @@ public class MyCamera : MonoBehaviour {
 
 		// Set the camera's position to the target position with the same z component.
 		transform.position = new Vector3(targetX, targetY, transform.position.z);
+	}
+
+	public void previewMoving(Transform target, float ptime){
+		inPreviewMode = true;
+		player.gameObject.GetComponent<PlayerControl> ().enabled = false;
+		previewTarget = target;
+		previewStartTime = Time.time;
+		previewTime = ptime;
+	}
+
+	void moveCameraInPreviewMode (){
+		if (Time.time - previewStartTime > previewTime) {
+			inPreviewMode = false;
+			player.gameObject.GetComponent<PlayerControl> ().enabled = true;
+		}
+		float targetX = transform.position.x;
+		float targetY = transform.position.y;
+
+		targetX = Mathf.Lerp(transform.position.x, previewTarget.position.x, xSmooth * Time.deltaTime);
+		targetY = Mathf.Lerp(transform.position.y, previewTarget.position.y, ySmooth * Time.deltaTime);
+
+		transform.position = new Vector3 (targetX, targetY, transform.position.z);
 	}
 }
