@@ -1,14 +1,15 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\mine\GameController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\mine\MyCamera.cs">
     <Files>
       <File FileName="Assets\Scripts\PlayerControl.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\GameController.cs" Line="132" Column="29" />
-      <File FileName="Assets\Scripts\mine\DeathLayer.cs" Line="4" Column="42" />
+      <File FileName="Assets\Scripts\mine\GameController.cs" Line="83" Column="71" />
+      <File FileName="Assets\Scripts\mine\DeathLayer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\WheelSpawner.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\ShootingSpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\MyBullet.cs" Line="18" Column="22" />
+      <File FileName="Assets\Scripts\mine\MyBullet.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\MovingGround.cs" Line="55" Column="57" />
+      <File FileName="Assets\Scripts\mine\MyCamera.cs" Line="128" Column="68" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
