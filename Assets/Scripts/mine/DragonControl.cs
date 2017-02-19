@@ -45,6 +45,7 @@ public class DragonControl : MonoBehaviour {
 				Flip ();
 		}
 
+		//if not attacking and not in the cooldown
 		if (!attacking && Time.time - timer > attackCoolDown) {
 			
 			int rnd = Random.Range (0, 100);
@@ -56,13 +57,10 @@ public class DragonControl : MonoBehaviour {
 				attacking = true;
 			} else if (rnd >= 60 && rnd < 90) {
 				mode = 2;
+				roar ();
+				attacking = true;
 			} else {
 				mode = 3;
-			}
-		} else {
-			if (mode == 1) {
-				//if the dragon hit the wall or 
-
 			}
 		}
 	}
@@ -73,6 +71,12 @@ public class DragonControl : MonoBehaviour {
 		anim.SetBool ("rush", false);
 		rb.velocity = new Vector2 (0.0f, 0.0f);
 		timer = Time.time;
+	}
+
+	void roar(){
+		anim.SetBool ("roar", true);
+
+
 	}
 
 	void rush(){
@@ -90,5 +94,4 @@ public class DragonControl : MonoBehaviour {
 		transform.localScale = enemyScale;
 		facingRight = !facingRight;
 	}
-
 }
