@@ -88,9 +88,9 @@ public class PlayerControl : MonoBehaviour
 		// cache the crouch input wen
 		float c = Input.GetAxis("Crouch");
 
-		if (move && facingRight)
+		if (move && facingRight || h > 0)
 			rigidbody.velocity = new Vector2 (Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody.velocity.y);
-		else if (move && !facingRight)
+		else if (move && !facingRight || h < 0)
 			rigidbody.velocity = new Vector2 (-Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody.velocity.y);
 
 

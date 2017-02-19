@@ -75,6 +75,7 @@
      <Compile Include="Assets\Scripts\mine\DeathLayer.cs" />
      <Compile Include="Assets\Scripts\mine\DestroyBullet.cs" />
      <Compile Include="Assets\Scripts\mine\DownBound.cs" />
+     <Compile Include="Assets\Scripts\mine\DragonControl.cs" />
      <Compile Include="Assets\Scripts\mine\GameController.cs" />
      <Compile Include="Assets\Scripts\mine\GameManager.cs" />
      <Compile Include="Assets\Scripts\mine\LaserEmitter.cs" />
@@ -89,6 +90,7 @@
      <Compile Include="Assets\Scripts\mine\ShootingSpawner.cs" />
      <Compile Include="Assets\Scripts\mine\TailRotator.cs" />
      <Compile Include="Assets\Scripts\mine\WheelSpawner.cs" />
+     <Compile Include="Assets\Scripts\mine\dragon\HeadCollision.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
