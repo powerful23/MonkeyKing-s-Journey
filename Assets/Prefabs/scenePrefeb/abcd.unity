@@ -91,6 +91,41 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
+--- !u!4 &51574141 stripped
+Transform:
+  m_PrefabParentObject: {fileID: 4108919394937550, guid: 1c4d18bd3cb556e40a613b4bf8b01fb3,
+    type: 2}
+  m_PrefabInternal: {fileID: 555685402}
+--- !u!1 &259064719
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 1384506649387602, guid: 1c4d18bd3cb556e40a613b4bf8b01fb3,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 259064720}
+  m_Layer: 8
+  m_Name: groundCheck2
+  m_TagString: Untagged
+  m_Icon: {fileID: -2065832391, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &259064720
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 4152405946006606, guid: 1c4d18bd3cb556e40a613b4bf8b01fb3,
+    type: 2}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 259064719}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.382, y: -1.115, z: 0}
+  m_LocalScale: {x: 0.99999994, y: 0.99999994, z: 0.9999998}
+  m_Children: []
+  m_Father: {fileID: 51574141}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &555685402
 Prefab:
   m_ObjectHideFlags: 0
@@ -129,6 +164,18 @@ Prefab:
     - target: {fileID: 4668881456578856, guid: 1c4d18bd3cb556e40a613b4bf8b01fb3, type: 2}
       propertyPath: m_RootOrder
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152405946006606, guid: 1c4d18bd3cb556e40a613b4bf8b01fb3, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -0.342
+      objectReference: {fileID: 0}
+    - target: {fileID: 4152405946006606, guid: 1c4d18bd3cb556e40a613b4bf8b01fb3, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -1.082
+      objectReference: {fileID: 0}
+    - target: {fileID: 1384506649387602, guid: 1c4d18bd3cb556e40a613b4bf8b01fb3, type: 2}
+      propertyPath: m_Name
+      value: groundCheck1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1c4d18bd3cb556e40a613b4bf8b01fb3, type: 2}
