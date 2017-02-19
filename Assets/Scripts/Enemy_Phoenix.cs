@@ -64,7 +64,7 @@ public class Enemy_Phoenix : MonoBehaviour {
 
 
 		if (Time.time > nextFire) {
-			Transform trans = Instantiate (fireBall, tmp.position, tmp.rotation) as Transform;
+	//		Transform trans = Instantiate (fireBall, tmp.position, tmp.rotation) as Transform;
 			nextFire = Time.time + fireRate;
 		}
 

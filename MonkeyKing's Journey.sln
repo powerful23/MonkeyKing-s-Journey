@@ -1,7 +1,7 @@
+﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
-# Visual Studio 2008
-
-Project("{DE5B0BE0-ECA2-E0FD-994A-1F95EBDAB4D5}") = "MonkeyKing's Journey", "Assembly-CSharp.csproj", "{6E9DE94A-31BC-B8B2-8CB6-448C9B2C67D7}"
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MonkeyKing's Journey", "Assembly-CSharp.csproj", "{6E9DE94A-31BC-B8B2-8CB6-448C9B2C67D7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
