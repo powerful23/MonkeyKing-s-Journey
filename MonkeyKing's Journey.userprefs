@@ -1,8 +1,8 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\mine\DragonControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\PlayerControl.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerControl.cs" Line="26" Column="18" />
       <File FileName="Assets\Scripts\mine\GameController.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\DeathLayer.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\WheelSpawner.cs" Line="1" Column="1" />
@@ -11,7 +11,7 @@
       <File FileName="Assets\Scripts\mine\MovingGround.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\MyCamera.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\TailRotator.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\DragonControl.cs" Line="79" Column="3" />
+      <File FileName="Assets\Scripts\mine\DragonControl.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\dragon\HeadCollision.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
