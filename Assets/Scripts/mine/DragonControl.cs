@@ -12,6 +12,7 @@ public class DragonControl : MonoBehaviour {
 	public float rushSpeed;
 	public float rushCD = 2;
 	public float[] cooldown;
+	public float roarTime = 2.0f;
 
 	public float attackCoolDown = 3.0f;
 
@@ -24,6 +25,7 @@ public class DragonControl : MonoBehaviour {
 	private CircleCollider2D cc;
 	private Transform player;
 	private bool facingRight;
+	private float startRoar;
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
@@ -51,6 +53,8 @@ public class DragonControl : MonoBehaviour {
 			int rnd = Random.Range (0, 100);
 			if (rnd >= 0 && rnd < 30) {
 				mode = 0;
+				ulti ();
+				attacking = true;
 			} else if (rnd >= 30 && rnd < 60) {
 				mode = 1;
 				rush ();
@@ -62,7 +66,17 @@ public class DragonControl : MonoBehaviour {
 			} else {
 				mode = 3;
 			}
+		} else if (attacking){
+			if (mode == 2 && Time.time - startRoar > roarTime) {
+				stopRoar ();
+			}
 		}
+	}
+
+	void stopRoar(){
+		attacking = false;
+		anim.SetBool ("roar", false);
+		timer = Time.time;
 	}
 
 
@@ -75,9 +89,14 @@ public class DragonControl : MonoBehaviour {
 
 	void roar(){
 		anim.SetBool ("roar", true);
-
-
+		startRoar = Time.time;
 	}
+	void ulti(){
+		anim.SetBool ("ulti", true);
+		startRoar = Time.time;
+	}
+
+
 
 	void rush(){
 		anim.SetBool ("rush", true);
