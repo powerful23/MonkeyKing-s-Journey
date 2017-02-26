@@ -9,6 +9,9 @@ public class MyCamera : MonoBehaviour {
 	public Vector2 minXAndY;		// The minimum x and y coordinates the camera can have.
 
 	public bool fixedPos = false;   // whether the camera is stopped or not
+	public bool shake = false;
+	public float shakeAmount = 1.0f;
+
 	private Transform player;		// Reference to the player's transform.
 
 	private float xSmooth;		// How smoothly the camera catches up with it's target movement in the x axis.
@@ -121,6 +124,13 @@ public class MyCamera : MonoBehaviour {
 
 		// Set the camera's position to the target position with the same z component.
 		transform.position = new Vector3(targetX, targetY, transform.position.z);
+
+		if (shake) {
+			transform.position = new Vector3 (targetX + Random.Range (-1f, 1f) * shakeAmount, targetY + Random.Range (-1f, 1f) * shakeAmount, transform.position.z); 
+		} else {
+			transform.position = new Vector3 (targetX, targetY, transform.position.z);
+		}
+
 	}
 
 	public void previewMoving(Transform target, float ptime){
@@ -144,4 +154,5 @@ public class MyCamera : MonoBehaviour {
 
 		transform.position = new Vector3 (targetX, targetY, transform.position.z);
 	}
+		
 }

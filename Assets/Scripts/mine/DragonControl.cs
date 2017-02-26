@@ -9,36 +9,52 @@ using System.Collections;
 
 
 public class DragonControl : MonoBehaviour {
-	public float rushSpeed;
-	public float rushCD = 2;
-	public float[] cooldown;
-	public float roarTime = 2.0f;
+	public float rushSpeed;		// speed of the rush
+	public float roarTime = 2.0f;	// duration time for roar
 
-	public float attackCoolDown = 3.0f;
+	public GameObject headLaserEmitter;	// the laser emitter of the head
+	public GameObject headLaserPartical;
 
+	public float attackCoolDown = 3.0f;	// the cooldown between different modes
+	public float ultiStandBy = 1.0f;
+	public GameObject shield;
 
-	private float timer;
-	private Animator anim;
+	public Transform ground;
+
+	private float timer;	// the timer of the overall battle
+	private float ultiStandByTimer;
+
+	private Animator anim;	// the animator controls the dragon boss
 	private Rigidbody2D rb;
-	private int mode;
-	private bool attacking;
-	private CircleCollider2D cc;
-	private Transform player;
-	private bool facingRight;
-	private float startRoar;
+	private int mode;		// attack mode
+	private bool attacking;	// is the dragon attacking
+	private Transform player;	// the transform of the player
+	private bool facingRight;	// is the dragon facing right or left
+	private float startRoar;	// the timer for the dragon when roaring
+	private MyCamera myCamera;
+
+	private LineRenderer headLR;	// the lineRenderer of the head laser
+
+	private float angle;	// controls the head laser
+	private GameObject tempShield;
+
 	// Use this for initialization
 	void Start () {
 		anim = GetComponent<Animator> ();
 		rb = GetComponent<Rigidbody2D> ();
 		timer = Time.time;
 		attacking = false;
-		cc = GetComponent<CircleCollider2D> ();
 		player = GameObject.FindGameObjectWithTag("Player").transform;
+		myCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<MyCamera>();
 		facingRight = false;
+
+		headLR = headLaserEmitter.GetComponent<LineRenderer> ();
+
 	}
 
 	// Update is called once per frame
 	void Update () {
+		// control the dragon to always face the player
 		if (player.transform.position.x < transform.position.x - 3.0f) {
 			if (facingRight)
 				Flip ();
@@ -49,26 +65,64 @@ public class DragonControl : MonoBehaviour {
 
 		//if not attacking and not in the cooldown
 		if (!attacking && Time.time - timer > attackCoolDown) {
-			
+			// randomly select the mode
 			int rnd = Random.Range (0, 100);
+			// normal attack
 			if (rnd >= 0 && rnd < 30) {
 				mode = 0;
-				ulti ();
 				attacking = true;
-			} else if (rnd >= 30 && rnd < 60) {
+				ultiStandByTimer = Time.time;
+				ultiReady ();
+			}
+			// rush mode
+			else if (rnd >= 30 && rnd < 60) {
 				mode = 1;
 				rush ();
 				attacking = true;
-			} else if (rnd >= 60 && rnd < 90) {
+			}
+			// roar mode
+			else if (rnd >= 60 && rnd < 90) {
 				mode = 2;
 				roar ();
 				attacking = true;
-			} else {
+			}
+			// ulti mode
+			else {
 				mode = 3;
 			}
-		} else if (attacking){
+		} 
+		else if (attacking){
+			// if in roar mode and exceeds the roar time limitation, stop the roar mode;
 			if (mode == 2 && Time.time - startRoar > roarTime) {
 				stopRoar ();
+			} else if (mode == 0 && ultiStandByTimer > 0 && Time.time - ultiStandByTimer > ultiStandBy) {
+				ultiStandByTimer = -ultiStandByTimer;
+				ulti ();
+			}
+		}
+	}
+
+
+	void FixedUpdate(){
+		if (attacking) {
+			// if in the ulti mode, emit the laser
+			if (mode == 0 && ultiStandByTimer < 0) {
+				Vector3 emitterPos = headLaserEmitter.transform.position;
+				headLR.SetPosition(0, emitterPos);
+				//headLR.SetPosition(1, new Vector3(0,0,0));
+				RaycastHit2D hit = Physics2D.Raycast (new Vector2 (emitterPos.x, emitterPos.y), new Vector2 (angle, -1), 100, 1 << LayerMask.NameToLayer("Ground"));
+				if (hit.collider != null) {
+					headLR.SetPosition (1, hit.point);
+					headLaserPartical.transform.position = hit.point;
+					if (!facingRight)
+						angle -= Time.deltaTime * 1f;
+					else
+						angle += Time.deltaTime * 1f;
+				}
+				else {
+					stopUlti ();
+				}
+
 			}
 		}
 	}
@@ -77,6 +131,7 @@ public class DragonControl : MonoBehaviour {
 		attacking = false;
 		anim.SetBool ("roar", false);
 		timer = Time.time;
+		myCamera.shake = false;
 	}
 
 
@@ -87,13 +142,35 @@ public class DragonControl : MonoBehaviour {
 		timer = Time.time;
 	}
 
+	void stopUlti(){
+		attacking = false;
+		anim.SetBool ("ulti", false);
+		timer = Time.time;
+		headLR.enabled = false;
+		headLaserPartical.GetComponent<ParticleSystem> ().Stop ();
+		if (tempShield != null)
+			Destroy (tempShield);
+	}
+
 	void roar(){
 		anim.SetBool ("roar", true);
 		startRoar = Time.time;
+		myCamera.shake = true;
 	}
-	void ulti(){
+
+	void ultiReady(){
 		anim.SetBool ("ulti", true);
-		startRoar = Time.time;
+
+		Vector3 shieldPos = new Vector3 ();
+		shieldPos.x = player.position.x + Random.Range (-3f, 3f);
+		shieldPos.y = ground.position.y + 1f;
+		shieldPos.z = 0.0f;
+		tempShield = Instantiate (shield, shieldPos, shield.transform.rotation) as GameObject;
+	}
+	void ulti(){		
+		angle = 0.2f;
+		headLR.enabled = true;
+		headLaserPartical.GetComponent<ParticleSystem> ().Play ();
 	}
 
 
