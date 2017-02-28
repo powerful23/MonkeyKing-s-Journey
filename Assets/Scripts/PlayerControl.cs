@@ -22,7 +22,8 @@ public class PlayerControl : MonoBehaviour
 
 
 
-	private Transform groundCheck;			// A position marking where to check if the player is grounded.
+	private Transform groundCheck1;			// A position marking where to check if the player is grounded.
+	private Transform groundCheck2;
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Rigidbody2D rigidbody;
 
@@ -35,7 +36,8 @@ public class PlayerControl : MonoBehaviour
 	void Awake()
 	{
 		// Setting up references.
-		groundCheck = transform.Find("groundCheck");
+		groundCheck1 = transform.Find("groundCheck1");
+		groundCheck2 = transform.Find("groundCheck2");
 		rigidbody = GetComponent<Rigidbody2D> ();
 	}
 
@@ -43,7 +45,8 @@ public class PlayerControl : MonoBehaviour
 	void Update()
 	{
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-		grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));  
+		grounded = Physics2D.Linecast(transform.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"))
+			|| Physics2D.Linecast(transform.position, groundCheck2.position, 1 << LayerMask.NameToLayer("Ground"));  
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
 		if (jumpButtonClicked && grounded) {
@@ -88,9 +91,9 @@ public class PlayerControl : MonoBehaviour
 		// cache the crouch input wen
 		float c = Input.GetAxis("Crouch");
 
-		if (move && facingRight)
+		if (move && facingRight || h > 0)
 			rigidbody.velocity = new Vector2 (Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody.velocity.y);
-		else if (move && !facingRight)
+		else if (move && !facingRight || h < 0)
 			rigidbody.velocity = new Vector2 (-Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody.velocity.y);
 
 

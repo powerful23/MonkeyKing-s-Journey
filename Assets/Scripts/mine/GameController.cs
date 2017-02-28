@@ -7,7 +7,9 @@ public class GameController : MonoBehaviour {
 	public GameObject camera;				// get the MainCamera
 	public Transform playerPos;				// get the player's transform
 	public Transform[] checkPoints;			// get the transforms of all checkPoints
-	public Transform[] rebornPoints;
+	public Transform[] rebornPoints;		// get the transforms of the rebornPoints
+	public Transform[] previewPoints;
+
 	public GameObject wall;					// the "PREFAB" wall which will be instantiated when player arrives the checkPoint
 	public GameObject missionComplete;		// mission complete title
 
@@ -19,7 +21,8 @@ public class GameController : MonoBehaviour {
 	private float cameraWidth;				// the width size of the camera
 	private bool inCheckPoint;				// whether the player in a checkPoint event
 
-	private int curRebornPoint;
+	private int pendingRebornPoint;
+	private int pendingPreviewPoint;
 
 
 	// Use this for initialization
@@ -30,7 +33,8 @@ public class GameController : MonoBehaviour {
 		cameraWidth = camera.GetComponent<Camera> ().aspect * camera.GetComponent<Camera> ().orthographicSize;
 		inCheckPoint = false;
 		enemySurvivedNum = 0;
-		curRebornPoint = 0;
+		pendingRebornPoint = 0;
+		pendingPreviewPoint = 0;
 	}
 		
 	// Update is called once per frame
@@ -65,7 +69,22 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
+		if (pendingRebornPoint < rebornPoints.Length && playerPos.position.x > rebornPoints [pendingRebornPoint].position.x) {
+			++pendingRebornPoint;
+		}
 
+		if (!inCheckPoint && pendingPreviewPoint < previewPoints.Length && playerPos.position.x > previewPoints [pendingPreviewPoint].position.x) {
+			camera.GetComponent<MyCamera> ().previewMoving (previewPoints [pendingPreviewPoint].GetChild (0), 3.0f);
+			++pendingPreviewPoint;
+		}
+	}
+
+	public void disablePlayer(){
+		playerPos.gameObject.GetComponent<PlayerControl> ().enabled = false;
+	}
+
+	public void enablePlayer(){
+		playerPos.gameObject.GetComponent<PlayerControl> ().enabled = true;
 	}
 
 
@@ -130,7 +149,9 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void RebornPlayer(){
-		Transform tmp = rebornPoints [curRebornPoint];
+		Transform tmp = rebornPoints [pendingRebornPoint - 1];
 		playerPos.position = tmp.position;
 	}
+
+
 }
