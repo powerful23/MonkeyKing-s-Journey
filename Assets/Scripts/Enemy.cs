@@ -8,45 +8,36 @@ public class Enemy : MonoBehaviour
 	public Sprite deadEnemy;			// A sprite of the enemy when it's dead.
 	public Sprite damagedEnemy;			// An optional sprite of the enemy when it's damaged.
 	public AudioClip[] deathClips;		// An array of audioclips that can play when the enemy dies.
-	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
+//	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
-	public float sightSizeX;
-	public float sightSizeY;
-
-	private GameObject player; 			//the transform of the player;
 
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
+	private Transform frontCheckHero;
 	private bool dead = false;			// Whether or not the enemy is dead.
-	private Score score;				// Reference to the Score script.
-
-	private bool forward;
-
+	private bool isRushing = false;		// Whether or not the enemy is rushing.
+//	private Score score;				// Reference to the Score script.
 
 	
 	void Awake()
 	{
 		// Setting up the references.
-		ren = transform.Find("body").GetComponent<SpriteRenderer>();
+		ren = transform.GetComponent<SpriteRenderer>();
 		frontCheck = transform.Find("frontCheck").transform;
-		score = GameObject.Find("Score").GetComponent<Score>();
-
-		player = GameObject.FindGameObjectWithTag ("Player");
-
-		forward = true;
-
+		frontCheckHero = transform.Find ("frontCheckHero").transform;
+//		score = GameObject.Find("Score").GetComponent<Score>();
 	}
 
 	void FixedUpdate ()
 	{
-		/*
 		// Create an array of all the colliders in front of the enemy.
 		Collider2D[] frontHits = Physics2D.OverlapPointAll(frontCheck.position, 1);
 
-		// Check each of the colliders.
+		Collider2D[] frontHeroHits = Physics2D.OverlapPointAll (frontCheckHero.position);
 
+		// Check each of the colliders.
 		foreach(Collider2D c in frontHits)
 		{
 			// If any of the colliders is an Obstacle...
@@ -57,43 +48,29 @@ public class Enemy : MonoBehaviour
 				break;
 			}
 		}
-		*/
+		foreach(Collider2D c in frontHeroHits)
+		{
+			// If any of the colliders is an Obstacle...
+			if(c.tag == "Player")
+			{
+				// ... Flip the enemy and stop checking the other colliders.
+				Rush();
+				break;
+			}
+		}
 
-		if (withinSight (player))
-			startAttack ();
-		else
-			GetComponent<Rigidbody2D> ().velocity = new Vector2 (0f, 0f);
+		// Set the enemy's velocity to moveSpeed in the x direction.
+		GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
 		// If the enemy has one hit point left and has a damagedEnemy sprite...
-		if (HP == 1 && damagedEnemy != null)
+		if(HP == 1 && damagedEnemy != null)
 			// ... set the sprite renderer's sprite to be the damagedEnemy sprite.
 			ren.sprite = damagedEnemy;
-
+			
 		// If the enemy has zero or fewer hit points and isn't dead yet...
-		if (HP <= 0 && !dead)
+		if(HP <= 0 && !dead)
 			// ... call the death function.
 			Death ();
-
-	}
-	void startAttack(){
-
-		if (transform.position.x - player.transform.position.x < 0 && !forward) {
-			forward = true;
-			transform.Rotate (new Vector3 (0, 180, 0), Space.Self);
-		} else if (transform.position.x - player.transform.position.x > 0 && forward){
-			forward = false;
-			transform.Rotate (new Vector3 (0, 180, 0), Space.Self);
-		}
-		transform.Translate (new Vector3 (moveSpeed * Time.deltaTime, 0, 0));
-
-	}
-
-	bool withinSight(GameObject player){
-		if (Mathf.Abs (player.transform.position.x - transform.position.x) < sightSizeX
-		    && Mathf.Abs (player.transform.position.y - transform.position.y) < sightSizeY)
-			return true;
-		else
-			return false;
 	}
 	
 	public void Hurt()
@@ -118,13 +95,12 @@ public class Enemy : MonoBehaviour
 		ren.sprite = deadEnemy;
 
 		// Increase the score by 100 points
-		score.score += 100;
+//		score.score += 100;
 
 		// Set dead to true.
 		dead = true;
 
 		// Allow the enemy to rotate and spin it by adding a torque.
-		GetComponent<Rigidbody2D>().fixedAngle = false;
 		GetComponent<Rigidbody2D>().AddTorque(Random.Range(deathSpinMin,deathSpinMax));
 
 		// Find all of the colliders on the gameobject and set them all to be triggers.
@@ -139,12 +115,12 @@ public class Enemy : MonoBehaviour
 		AudioSource.PlayClipAtPoint(deathClips[i], transform.position);
 
 		// Create a vector that is just above the enemy.
-		Vector3 scorePos;
-		scorePos = transform.position;
-		scorePos.y += 1.5f;
+//		Vector3 scorePos;
+//		scorePos = transform.position;
+//		scorePos.y += 1.5f;
 
 		// Instantiate the 100 points prefab at this point.
-		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
+//		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
 	}
 
 
@@ -154,5 +130,25 @@ public class Enemy : MonoBehaviour
 		Vector3 enemyScale = transform.localScale;
 		enemyScale.x *= -1;
 		transform.localScale = enemyScale;
+
+		Vector3 gun = transform.Find ("Ken_gun").localScale;
+		gun.x *= -1;
+		transform.Find ("Ken_gun").localScale = gun;
+
+		Vector3 frontcheck = transform.Find ("frontCheck").localScale;
+		gun.x *= -1;
+		transform.Find ("frontCheck").localScale = frontcheck;
+
+		Vector3 frontcheckhero = transform.Find ("frontCheckHero").localScale;
+		gun.x *= -1;
+		transform.Find ("frontCheckHero").localScale = frontcheckhero;
+	}
+
+	public void Rush()
+	{
+		if (!isRushing) {
+			isRushing = true;
+			moveSpeed = moveSpeed * 2;
+		}
 	}
 }
