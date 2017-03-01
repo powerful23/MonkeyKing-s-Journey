@@ -25,7 +25,7 @@ public class PlayerControl : MonoBehaviour
 	private Transform groundCheck1;			// A position marking where to check if the player is grounded.
 	private Transform groundCheck2;
 	private bool grounded = false;			// Whether or not the player is grounded.
-	private Rigidbody2D rigidbody;
+	private Rigidbody2D rigidbody2d;
 
 	//private bool jumping = false;
 	//private float jumpTimer = 0f;
@@ -38,7 +38,7 @@ public class PlayerControl : MonoBehaviour
 		// Setting up references.
 		groundCheck1 = transform.Find("groundCheck1");
 		groundCheck2 = transform.Find("groundCheck2");
-		rigidbody = GetComponent<Rigidbody2D> ();
+		rigidbody2d = GetComponent<Rigidbody2D> ();
 	}
 
 
@@ -49,7 +49,7 @@ public class PlayerControl : MonoBehaviour
 			|| Physics2D.Linecast(transform.position, groundCheck2.position, 1 << LayerMask.NameToLayer("Ground"));  
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
-		if (jumpButtonClicked && grounded) {
+		if ((jumpButtonClicked || Input.GetButtonDown("Jump")) && grounded) {
 			Debug.Log ("hit");
 			jump = true;
 			jumpButtonClicked = false;
@@ -92,9 +92,9 @@ public class PlayerControl : MonoBehaviour
 		float c = Input.GetAxis("Crouch");
 
 		if (move && facingRight || h > 0)
-			rigidbody.velocity = new Vector2 (Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody.velocity.y);
+			rigidbody2d.velocity = new Vector2 (Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody2d.velocity.y);
 		else if (move && !facingRight || h < 0)
-			rigidbody.velocity = new Vector2 (-Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody.velocity.y);
+			rigidbody2d.velocity = new Vector2 (-Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody2d.velocity.y);
 
 
 		// If the player should jump...
@@ -126,5 +126,9 @@ public class PlayerControl : MonoBehaviour
 
 	public void death(){
 		gameController.RebornPlayer ();
+	}
+
+	public void death_testMode(){
+		transform.position = new Vector3 (0.0f, 0.0f, 0.0f);
 	}
 }

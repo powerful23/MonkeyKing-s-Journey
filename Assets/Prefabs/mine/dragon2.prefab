@@ -776,7 +776,7 @@ CircleCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: -0.14, y: 0.15}
   serializedVersion: 2
-  m_Radius: 0.48
+  m_Radius: 0.3
 --- !u!61 &61000010138053216
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -890,6 +890,10 @@ MonoBehaviour:
   headLaserEmitter: {fileID: 1530831726703288}
   headLaserPartical: {fileID: 1702667545509710}
   attackCoolDown: 3
+  ultiStandBy: 1.5
+  shield: {fileID: 1752626341776850, guid: a4f14e56e48ae8d4587c734d468b13c1, type: 2}
+  rock: {fileID: 1673288033958158, guid: c8de87da385df194c90c1dfe389fa673, type: 2}
+  ground: {fileID: 0}
 --- !u!114 &114000012756436244
 MonoBehaviour:
   m_ObjectHideFlags: 1

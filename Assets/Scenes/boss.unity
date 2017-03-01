@@ -143,6 +143,11 @@ Prefab:
       propertyPath: maxSpeed
       value: 300
       objectReference: {fileID: 0}
+    - target: {fileID: 114852716392125062, guid: 6aa187bc6339843479c03fdfd71404a3,
+        type: 2}
+      propertyPath: jumpForce
+      value: 700
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 6aa187bc6339843479c03fdfd71404a3, type: 2}
   m_IsPrefabParent: 0
@@ -185,26 +190,35 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1000013343790570, guid: 0675d28392b5c87499fe487bf8d96b34, type: 2}
-      propertyPath: m_Name
-      value: dragon
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012475620028, guid: 0675d28392b5c87499fe487bf8d96b34,
-        type: 2}
-      propertyPath: ultiStandBy
-      value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012475620028, guid: 0675d28392b5c87499fe487bf8d96b34,
-        type: 2}
-      propertyPath: shield
-      value: 
-      objectReference: {fileID: 1752626341776850, guid: a4f14e56e48ae8d4587c734d468b13c1,
-        type: 2}
     - target: {fileID: 114000012475620028, guid: 0675d28392b5c87499fe487bf8d96b34,
         type: 2}
       propertyPath: ground
       value: 
       objectReference: {fileID: 582629837}
+    - target: {fileID: 1000013343790570, guid: 0675d28392b5c87499fe487bf8d96b34, type: 2}
+      propertyPath: m_Name
+      value: dragon
+      objectReference: {fileID: 0}
+    - target: {fileID: 58000013777790882, guid: 0675d28392b5c87499fe487bf8d96b34,
+        type: 2}
+      propertyPath: m_Radius
+      value: 0.26
+      objectReference: {fileID: 0}
+    - target: {fileID: 58000013777790882, guid: 0675d28392b5c87499fe487bf8d96b34,
+        type: 2}
+      propertyPath: m_Offset.x
+      value: -0.24
+      objectReference: {fileID: 0}
+    - target: {fileID: 58000013777790882, guid: 0675d28392b5c87499fe487bf8d96b34,
+        type: 2}
+      propertyPath: m_Offset.y
+      value: -0.03
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012475620028, guid: 0675d28392b5c87499fe487bf8d96b34,
+        type: 2}
+      propertyPath: ultiStandBy
+      value: 0.5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0675d28392b5c87499fe487bf8d96b34, type: 2}
   m_IsPrefabParent: 0
