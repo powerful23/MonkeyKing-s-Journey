@@ -12,6 +12,8 @@ TagManager:
   - Obstacle
   - deathBound
   - PreviewPoint
+  - DragonBoss
+  - Rock
   layers:
   - Default
   - TransparentFX

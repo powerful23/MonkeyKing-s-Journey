@@ -19,7 +19,7 @@ public class HeadCollision : MonoBehaviour {
 			Debug.Log ("hit");
 			gameObject.GetComponentInParent<DragonControl> ().stopRush ();
 		} else if (col.tag == "Player") {
-			player.GetComponent<PlayerControl> ().death_testMode ();
+			player.GetComponent<MonkeyControl> ().hurt ();
 		}
 	}
 }

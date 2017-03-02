@@ -18,6 +18,7 @@ public class DragonControl : MonoBehaviour {
 	public float attackCoolDown = 3.0f;	// the cooldown between different modes
 	public float ultiStandBy = 1.0f;
 	public GameObject shield;
+	public float dragonHealth = 10.0f;
 
 	public GameObject rock;
 
@@ -40,6 +41,8 @@ public class DragonControl : MonoBehaviour {
 	private float angle;	// controls the head laser
 	private GameObject tempShield;
 	private Coroutine rockCoroutine = null;
+
+
 
 
 	// Use this for initialization
@@ -119,21 +122,25 @@ public class DragonControl : MonoBehaviour {
 				// set the head emitter
 				headLR.SetPosition(0, emitterPos);
 				// detect the position of the ray hitting the ground layer
-				RaycastHit2D hit = Physics2D.Raycast (new Vector2 (emitterPos.x, emitterPos.y), new Vector2 (angle, -1), 100, 1 << LayerMask.NameToLayer("Ground"));
+				RaycastHit2D hit = Physics2D.Raycast (new Vector2 (emitterPos.x, emitterPos.y), new Vector2 (angle, -1), 100);
 				// if hit something, form a laser
-				if (hit.collider != null) {
+				if (hit.collider != null && Mathf.Abs(angle) < 8.0f) {
 					headLR.SetPosition (1, hit.point);
 					headLaserPartical.transform.position = hit.point;
 					if (!facingRight)
 						angle -= Time.deltaTime * 2f;
 					else
 						angle += Time.deltaTime * 2f;
+
+					if (hit.collider.tag.Equals ("Player")) {
+						player.gameObject.GetComponent<MonkeyControl>().death ();
+						stopUlti ();
+					}
 				}
 				// if hit nothing, stop laser
 				else {
 					stopUlti ();
 				}
-
 			}
 		}
 	}
@@ -222,5 +229,15 @@ public class DragonControl : MonoBehaviour {
 		enemyScale.x *= -1;
 		transform.localScale = enemyScale;
 		facingRight = !facingRight;
+	}
+
+	public void hurt(){
+		dragonHealth = dragonHealth - 1.0f;
+		if (dragonHealth < 0.0f) {
+			death ();
+		}
+	}
+
+	private void death(){
 	}
 }
