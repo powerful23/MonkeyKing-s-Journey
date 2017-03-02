@@ -76,7 +76,7 @@ public class MyCamera : MonoBehaviour {
 		fixedPos = false;
 		inPreviewMode = false;
 		smoothFactor = 2.0f / 75.0f;
-		xSmooth = smoothFactor * player.gameObject.GetComponent<PlayerControl> ().maxSpeed;
+		xSmooth = smoothFactor * player.gameObject.GetComponent<MonkeyControl> ().maxSpeed;
 	}
 
 	bool CheckXMargin()
