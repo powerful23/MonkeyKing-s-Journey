@@ -1,22 +1,14 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MonkeyControl : MonoBehaviour
 {
 	
 	public bool facingRight = true;			// For determining which way the player is currently facing.
-
-	public bool jump = false;				// Condition for whether the player should jump.
-
-
-	public float moveForce = 365f;			// Amount of force added to move the player left and right.
 	public float maxSpeed = 5000f;				// The fastest the player can travel in the x axis.
-	public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
 	public float jumpForce = 1000f;			// Amount of force added when the player jumps.
-
-	public float maxExtraJumpTime;
-	public float extraJumpForce;
-	public float delayToExtraJumpForce;
+	public float monkeyHealth = 1.0f;
 
 //	public GameController gameController;
 
@@ -27,6 +19,7 @@ public class MonkeyControl : MonoBehaviour
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Rigidbody2D rigidbody2d;
 	private Animator animator;
+	private bool jump = false;				// Condition for whether the player should jump.
 	//private bool jumping = false;
 	//private float jumpTimer = 0f;
 	private bool move = false;
@@ -126,9 +119,6 @@ public class MonkeyControl : MonoBehaviour
 			jump = false;
 		}
 
-		if ((!move || h == 0) && grounded) {
-			animator.SetTrigger ("Grounded");
-		}
 
 		if (Input.GetButtonDown ("Fire1")) {
 			
@@ -152,9 +142,19 @@ public class MonkeyControl : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
+	public void hurt(){
+		monkeyHealth = monkeyHealth - 1.0f;
+		if (monkeyHealth < 0.0f) {
+			death ();
+		}
+		
+	}
 
-//	public void death(){
-//	animator.SetInteger ("AnimationState", 3);
-//		gameController.RebornPlayer ();
-//	}
+	public void death(){
+		//gameController.RebornPlayer ();
+		animator.SetTrigger("Die");
+		//transform.position = new Vector3 (0.0f, 0.0f, 0.0f);
+	}
+
+
 }

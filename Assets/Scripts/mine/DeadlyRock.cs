@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class DestroyBullet : MonoBehaviour {
+public class DeadlyRock: MonoBehaviour {
 	public float destroyTime;
 	// Use this for initialization
 	void Start () {
@@ -16,6 +16,14 @@ public class DestroyBullet : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		Destroy (gameObject);
+		if (!col.tag.Equals ("Rock")) {
+			Destroy (gameObject);
+
+			if (col.tag.Equals ("Player")) {
+				col.gameObject.GetComponent<MonkeyControl> ().hurt ();
+			} else if (col.tag.Equals ("Enemy")) {
+				//col.gameObject.GetComponent<Enemy> ().hurt ();
+			}
+		}
 	}
 }

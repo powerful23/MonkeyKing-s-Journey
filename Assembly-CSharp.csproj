@@ -77,8 +77,8 @@
      <Compile Include="Assets\Scripts\UIScript\MissionSelect.cs" />
      <Compile Include="Assets\Scripts\herodesign\MonkeyControl.cs" />
      <Compile Include="Assets\Scripts\herodesign\Weapon.cs" />
+     <Compile Include="Assets\Scripts\mine\DeadlyRock.cs" />
      <Compile Include="Assets\Scripts\mine\DeathLayer.cs" />
-     <Compile Include="Assets\Scripts\mine\DestroyBullet.cs" />
      <Compile Include="Assets\Scripts\mine\DownBound.cs" />
      <Compile Include="Assets\Scripts\mine\DragonControl.cs" />
      <Compile Include="Assets\Scripts\mine\GameController.cs" />

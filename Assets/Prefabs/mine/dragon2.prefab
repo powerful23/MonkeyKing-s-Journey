@@ -317,9 +317,10 @@ GameObject:
   - component: {fileID: 95000012789251762}
   - component: {fileID: 50000012376032662}
   - component: {fileID: 114000012475620028}
+  - component: {fileID: 58295629855126194}
   m_Layer: 0
   m_Name: dragon2
-  m_TagString: Untagged
+  m_TagString: DragonBoss
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -552,8 +553,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013343790570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.36, y: 2.2, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 2.12, y: 0.77, z: 0}
+  m_LocalScale: {x: 2, y: 2, z: 1}
   m_Children:
   - {fileID: 4000013010513896}
   - {fileID: 4000010292148812}
@@ -774,9 +775,23 @@ CircleCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_Offset: {x: -0.14, y: 0.15}
+  m_Offset: {x: -0.24, y: -0.03}
   serializedVersion: 2
-  m_Radius: 0.3
+  m_Radius: 0.26
+--- !u!58 &58295629855126194
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1000013343790570}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.25, y: -0.32}
+  serializedVersion: 2
+  m_Radius: 0.37
 --- !u!61 &61000010138053216
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -890,8 +905,9 @@ MonoBehaviour:
   headLaserEmitter: {fileID: 1530831726703288}
   headLaserPartical: {fileID: 1702667545509710}
   attackCoolDown: 3
-  ultiStandBy: 1.5
+  ultiStandBy: 0.5
   shield: {fileID: 1752626341776850, guid: a4f14e56e48ae8d4587c734d468b13c1, type: 2}
+  dragonHealth: 10
   rock: {fileID: 1673288033958158, guid: c8de87da385df194c90c1dfe389fa673, type: 2}
   ground: {fileID: 0}
 --- !u!114 &114000012756436244
