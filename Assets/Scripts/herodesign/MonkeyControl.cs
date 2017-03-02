@@ -22,8 +22,8 @@ public class MonkeyControl : MonoBehaviour
 
 
 	private Transform groundCheck;
-//	private Transform groundCheck1;			// A position marking where to check if the player is grounded.
-//	private Transform groundCheck2;
+	private Transform groundCheck1;			// A position marking where to check if the player is grounded.
+	private Transform groundCheck2;
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Rigidbody2D rigidbody2d;
 	private Animator animator;
@@ -37,8 +37,8 @@ public class MonkeyControl : MonoBehaviour
 	{
 		// Setting up references.
 		//groundCheck = transform.Find("groundCheck");
-//		groundCheck1 = transform.Find("groundCheck1");
-//		groundCheck2 = transform.Find("groundCheck2");
+		groundCheck1 = transform.Find("groundCheck1");
+		groundCheck2 = transform.Find("groundCheck2");
 		rigidbody2d = GetComponent<Rigidbody2D> ();
 		animator = GetComponent<Animator> ();
 
@@ -48,13 +48,12 @@ public class MonkeyControl : MonoBehaviour
 	void Update()
 	{
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-//		grounded = Physics2D.Linecast(transform.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"))
-//			|| Physics2D.Linecast(transform.position, groundCheck2.position, 1 << LayerMask.NameToLayer("Ground"));  
+		grounded = Physics2D.Linecast(transform.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"))
+			|| Physics2D.Linecast(transform.position, groundCheck2.position, 1 << LayerMask.NameToLayer("Ground"));  
 
-		//grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
-//		if (jumpButtonClicked && grounded) {
+//		if (jumpButtonClicked  && grounded) {
 //			Debug.Log ("hit");
 //			jump = true;
 //			jumpButtonClicked = false;
@@ -66,6 +65,7 @@ public class MonkeyControl : MonoBehaviour
 		//	}
 		if(Input.GetButtonDown("Jump") && grounded){
 			jump = true;
+			Debug.Log ("hit");
 		}
 	}
 
@@ -73,17 +73,12 @@ public class MonkeyControl : MonoBehaviour
 		move = true;
 		if (!facingRight)
 			Flip ();
-//			
-			
-		
 	}
 
 	public void moveCharacterLeft(){
 		move = true;
 		if (facingRight)
 			Flip ();
-//			
-
 	}
 
 	public void stopCharacter(){
@@ -107,24 +102,23 @@ public class MonkeyControl : MonoBehaviour
 		if (move && facingRight || h > 0) {
 			if (!facingRight) Flip();
 			rigidbody2d.velocity = new Vector2 (Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody2d.velocity.y);
-
-			animator.SetInteger ("AnimationState", 1);
 		} else if (move && !facingRight || h < 0) {
 			if (facingRight) Flip();
 			rigidbody2d.velocity = new Vector2 (-Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody2d.velocity.y);
-
-			animator.SetInteger ("AnimationState", 1);
 		} else if(!move || h == 0){
 			rigidbody2d.velocity = new Vector2 (0, rigidbody2d.velocity.y);
-			animator.SetInteger ("AnimationState", 2);
-
 		}
-		Debug.Log (h);
+
+		if (move || h != 0) {
+			animator.SetBool ("Move", true);
+		} else {
+			animator.SetBool ("Move", false);
+		}
+
 		// If the player should jump...
 		if(jump)
-		{			
-
-			animator.SetTrigger("Jump");
+		{		
+			animator.SetTrigger ("Jump");
 			// Add a vertical force to the player.
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
 
@@ -132,10 +126,12 @@ public class MonkeyControl : MonoBehaviour
 			jump = false;
 		}
 
+		if ((!move || h == 0) && grounded) {
+			animator.SetTrigger ("Grounded");
+		}
+
 		if (Input.GetButtonDown ("Fire1")) {
-			//animator.SetInteger ("AnimationState", 5);
-			animator.SetTrigger("Shoot");
-//			if(facingRight)
+			
 		} 
 
 
