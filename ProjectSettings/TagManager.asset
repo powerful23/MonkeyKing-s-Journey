@@ -49,12 +49,12 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: 11
-    uniqueID: 1323960365
-    locked: 0
-  - name: 12
+  - name: bodyBack
     uniqueID: 698238443
     locked: 0
-  - name: 13
+  - name: bodyMiddle
     uniqueID: 2767836361
+    locked: 0
+  - name: bodyFront
+    uniqueID: 1323960365
     locked: 0
