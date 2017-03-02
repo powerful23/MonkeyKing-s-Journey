@@ -87,6 +87,7 @@
      <Compile Include="Assets\Scripts\mine\MyCamera.cs" />
      <Compile Include="Assets\Scripts\mine\MyEnemy.cs" />
      <Compile Include="Assets\Scripts\mine\MySpawner.cs" />
+     <Compile Include="Assets\Scripts\mine\RockDestroy.cs" />
      <Compile Include="Assets\Scripts\mine\RopeRender.cs" />
      <Compile Include="Assets\Scripts\mine\ShootingSpawner.cs" />
      <Compile Include="Assets\Scripts\mine\TailRotator.cs" />

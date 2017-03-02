@@ -181,7 +181,7 @@ public class DragonControl : MonoBehaviour {
 		yield return new WaitForSeconds (0);
 		while (true)
 		{
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				Vector3 spawnPosition = new Vector3 (Random.Range (-5f, 5f), 5f, 0f);
 				Instantiate (rock, spawnPosition, rock.transform.rotation);
@@ -203,7 +203,7 @@ public class DragonControl : MonoBehaviour {
 		tempShield = Instantiate (shield, shieldPos, shield.transform.rotation) as GameObject;
 	}
 	void ulti(){		
-		angle = 0.2f;
+		angle = -0.2f;
 		headLR.enabled = true;
 		headLaserPartical.GetComponent<ParticleSystem> ().Play ();
 	}
