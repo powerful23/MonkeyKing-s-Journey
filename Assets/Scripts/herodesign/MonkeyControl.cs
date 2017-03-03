@@ -10,6 +10,8 @@ public class MonkeyControl : MonoBehaviour
 	public float jumpForce = 1000f;			// Amount of force added when the player jumps.
 	public float monkeyHealth = 1.0f;
 
+	public GameController gameController;
+
 //	public GameController gameController;
 
 
@@ -20,24 +22,21 @@ public class MonkeyControl : MonoBehaviour
 	private Rigidbody2D rigidbody2d;
 	private Animator animator;
 	private bool jump = false;				// Condition for whether the player should jump.
-	//private bool jumping = false;
-	//private float jumpTimer = 0f;
 	private bool move = false;
+	private bool isDead = false;
 	//private bool jumpButtonClicked = false;
 
 
 	void Awake()
 	{
 		// Setting up references.
-		//groundCheck = transform.Find("groundCheck");
 		groundCheck1 = transform.Find("groundCheck1");
 		groundCheck2 = transform.Find("groundCheck2");
 		rigidbody2d = GetComponent<Rigidbody2D> ();
 		animator = GetComponent<Animator> ();
 
+		isDead = false;
 	}
-
-
 	void Update()
 	{
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
@@ -53,12 +52,28 @@ public class MonkeyControl : MonoBehaviour
 //			//	jumping = true;
 //			//	jumpTimer = Time.time;
 //		}
-		//if (jumpButtonDown || Time.time - jumpTimer > maxExtraJumpTime) {
-		//	jumping = false;
-		//	}
 		if(Input.GetButtonDown("Jump") && grounded){
 			jump = true;
-			Debug.Log ("hit");
+		}
+
+		if(Input.GetButtonDown("Death")){
+			death ();
+		}
+
+		if (Input.GetButtonDown ("MoveRight")) {
+			moveCharacterRight ();
+		} else if (Input.GetButtonDown ("MoveLeft")) {
+			moveCharacterLeft ();
+		}
+
+		if (Input.GetButtonUp ("MoveRight") || Input.GetButtonUp ("MoveLeft")) {
+			stopCharacter ();
+		}
+
+		if (move) {
+			animator.SetBool ("Move", true);
+		} else {
+			animator.SetBool ("Move", false);
 		}
 	}
 
@@ -76,7 +91,7 @@ public class MonkeyControl : MonoBehaviour
 
 	public void stopCharacter(){
 		move = false;
-//		animator.SetInteger ("AnimationState", 2);
+		rigidbody2d.velocity = new Vector2 (0.0f, rigidbody2d.velocity.y);
 	}
 
 //	public void jbuttonClick(){
@@ -87,26 +102,11 @@ public class MonkeyControl : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-		// Cache the horizontal input.
-		float h = Input.GetAxis("Horizontal");
-		// cache the crouch input wen
-		//float c = Input.GetAxis("Crouch");
-
-		if (move && facingRight || h > 0) {
-			if (!facingRight) Flip();
+		if (move && facingRight) {
 			rigidbody2d.velocity = new Vector2 (Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody2d.velocity.y);
-		} else if (move && !facingRight || h < 0) {
-			if (facingRight) Flip();
+		} else if (move && !facingRight) {
 			rigidbody2d.velocity = new Vector2 (-Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody2d.velocity.y);
-		} else if(!move || h == 0){
-			rigidbody2d.velocity = new Vector2 (0, rigidbody2d.velocity.y);
-		}
-
-		if (move || h != 0) {
-			animator.SetBool ("Move", true);
-		} else {
-			animator.SetBool ("Move", false);
-		}
+		} 
 
 		// If the player should jump...
 		if(jump)
@@ -123,12 +123,6 @@ public class MonkeyControl : MonoBehaviour
 		if (Input.GetButtonDown ("Fire1")) {
 			
 		} 
-
-
-		//If our player is holding the jump button and a little bit of time has passed...
-		//		if (jumping && Time.time - jumpTimer > delayToExtraJumpForce){
-		//			rigidbody.AddForce(new Vector2(0,extraJumpForce)); //... then add some additional force to the jump
-		//		}
 	}
 
 	void Flip ()
@@ -151,9 +145,23 @@ public class MonkeyControl : MonoBehaviour
 	}
 
 	public void death(){
-		//gameController.RebornPlayer ();
-		animator.SetTrigger("Die");
-		//transform.position = new Vector3 (0.0f, 0.0f, 0.0f);
+		if (!isDead) {
+			GetComponent<MonkeyControl> ().enabled = false;
+			animator.SetTrigger ("Die");
+			animator.SetBool ("Dead", true);
+			rigidbody2d.velocity = new Vector2 (0.0f, 0.0f);
+			move = false;
+			jump = false;
+			grounded = false;
+			gameController.RebornPlayer ();
+
+			isDead = true;
+		}
+	}
+
+	public void reset(){
+		isDead = false;
+		animator.SetBool("Dead", false);
 	}
 
 
