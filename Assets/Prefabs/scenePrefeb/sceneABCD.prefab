@@ -760,7 +760,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1064410349449204
 GameObject:
   m_ObjectHideFlags: 1
@@ -12964,7 +12964,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1143975101938446}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.1, y: 0.1, z: 1}
   m_Children:
   - {fileID: 4160261280254388}
@@ -18170,7 +18170,7 @@ Camera:
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 1.5
+  orthographic size: 1.39
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -23815,14 +23815,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 1
-  jump: 0
-  moveForce: 365
   maxSpeed: 100
-  jumpClips: []
-  jumpForce: 180
-  maxExtraJumpTime: 0
-  extraJumpForce: 0
-  delayToExtraJumpForce: 0
+  jumpForce: 200
+  monkeyHealth: 1
+  gameController: {fileID: 114856684772311212}
 --- !u!114 &114263600435423148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -24427,6 +24423,7 @@ MonoBehaviour:
   - {fileID: 4804791437363720}
   wall: {fileID: 0}
   missionComplete: {fileID: 0}
+  rebornDialog: {fileID: 0}
 --- !u!114 &114866641324263346
 MonoBehaviour:
   m_ObjectHideFlags: 1

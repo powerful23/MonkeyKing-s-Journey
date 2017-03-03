@@ -89,7 +89,7 @@ public class PlayerControl : MonoBehaviour
 		// Cache the horizontal input.
 		float h = Input.GetAxis("Horizontal");
 		// cache the crouch input wen
-		float c = Input.GetAxis("Crouch");
+	//	float c = Input.GetAxis("Crouch");
 
 		if (move && facingRight || h > 0)
 			rigidbody2d.velocity = new Vector2 (Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody2d.velocity.y);

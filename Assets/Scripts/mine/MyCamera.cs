@@ -135,7 +135,7 @@ public class MyCamera : MonoBehaviour {
 
 	public void previewMoving(Transform target, float ptime){
 		inPreviewMode = true;
-		player.gameObject.GetComponent<PlayerControl> ().enabled = false;
+		player.gameObject.GetComponent<MonkeyControl> ().enabled = false;
 		previewTarget = target;
 		previewStartTime = Time.time;
 		previewTime = ptime;
@@ -144,7 +144,7 @@ public class MyCamera : MonoBehaviour {
 	void moveCameraInPreviewMode (){
 		if (Time.time - previewStartTime > previewTime) {
 			inPreviewMode = false;
-			player.gameObject.GetComponent<PlayerControl> ().enabled = true;
+			player.gameObject.GetComponent<MonkeyControl> ().enabled = true;
 		}
 		float targetX = transform.position.x;
 		float targetY = transform.position.y;

@@ -13,6 +13,8 @@ public class GameController : MonoBehaviour {
 	public GameObject wall;					// the "PREFAB" wall which will be instantiated when player arrives the checkPoint
 	public GameObject missionComplete;		// mission complete title
 
+	public GameObject rebornDialog;
+
 
 	private bool[] checkPointPass;			// decide whether checkPoints are passed
 	private int curCP;						// current checkPoint
@@ -149,9 +151,24 @@ public class GameController : MonoBehaviour {
 	}
 
 	public void RebornPlayer(){
+		rebornDialog.SetActive (true);
+
+
+	//	Transform tmp = rebornPoints [pendingRebornPoint - 1];
+	//	playerPos.position = tmp.position;
+	}
+
+	public void StartReborn(){
 		Transform tmp = rebornPoints [pendingRebornPoint - 1];
 		playerPos.position = tmp.position;
+
+		MonkeyControl mc = playerPos.gameObject.GetComponent<MonkeyControl> ();
+		mc.enabled = true;
+		mc.reset ();
+		rebornDialog.SetActive (false);
 	}
+
+
 
 
 }
