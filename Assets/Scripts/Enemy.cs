@@ -53,7 +53,9 @@ public class Enemy : MonoBehaviour
 			// If any of the colliders is an Obstacle...
 			if(c.tag == "Player")
 			{
-				// ... Flip the enemy and stop checking the other colliders.
+				// damage the player
+				//c.gameObject.GetComponent<PlayerHealth>().Hurt();
+				// ... enemy will then rush to the player
 				Rush();
 				break;
 			}
@@ -131,16 +133,19 @@ public class Enemy : MonoBehaviour
 		enemyScale.x *= -1;
 		transform.localScale = enemyScale;
 
-		Vector3 gun = transform.Find ("Ken_gun").localScale;
-		gun.x *= -1;
-		transform.Find ("Ken_gun").localScale = gun;
+		if (transform.Find ("Ken_gun") != null)
+		{
+			Vector3 gun = transform.Find ("Ken_gun").localScale;
+			gun.x *= -1;
+			transform.Find ("Ken_gun").localScale = gun;
+		}
 
 		Vector3 frontcheck = transform.Find ("frontCheck").localScale;
-		gun.x *= -1;
+		frontcheck.x *= -1;
 		transform.Find ("frontCheck").localScale = frontcheck;
 
 		Vector3 frontcheckhero = transform.Find ("frontCheckHero").localScale;
-		gun.x *= -1;
+		frontcheckhero.x *= -1;
 		transform.Find ("frontCheckHero").localScale = frontcheckhero;
 	}
 
