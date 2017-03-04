@@ -13,7 +13,7 @@ public class DeathLayer : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.tag == "Player"){
-			col.GetComponent<PlayerControl> ().death ();
+			col.GetComponent<MonkeyControl> ().death ();
 		//	playerControl.death ();
 		}
 	}

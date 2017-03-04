@@ -5,7 +5,7 @@ public class MyBullet : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Destroy(gameObject, 10);
+		Destroy(gameObject, 3);
 	}
 	
 	// Update is called once per frame
@@ -14,7 +14,12 @@ public class MyBullet : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		Debug.Log ("hit");
+		if (col.tag.Equals("Enemy")){
+			//col.gameObject.GetComponent<Enemy>().death();
+		}
+		else if (col.tag.Equals("DragonBoss")){
+			col.gameObject.GetComponent<DragonControl>().hurt();
+		}
 		Destroy (gameObject);
 	}
 }

@@ -1,16 +1,19 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\mine\DragonControl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\mine\MyCamera.cs">
     <Files>
-      <File FileName="Assets\Scripts\PlayerControl.cs" Line="55" Column="30" />
-      <File FileName="Assets\Scripts\mine\GameController.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\PlayerControl.cs" Line="92" Column="36" />
       <File FileName="Assets\Scripts\mine\ShootingSpawner.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\MyBullet.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\MovingGround.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\MyCamera.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\DragonControl.cs" Line="188" Column="29" />
+      <File FileName="Assets\Scripts\mine\MyCamera.cs" Line="147" Column="48" />
+      <File FileName="Assets\Scripts\mine\DragonControl.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\mine\dragon\HeadCollision.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\DestroyBullet.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\herodesign\MonkeyControl.cs" Line="157" Column="4" />
+      <File FileName="Assets\Scripts\mine\GameController.cs" Line="162" Column="1" />
+      <File FileName="Assets\Scripts\herodesign\Weapon.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\mine\DeadlyRock.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\mine\DeathLayer.cs" Line="16" Column="4" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

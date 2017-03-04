@@ -1,71 +1,79 @@
 using UnityEngine;
 using System.Collections;
+using UnityEngine.UI;
 
 public class MonkeyControl : MonoBehaviour
 {
 	
 	public bool facingRight = true;			// For determining which way the player is currently facing.
-
-	public bool jump = false;				// Condition for whether the player should jump.
-
-
-	public float moveForce = 365f;			// Amount of force added to move the player left and right.
 	public float maxSpeed = 5000f;				// The fastest the player can travel in the x axis.
-	public AudioClip[] jumpClips;			// Array of clips for when the player jumps.
 	public float jumpForce = 1000f;			// Amount of force added when the player jumps.
+	public float monkeyHealth = 1.0f;
 
-	public float maxExtraJumpTime;
-	public float extraJumpForce;
-	public float delayToExtraJumpForce;
+	public GameController gameController;
 
 //	public GameController gameController;
 
 
 	private Transform groundCheck;
-//	private Transform groundCheck1;			// A position marking where to check if the player is grounded.
-//	private Transform groundCheck2;
+	private Transform groundCheck1;			// A position marking where to check if the player is grounded.
+	private Transform groundCheck2;
 	private bool grounded = false;			// Whether or not the player is grounded.
 	private Rigidbody2D rigidbody2d;
 	private Animator animator;
-	//private bool jumping = false;
-	//private float jumpTimer = 0f;
+	private bool jump = false;				// Condition for whether the player should jump.
 	private bool move = false;
+	private bool isDead = false;
 	//private bool jumpButtonClicked = false;
 
 
 	void Awake()
 	{
 		// Setting up references.
-		//groundCheck = transform.Find("groundCheck");
-//		groundCheck1 = transform.Find("groundCheck1");
-//		groundCheck2 = transform.Find("groundCheck2");
+		groundCheck1 = transform.Find("groundCheck1");
+		groundCheck2 = transform.Find("groundCheck2");
 		rigidbody2d = GetComponent<Rigidbody2D> ();
 		animator = GetComponent<Animator> ();
 
+		isDead = false;
 	}
-
-
 	void Update()
 	{
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
-//		grounded = Physics2D.Linecast(transform.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"))
-//			|| Physics2D.Linecast(transform.position, groundCheck2.position, 1 << LayerMask.NameToLayer("Ground"));  
+		grounded = Physics2D.Linecast(transform.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"))
+			|| Physics2D.Linecast(transform.position, groundCheck2.position, 1 << LayerMask.NameToLayer("Ground"));  
 
-		//grounded = Physics2D.Linecast(transform.position, groundCheck.position, 1 << LayerMask.NameToLayer("Ground"));
 
 		// If the jump button is pressed and the player is grounded then the player should jump.
-//		if (jumpButtonClicked && grounded) {
+//		if (jumpButtonClicked  && grounded) {
 //			Debug.Log ("hit");
 //			jump = true;
 //			jumpButtonClicked = false;
 //			//	jumping = true;
 //			//	jumpTimer = Time.time;
 //		}
-		//if (jumpButtonDown || Time.time - jumpTimer > maxExtraJumpTime) {
-		//	jumping = false;
-		//	}
 		if(Input.GetButtonDown("Jump") && grounded){
 			jump = true;
+		}
+
+		if(Input.GetButtonDown("Death")){
+			death ();
+		}
+
+		if (Input.GetButtonDown ("MoveRight")) {
+			moveCharacterRight ();
+		} else if (Input.GetButtonDown ("MoveLeft")) {
+			moveCharacterLeft ();
+		}
+
+		if (Input.GetButtonUp ("MoveRight") || Input.GetButtonUp ("MoveLeft")) {
+			stopCharacter ();
+		}
+
+		if (move) {
+			animator.SetBool ("Move", true);
+		} else {
+			animator.SetBool ("Move", false);
 		}
 	}
 
@@ -73,22 +81,17 @@ public class MonkeyControl : MonoBehaviour
 		move = true;
 		if (!facingRight)
 			Flip ();
-//			
-			
-		
 	}
 
 	public void moveCharacterLeft(){
 		move = true;
 		if (facingRight)
 			Flip ();
-//			
-
 	}
 
 	public void stopCharacter(){
 		move = false;
-//		animator.SetInteger ("AnimationState", 2);
+		rigidbody2d.velocity = new Vector2 (0.0f, rigidbody2d.velocity.y);
 	}
 
 //	public void jbuttonClick(){
@@ -99,32 +102,16 @@ public class MonkeyControl : MonoBehaviour
 
 	void FixedUpdate ()
 	{
-		// Cache the horizontal input.
-		float h = Input.GetAxis("Horizontal");
-		// cache the crouch input wen
-		//float c = Input.GetAxis("Crouch");
-
-		if (move && facingRight || h > 0) {
-			if (!facingRight) Flip();
+		if (move && facingRight) {
 			rigidbody2d.velocity = new Vector2 (Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody2d.velocity.y);
-
-			animator.SetInteger ("AnimationState", 1);
-		} else if (move && !facingRight || h < 0) {
-			if (facingRight) Flip();
+		} else if (move && !facingRight) {
 			rigidbody2d.velocity = new Vector2 (-Vector2.right.x * maxSpeed * Time.deltaTime, rigidbody2d.velocity.y);
+		} 
 
-			animator.SetInteger ("AnimationState", 1);
-		} else if(!move || h == 0){
-			rigidbody2d.velocity = new Vector2 (0, rigidbody2d.velocity.y);
-			animator.SetInteger ("AnimationState", 2);
-
-		}
-		Debug.Log (h);
 		// If the player should jump...
 		if(jump)
-		{			
-
-			animator.SetTrigger("Jump");
+		{		
+			animator.SetTrigger ("Jump");
 			// Add a vertical force to the player.
 			GetComponent<Rigidbody2D>().AddForce(new Vector2(0f, jumpForce));
 
@@ -132,17 +119,10 @@ public class MonkeyControl : MonoBehaviour
 			jump = false;
 		}
 
+
 		if (Input.GetButtonDown ("Fire1")) {
-			//animator.SetInteger ("AnimationState", 5);
-			animator.SetTrigger("Shoot");
-//			if(facingRight)
+			
 		} 
-
-
-		//If our player is holding the jump button and a little bit of time has passed...
-		//		if (jumping && Time.time - jumpTimer > delayToExtraJumpForce){
-		//			rigidbody.AddForce(new Vector2(0,extraJumpForce)); //... then add some additional force to the jump
-		//		}
 	}
 
 	void Flip ()
@@ -156,9 +136,33 @@ public class MonkeyControl : MonoBehaviour
 		transform.localScale = theScale;
 	}
 
+	public void hurt(){
+		monkeyHealth = monkeyHealth - 1.0f;
+		if (monkeyHealth < 0.0f) {
+			death ();
+		}
+		
+	}
 
-//	public void death(){
-//	animator.SetInteger ("AnimationState", 3);
-//		gameController.RebornPlayer ();
-//	}
+	public void death(){
+		if (!isDead) {
+			GetComponent<MonkeyControl> ().enabled = false;
+			animator.SetTrigger ("Die");
+			animator.SetBool ("Dead", true);
+			rigidbody2d.velocity = new Vector2 (0.0f, 0.0f);
+			move = false;
+			jump = false;
+			grounded = false;
+			gameController.RebornPlayer ();
+
+			isDead = true;
+		}
+	}
+
+	public void reset(){
+		isDead = false;
+		animator.SetBool("Dead", false);
+	}
+
+
 }
