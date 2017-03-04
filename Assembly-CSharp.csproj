@@ -54,6 +54,7 @@
      <Compile Include="Assets\Scripts\Destroyer.cs" />
      <Compile Include="Assets\Scripts\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemyBullet.cs" />
+     <Compile Include="Assets\Scripts\EnemyChase.cs" />
      <Compile Include="Assets\Scripts\EnemyGun.cs" />
      <Compile Include="Assets\Scripts\Enemy_Phoenix.cs" />
      <Compile Include="Assets\Scripts\FireBallCtrl.cs" />
