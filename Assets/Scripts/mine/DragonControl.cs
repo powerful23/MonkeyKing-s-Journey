@@ -20,11 +20,13 @@ public class DragonControl : MonoBehaviour {
 	public GameObject shield;
 	public float dragonHealth = 10.0f;
 
+	public GameObject explosion;
+
 	public GameObject rock;
 
 	public Transform ground;
 
-	private float timer;	// the timer of the overall battle
+	public float timer;	// the timer of the overall battle
 	private float ultiStandByTimer;
 
 	private Animator anim;	// the animator controls the dragon boss
@@ -41,6 +43,7 @@ public class DragonControl : MonoBehaviour {
 	private float angle;	// controls the head laser
 	private GameObject tempShield;
 	private Coroutine rockCoroutine = null;
+	private bool dead;
 
 
 
@@ -57,59 +60,62 @@ public class DragonControl : MonoBehaviour {
 
 		headLR = headLaserEmitter.GetComponent<LineRenderer> ();
 		gameObject.GetComponent<DragonControl> ().enabled = false;
+		dead = false;
 
 	}
 
 	// Update is called once per frame
 	void Update () {
 		// control the dragon to always face the player
-		if (!attacking) {
-			if (player.transform.position.x < transform.position.x - 3.0f) {
-				if (facingRight)
-					Flip ();
-			} else if (player.transform.position.x > transform.position.x + 3.0f) {
-				if (!facingRight)
-					Flip ();
+		if (!dead) {
+			if (!attacking) {
+				if (player.transform.position.x < transform.position.x - 1.0f) {
+					if (facingRight)
+						Flip ();
+				} else if (player.transform.position.x > transform.position.x + 1.0f) {
+					if (!facingRight)
+						Flip ();
+				}
 			}
-		}
 
-		//if not attacking and not in the cooldown
-		if (!attacking && Time.time - timer > attackCoolDown) {
-			// randomly select the mode
-			int rnd = Random.Range (0, 100);
-			// normal attack
-			if (rnd >= 0 && rnd < 30) {
-				mode = 0;
-				attacking = true;
-				ultiStandByTimer = Time.time;
-				ultiReady ();
-			}
+			//if not attacking and not in the cooldown
+			if (!attacking && Time.time - timer > attackCoolDown) {
+				// randomly select the mod
+
+				int rnd = Random.Range (0, 100);
+				// normal attack
+				if (rnd >= 0 && rnd < 30) {
+					mode = 0;
+					attacking = true;
+					ultiStandByTimer = Time.time;
+					ultiReady ();
+				}
 			// rush mode
 			else if (rnd >= 30 && rnd < 60) {
-				mode = 1;
-				rush ();
-				attacking = true;
-			}
+					mode = 1;
+					rush ();
+					attacking = true;
+				}
 			// roar mode
 			else if (rnd >= 60 && rnd < 90) {
-				mode = 2;
-				roar ();
-				attacking = true;
-			}
+					mode = 2;
+					roar ();
+					attacking = true;
+				}
 			// ulti mode
 			else {
-				mode = 3;
-			}
-		} 
-		else if (attacking){
-			// if in roar mode and exceeds the roar time limitation, stop the roar mode;
-			if (mode == 2 && Time.time - startRoar > roarTime) {
-				stopRoar ();
-			} 
+					mode = 3;
+				}
+			} else if (attacking) {
+				// if in roar mode and exceeds the roar time limitation, stop the roar mode;
+				if (mode == 2 && Time.time - startRoar > roarTime) {
+					stopRoar ();
+				} 
 			// if in the laser mode and exceeds the standby time, start emit laser
 			else if (mode == 0 && ultiStandByTimer > 0 && Time.time - ultiStandByTimer > ultiStandBy) {
-				ultiStandByTimer = -ultiStandByTimer;
-				ulti ();
+					ultiStandByTimer = -ultiStandByTimer;
+					ulti ();
+				}
 			}
 		}
 	}
@@ -121,11 +127,11 @@ public class DragonControl : MonoBehaviour {
 			if (mode == 0 && ultiStandByTimer < 0) {
 				Vector3 emitterPos = headLaserEmitter.transform.position;
 				// set the head emitter
-				headLR.SetPosition(0, emitterPos);
+				headLR.SetPosition (0, emitterPos);
 				// detect the position of the ray hitting the ground layer
 				RaycastHit2D hit = Physics2D.Raycast (new Vector2 (emitterPos.x, emitterPos.y), new Vector2 (angle, -1), 100);
 				// if hit something, form a laser
-				if (hit.collider != null && Mathf.Abs(angle) < 8.0f) {
+				if (hit.collider != null && Mathf.Abs (angle) < 8.0f) {
 					headLR.SetPosition (1, hit.point);
 					headLaserPartical.transform.position = hit.point;
 					if (!facingRight)
@@ -134,7 +140,7 @@ public class DragonControl : MonoBehaviour {
 						angle += Time.deltaTime * 2f;
 
 					if (hit.collider.tag.Equals ("Player")) {
-						player.gameObject.GetComponent<MonkeyControl>().death ();
+						player.gameObject.GetComponent<MonkeyControl> ().death ();
 						stopUlti ();
 					}
 				}
@@ -142,24 +148,34 @@ public class DragonControl : MonoBehaviour {
 				else {
 					stopUlti ();
 				}
-			}
+			} 
+		}
+
+
+		if (dead) {
+			Quaternion randomRotation = Quaternion.Euler (0f, 0f, Random.Range (0f, 360f));
+
+			// Instantiate the explosion where the rocket is with the random rotation.
+			float scale = 1f;
+			Vector3 rndPos = new Vector3 (transform.position.x + Random.Range (-1f, 1f) * scale, transform.position.y + Random.Range (-1f, 1f) * scale, 0);
+			Instantiate (explosion, rndPos , randomRotation);
 		}
 	}
 
 	// stop the roar mode, stop the animation and reset timer, stop camera shake
 	void stopRoar(){
 		attacking = false;
-		anim.SetBool ("roar", false);
+		anim.SetBool ("Roar", false);
 		timer = Time.time;
 		myCamera.shake = false;
 
-		StopCoroutine (rockCoroutine);
+		if (rockCoroutine != null) StopCoroutine (rockCoroutine);
 	}
 
 	// stop the rush mode, reset the dragon's speed, reset timer
 	public void stopRush(){
 		attacking = false;
-		anim.SetBool ("rush", false);
+		anim.SetBool ("Rush", false);
 		rb.velocity = new Vector2 (0.0f, 0.0f);
 		timer = Time.time;
 	}
@@ -167,7 +183,7 @@ public class DragonControl : MonoBehaviour {
 	// stop the laser mode, disable the particle system, destroy the shield
 	void stopUlti(){
 		attacking = false;
-		anim.SetBool ("ulti", false);
+		anim.SetBool ("Ulti", false);
 		timer = Time.time;
 		headLR.enabled = false;
 		headLaserPartical.GetComponent<ParticleSystem> ().Stop ();
@@ -176,7 +192,7 @@ public class DragonControl : MonoBehaviour {
 	}
 
 	void roar(){
-		anim.SetBool ("roar", true);
+		anim.SetBool ("Roar", true);
 		startRoar = Time.time;
 		myCamera.shake = true;
 		//stop dropping rocks
@@ -191,7 +207,7 @@ public class DragonControl : MonoBehaviour {
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				Vector3 spawnPosition = new Vector3 (Random.Range (-5f, 5f), 5f, 0f);
+				Vector3 spawnPosition = new Vector3 (Random.Range (42f, 52f), -3f, 0f);
 				Instantiate (rock, spawnPosition, rock.transform.rotation);
 				yield return new WaitForSeconds (0.1f);
 			}
@@ -203,10 +219,10 @@ public class DragonControl : MonoBehaviour {
 
 	// in the ready stage, instantiate a shield for player to hide
 	void ultiReady(){
-		anim.SetBool ("ulti", true);
+		anim.SetBool ("Ulti", true);
 		Vector3 shieldPos = new Vector3 ();
-		shieldPos.x = player.position.x + Random.Range (-3f, 3f);
-		shieldPos.y = ground.position.y + 1f;
+		shieldPos.x = player.position.x + Random.Range (-0.3f, 0.3f);
+		shieldPos.y = ground.position.y + 0.45f;
 		shieldPos.z = 0.0f;
 		tempShield = Instantiate (shield, shieldPos, shield.transform.rotation) as GameObject;
 	}
@@ -217,10 +233,12 @@ public class DragonControl : MonoBehaviour {
 	}
 
 	void rush(){
-		anim.SetBool ("rush", true);
+		anim.SetBool ("Rush", true);
 		// rush to the player
 		if (facingRight) rb.velocity = new Vector2 (transform.right.x * rushSpeed * Time.deltaTime, rb.velocity.y);
 		else rb.velocity = new Vector2 (-transform.right.x * rushSpeed * Time.deltaTime, rb.velocity.y);
+		//Debug.Log (rb.velocity);
+	//	rb.AddForce(new Vector2(10000f, 0f));
 	}
 
 	public void Flip()
@@ -234,11 +252,22 @@ public class DragonControl : MonoBehaviour {
 
 	public void hurt(){
 		dragonHealth = dragonHealth - 1.0f;
+
 		if (dragonHealth < 0.0f) {
 			death ();
+
 		}
 	}
 
 	private void death(){
+		
+		dead = true;
+		stopRoar ();
+		stopRush ();
+		stopUlti ();
+		attacking = false;
+
+
+		GameObject.FindGameObjectWithTag ("GameController").GetComponent<GameController> ().missionComplete ();
 	}
 }
