@@ -12,9 +12,13 @@ public class DeathLayer : MonoBehaviour {
 	}
 
 	void OnTriggerEnter2D(Collider2D col){
-		if (col.tag == "Player"){
+		if (col.tag == "Player") {
 			col.GetComponent<MonkeyControl> ().death ();
-		//	playerControl.death ();
+			//	playerControl.death ();
+		} else if (col.tag == "Enemy" || col.tag == "ChaseEnemy") {
+			col.GetComponent<Enemy> ().Death ();
 		}
 	}
 }
+
+

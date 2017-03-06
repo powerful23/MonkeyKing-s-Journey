@@ -56,6 +56,7 @@ public class DragonControl : MonoBehaviour {
 		facingRight = false;
 
 		headLR = headLaserEmitter.GetComponent<LineRenderer> ();
+		gameObject.GetComponent<DragonControl> ().enabled = false;
 
 	}
 

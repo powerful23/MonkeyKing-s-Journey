@@ -9,7 +9,7 @@ public class EnemyBullet : MonoBehaviour
 	void Start () 
 	{
 		// Destroy the rocket after 1 seconds if it doesn't get destroyed before then.
-		Destroy(gameObject, 1);
+		Destroy(gameObject, 4);
 	}
 
 
@@ -25,24 +25,20 @@ public class EnemyBullet : MonoBehaviour
 	void OnTriggerEnter2D (Collider2D col) 
 	{
 		// If it hits an enemy...
-		if(col.tag == "Obstacle")
+		if(!col.tag.Equals("Obstacle") && !col.tag.Equals("Enemy") && !col.tag.Equals("ChaseEnemy") && !col.tag.Equals("EnemyBullet"))
 		{
 			// Do damage to Player here
 			// ... find the Player script and call the Hurt function.
 			//col.gameObject.GetComponent<PlayerHealth>().Hurt();
 
 			// Call the explosion instantiation.
+			if (col.tag.Equals ("Player")) {
+				GameObject.FindGameObjectWithTag ("Player").GetComponent<MonkeyControl> ().hurt ();
+			}
 			OnExplode();
 
 			// Destroy the rocket.
 			Destroy (gameObject);
 		}
-		// Otherwise hit anything else, just explode
-//		else
-//		{
-//			// Instantiate the explosion and destroy the rocket.
-//			OnExplode();
-//			Destroy (gameObject);
-//		}
 	}
 }

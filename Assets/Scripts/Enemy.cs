@@ -20,6 +20,9 @@ public class Enemy : MonoBehaviour
 	private bool isRushing = false;		// Whether or not the enemy is rushing.
 //	private Score score;				// Reference to the Score script.
 
+	private GameObject gameCtrl = null;
+
+
 	
 	void Awake()
 	{
@@ -30,6 +33,7 @@ public class Enemy : MonoBehaviour
 //		score = GameObject.Find("Score").GetComponent<Score>();
 	}
 
+
 	void FixedUpdate ()
 	{
 		// Create an array of all the colliders in front of the enemy.
@@ -37,6 +41,7 @@ public class Enemy : MonoBehaviour
 
 		Collider2D[] frontHeroHits = Physics2D.OverlapPointAll (frontCheckHero.position);
 
+		/*
 		// Check each of the colliders.
 		foreach(Collider2D c in frontHits)
 		{
@@ -48,6 +53,7 @@ public class Enemy : MonoBehaviour
 				break;
 			}
 		}
+		*/
 		foreach(Collider2D c in frontHeroHits)
 		{
 			// If any of the colliders is an Obstacle...
@@ -63,6 +69,8 @@ public class Enemy : MonoBehaviour
 
 		// Set the enemy's velocity to moveSpeed in the x direction.
 		GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
+
+		Debug.Log (GetComponent<Rigidbody2D> ().velocity);
 
 		// If the enemy has one hit point left and has a damagedEnemy sprite...
 		if(HP == 1 && damagedEnemy != null)
@@ -80,9 +88,19 @@ public class Enemy : MonoBehaviour
 		// Reduce the number of hit points by one.
 		HP--;
 	}
-	
-	void Death()
+
+	public void SetGameCtrl(GameObject obj){
+		gameCtrl = obj;
+	}
+
+	public void Death()
 	{
+
+		if (gameCtrl != null) {
+			gameCtrl.GetComponent<GameController> ().DecreaseEnemy ();
+		}
+
+
 		// Find all of the sprite renderers on this object and it's children.
 		SpriteRenderer[] otherRenderers = GetComponentsInChildren<SpriteRenderer>();
 
@@ -96,14 +114,9 @@ public class Enemy : MonoBehaviour
 		ren.enabled = true;
 		ren.sprite = deadEnemy;
 
-		// Increase the score by 100 points
-//		score.score += 100;
 
 		// Set dead to true.
 		dead = true;
-
-		// Allow the enemy to rotate and spin it by adding a torque.
-		GetComponent<Rigidbody2D>().AddTorque(Random.Range(deathSpinMin,deathSpinMax));
 
 		// Find all of the colliders on the gameobject and set them all to be triggers.
 		Collider2D[] cols = GetComponents<Collider2D>();
@@ -112,17 +125,7 @@ public class Enemy : MonoBehaviour
 			c.isTrigger = true;
 		}
 
-		// Play a random audioclip from the deathClips array.
-		int i = Random.Range(0, deathClips.Length);
-		AudioSource.PlayClipAtPoint(deathClips[i], transform.position);
-
-		// Create a vector that is just above the enemy.
-//		Vector3 scorePos;
-//		scorePos = transform.position;
-//		scorePos.y += 1.5f;
-
-		// Instantiate the 100 points prefab at this point.
-//		Instantiate(hundredPointsUI, scorePos, Quaternion.identity);
+		Destroy (gameObject, 2);
 	}
 
 
@@ -156,4 +159,11 @@ public class Enemy : MonoBehaviour
 			moveSpeed = moveSpeed * 2;
 		}
 	}
+	void OnTriggerEnter2D(Collider2D col){
+		if (col.tag.Equals("Enemy")){
+			Flip ();
+		}
+	}
+
+
 }

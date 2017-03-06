@@ -11,16 +11,9 @@ public class MySpawner : MonoBehaviour
 
 
 	private int curSpawns;				// the currentNum of the enemies spawned
-
-
-
-
-
 	void Start ()
 	{
-		// Start calling the Spawn function repeatedly after a delay .
 		curSpawns = 0;
-
 
 	}
 
@@ -42,14 +35,12 @@ public class MySpawner : MonoBehaviour
 
 		// Instantiate a random enemy.
 		int enemyIndex = Random.Range(0, enemies.Length);
-		GameObject obj = Instantiate(enemies[enemyIndex], transform.position, transform.rotation) as GameObject;
-		obj.GetComponent<MyEnemy> ().SetGameCtrl (gameCtrl);
 
-		// Play the spawning effect from all of the particle systems.
-		foreach(ParticleSystem p in GetComponentsInChildren<ParticleSystem>())
-		{
-			p.Play();
-		}
+		GameObject obj = Instantiate(enemies[enemyIndex], transform.position, transform.rotation) as GameObject;
+		if (obj != null)
+			Debug.Log ("spawned");
+		obj.GetComponent<Enemy> ().SetGameCtrl (gameCtrl);
+
 		++curSpawns;
 	}
 

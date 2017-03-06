@@ -14,6 +14,7 @@ public class GameController : MonoBehaviour {
 	public GameObject missionComplete;		// mission complete title
 
 	public GameObject rebornDialog;
+	public Transform bossCheck;
 
 
 	private bool[] checkPointPass;			// decide whether checkPoints are passed
@@ -25,6 +26,8 @@ public class GameController : MonoBehaviour {
 
 	private int pendingRebornPoint;
 	private int pendingPreviewPoint;
+	private bool inBossFight;
+
 
 
 	// Use this for initialization
@@ -37,6 +40,7 @@ public class GameController : MonoBehaviour {
 		enemySurvivedNum = 0;
 		pendingRebornPoint = 0;
 		pendingPreviewPoint = 0;
+		inBossFight = false;
 	}
 		
 	// Update is called once per frame
@@ -78,6 +82,11 @@ public class GameController : MonoBehaviour {
 		if (!inCheckPoint && pendingPreviewPoint < previewPoints.Length && playerPos.position.x > previewPoints [pendingPreviewPoint].position.x) {
 			camera.GetComponent<MyCamera> ().previewMoving (previewPoints [pendingPreviewPoint].GetChild (0), 3.0f);
 			++pendingPreviewPoint;
+		}
+
+		if (!inBossFight && playerPos.position.x > bossCheck.position.x) {
+			GameObject.FindGameObjectWithTag ("DragonBoss").GetComponent<DragonControl> ().enabled = true;
+			inBossFight = true;
 		}
 	}
 
@@ -141,13 +150,13 @@ public class GameController : MonoBehaviour {
 			Destroy (invisWall);
 			invisWall = null;
 		}
-		camera.GetComponent<CameraFollow> ().fixedPos = false;
+		camera.GetComponent<MyCamera> ().fixedPos = false;
 	}
 
 	// set the invisWall and make the camera stop
 	void StopCameraMoving(){
 		SetInvisWall ();
-		camera.GetComponent<CameraFollow> ().fixedPos = true;
+		camera.GetComponent<MyCamera> ().fixedPos = true;
 	}
 
 	public void RebornPlayer(){

@@ -55,13 +55,15 @@ GameObject:
   - component: {fileID: 50826628353764246}
   - component: {fileID: 114521185095442984}
   - component: {fileID: 114078543698553062}
+  - component: {fileID: 58026697472530316}
+  - component: {fileID: 58017790815677662}
   m_Layer: 0
   m_Name: Enemy_little_lion
-  m_TagString: Untagged
+  m_TagString: ChaseEnemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &4530605221704874
 Transform:
   m_ObjectHideFlags: 1
@@ -82,8 +84,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1807222787297366}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 218.33, y: -68.72, z: 0}
-  m_LocalScale: {x: 5, y: 5, z: 1}
+  m_LocalPosition: {x: 12.103, y: -0.457, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4919630619875530}
   - {fileID: 4530605221704874}
@@ -123,6 +125,34 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58017790815677662
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1807222787297366}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.14, y: -0.09}
+  serializedVersion: 2
+  m_Radius: 0.09
+--- !u!58 &58026697472530316
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1807222787297366}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: -0.1, y: -0.09}
+  serializedVersion: 2
+  m_Radius: 0.09
 --- !u!61 &61869089788803720
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -134,9 +164,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: 0.03}
   serializedVersion: 2
-  m_Size: {x: 0.67, y: 0.39}
+  m_Size: {x: 0.53, y: 0.24}
 --- !u!95 &95156114406438294
 Animator:
   serializedVersion: 3
@@ -166,7 +196,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 2
+  speed: 0.5
 --- !u!114 &114521185095442984
 MonoBehaviour:
   m_ObjectHideFlags: 1

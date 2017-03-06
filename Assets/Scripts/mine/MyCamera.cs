@@ -10,7 +10,8 @@ public class MyCamera : MonoBehaviour {
 
 	public bool fixedPos = false;   // whether the camera is stopped or not
 	public bool shake = false;
-	public float shakeAmount = 1.0f;
+	public float shakeAmount = 0.01f;
+
 
 	private Transform player;		// Reference to the player's transform.
 
@@ -22,6 +23,8 @@ public class MyCamera : MonoBehaviour {
 	private Transform previewTarget;
 	private float previewStartTime;
 	private float previewTime;
+
+	private float biasY = 0.0f;
 
 	// Use this for initialization
 	void Start()
@@ -126,9 +129,9 @@ public class MyCamera : MonoBehaviour {
 		transform.position = new Vector3(targetX, targetY, transform.position.z);
 
 		if (shake) {
-			transform.position = new Vector3 (targetX + Random.Range (-1f, 1f) * shakeAmount, targetY + Random.Range (-1f, 1f) * shakeAmount, transform.position.z); 
+			transform.position = new Vector3 (targetX + Random.Range (-1f, 1f) * shakeAmount, targetY + Random.Range (-1f, 1f) * shakeAmount + biasY, transform.position.z); 
 		} else {
-			transform.position = new Vector3 (targetX, targetY, transform.position.z);
+			transform.position = new Vector3 (targetX, targetY + biasY, transform.position.z);
 		}
 
 	}
