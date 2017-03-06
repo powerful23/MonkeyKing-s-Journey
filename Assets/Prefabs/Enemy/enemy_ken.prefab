@@ -36,10 +36,11 @@ GameObject:
   m_Component:
   - component: {fileID: 4680255596798654}
   - component: {fileID: 212666408546923428}
-  - component: {fileID: 61407699947328648}
   - component: {fileID: 95253833934741610}
   - component: {fileID: 50170521119862426}
   - component: {fileID: 114403590055304190}
+  - component: {fileID: 58123996258621166}
+  - component: {fileID: 61159518627047614}
   m_Layer: 10
   m_Name: enemy_ken
   m_TagString: Enemy
@@ -110,8 +111,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433200601796574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 219.63004, y: -68.44692, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalPosition: {x: 11.53, y: -0.51, z: 0}
+  m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 4851625212312516}
   - {fileID: 4204679717028296}
@@ -152,8 +153,8 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!61 &61407699947328648
-BoxCollider2D:
+--- !u!58 &58123996258621166
+CircleCollider2D:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -163,9 +164,23 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
+  m_Offset: {x: 0, y: -0.18}
+  serializedVersion: 2
+  m_Radius: 0.35
+--- !u!61 &61159518627047614
+BoxCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1433200601796574}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 0.79, y: 1.06}
+  m_Size: {x: 0.73, y: 0.79}
 --- !u!95 &95253833934741610
 Animator:
   serializedVersion: 3
@@ -195,7 +210,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 50378408273857652, guid: 243392a744fb44e7e9d9426957a5b6ae, type: 2}
-  speed: 20
+  speed: 2
 --- !u!114 &114403590055304190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -207,7 +222,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef474d77e998d4890bff85103fb4c947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 3
+  moveSpeed: 1
   HP: 2
   deadEnemy: {fileID: 21300096, guid: 1a1a31a1ca87d4047a7b6178157b8213, type: 3}
   damagedEnemy: {fileID: 21300050, guid: 1a1a31a1ca87d4047a7b6178157b8213, type: 3}

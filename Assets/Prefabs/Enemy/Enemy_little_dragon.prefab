@@ -24,9 +24,10 @@ GameObject:
   - component: {fileID: 114107012480410984}
   - component: {fileID: 50573042191768212}
   - component: {fileID: 61658264330959558}
+  - component: {fileID: 58651789549159122}
   m_Layer: 0
   m_Name: Enemy_little_dragon
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -68,7 +69,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1839561213357662}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.49, y: -0.25, z: 0}
+  m_LocalPosition: {x: 0.36, y: 0.07, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4971175385515822}
@@ -94,8 +95,8 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1107646293500376}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 223.1, y: -67.7, z: 0}
-  m_LocalScale: {x: 3, y: 3, z: 1}
+  m_LocalPosition: {x: 11.06, y: -0.509, z: 0}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children:
   - {fileID: 4086706228598540}
   - {fileID: 4904942376605082}
@@ -122,6 +123,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
+--- !u!58 &58651789549159122
+CircleCollider2D:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1107646293500376}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0.09, y: -0.18}
+  serializedVersion: 2
+  m_Radius: 0.22
 --- !u!61 &61658264330959558
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -133,9 +148,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0.11, y: 0.15}
   serializedVersion: 2
-  m_Size: {x: 0.82, y: 0.8}
+  m_Size: {x: 0.55, y: 0.53}
 --- !u!95 &95805489128223382
 Animator:
   serializedVersion: 3
@@ -166,7 +181,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 2
   HP: 2
-  deadEnemy: {fileID: 0}
+  deadEnemy: {fileID: 21300124, guid: 3f72901be9be74432960a36f99ff2817, type: 3}
   damagedEnemy: {fileID: 0}
   deathClips: []
   deathSpinMin: -100

@@ -15,7 +15,7 @@ public class MyBullet : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.tag.Equals("Enemy")){
-			//col.gameObject.GetComponent<Enemy>().death();
+			col.gameObject.GetComponent<Enemy>().Hurt();
 		}
 		else if (col.tag.Equals("DragonBoss")){
 			col.gameObject.GetComponent<DragonControl>().hurt();
