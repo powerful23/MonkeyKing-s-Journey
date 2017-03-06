@@ -11,7 +11,7 @@ public class Enemy : MonoBehaviour
 //	public GameObject hundredPointsUI;	// A prefab of 100 that appears when the enemy dies.
 	public float deathSpinMin = -100f;			// A value to give the minimum amount of Torque when dying
 	public float deathSpinMax = 100f;			// A value to give the maximum amount of Torque when dying
-
+	public bool collisionDead = false;
 
 	private SpriteRenderer ren;			// Reference to the sprite renderer.
 	private Transform frontCheck;		// Reference to the position of the gameobject used for checking if something is in front.
@@ -21,6 +21,8 @@ public class Enemy : MonoBehaviour
 //	private Score score;				// Reference to the Score script.
 
 	private GameObject gameCtrl = null;
+
+
 
 
 	
@@ -70,7 +72,7 @@ public class Enemy : MonoBehaviour
 		// Set the enemy's velocity to moveSpeed in the x direction.
 		GetComponent<Rigidbody2D>().velocity = new Vector2(transform.localScale.x * moveSpeed, GetComponent<Rigidbody2D>().velocity.y);
 
-		Debug.Log (GetComponent<Rigidbody2D> ().velocity);
+//		Debug.Log (GetComponent<Rigidbody2D> ().velocity);
 
 		// If the enemy has one hit point left and has a damagedEnemy sprite...
 		if(HP == 1 && damagedEnemy != null)
@@ -161,7 +163,11 @@ public class Enemy : MonoBehaviour
 	}
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.tag.Equals("Enemy")){
+			
 			Flip ();
+		}
+		else if (col.tag.Equals("Player") && collisionDead){
+			GameObject.FindGameObjectWithTag ("Player").GetComponent<MonkeyControl> ().death ();
 		}
 	}
 

@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour {
 	public Transform[] previewPoints;
 
 	public GameObject wall;					// the "PREFAB" wall which will be instantiated when player arrives the checkPoint
-	public GameObject missionComplete;		// mission complete title
+	public GameObject missionCompleteTitle;		// mission complete title
 
 	public GameObject rebornDialog;
 	public Transform bossCheck;
@@ -70,7 +70,7 @@ public class GameController : MonoBehaviour {
 				++curCP;
 				// all checkPoints passed means the mission completed
 				if (curCP >= checkPointPass.Length) {
-					MissionComplete ();
+					//MissionComplete ();
 				}
 			}
 		}
@@ -85,27 +85,32 @@ public class GameController : MonoBehaviour {
 		}
 
 		if (!inBossFight && playerPos.position.x > bossCheck.position.x) {
-			GameObject.FindGameObjectWithTag ("DragonBoss").GetComponent<DragonControl> ().enabled = true;
+			GameObject boss = GameObject.FindGameObjectWithTag ("DragonBoss");
+			boss.GetComponent<DragonControl> ().enabled = true;
+			boss.GetComponent<DragonControl> ().timer = Time.time;
+			playerPos.gameObject.GetComponent<MonkeyControl> ().jumpForce = 250f;
 			inBossFight = true;
 		}
 	}
 
 	public void disablePlayer(){
-		playerPos.gameObject.GetComponent<PlayerControl> ().enabled = false;
+		playerPos.gameObject.GetComponent<MonkeyControl> ().enabled = false;
 	}
 
 	public void enablePlayer(){
-		playerPos.gameObject.GetComponent<PlayerControl> ().enabled = true;
+		playerPos.gameObject.GetComponent<MonkeyControl> ().enabled = true;
 	}
 
 
-	private void MissionComplete(){
+	public void missionComplete(){
 		// mission complete, disable all the control script
-		playerPos.gameObject.GetComponent<PlayerControl> ().enabled = false;
-		playerPos.gameObject.GetComponentInChildren<Gun> ().enabled = false;
+		playerPos.gameObject.GetComponent<MonkeyControl> ().enabled = false;
+		playerPos.gameObject.GetComponentInChildren<Weapon> ().enabled = false;
+
+		missionCompleteTitle.SetActive (true);
 
 		// set the text
-		missionComplete.GetComponent<Text> ().text = "MissionComplete!";
+		//missionComplete.GetComponent<Text> ().text = "MissionComplete!";
 	}
 
 	private void SetInvisWall(){
@@ -176,6 +181,7 @@ public class GameController : MonoBehaviour {
 		mc.reset ();
 		rebornDialog.SetActive (false);
 	}
+
 
 
 

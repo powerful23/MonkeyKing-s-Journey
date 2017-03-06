@@ -61,3 +61,9 @@ TagManager:
   - name: bodyFront
     uniqueID: 1323960365
     locked: 0
+  - name: ForeGround
+    uniqueID: 2003205785
+    locked: 0
+  - name: Explosion
+    uniqueID: 1984599941
+    locked: 0
