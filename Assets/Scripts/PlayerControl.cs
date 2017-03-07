@@ -131,4 +131,6 @@ public class PlayerControl : MonoBehaviour
 	public void death_testMode(){
 		transform.position = new Vector3 (0.0f, 0.0f, 0.0f);
 	}
+
+
 }

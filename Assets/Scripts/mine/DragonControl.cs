@@ -59,6 +59,7 @@ public class DragonControl : MonoBehaviour {
 		facingRight = false;
 
 		headLR = headLaserEmitter.GetComponent<LineRenderer> ();
+
 		gameObject.GetComponent<DragonControl> ().enabled = false;
 		dead = false;
 
@@ -128,6 +129,10 @@ public class DragonControl : MonoBehaviour {
 				Vector3 emitterPos = headLaserEmitter.transform.position;
 				// set the head emitter
 				headLR.SetPosition (0, emitterPos);
+
+				headLR.sortingLayerName = "ForeGround";
+
+
 				// detect the position of the ray hitting the ground layer
 				RaycastHit2D hit = Physics2D.Raycast (new Vector2 (emitterPos.x, emitterPos.y), new Vector2 (angle, -1), 100);
 				// if hit something, form a laser
@@ -143,6 +148,7 @@ public class DragonControl : MonoBehaviour {
 						player.gameObject.GetComponent<MonkeyControl> ().death ();
 						stopUlti ();
 					}
+
 				}
 				// if hit nothing, stop laser
 				else {
@@ -168,6 +174,8 @@ public class DragonControl : MonoBehaviour {
 		anim.SetBool ("Roar", false);
 		timer = Time.time;
 		myCamera.shake = false;
+
+		GetComponent<AudioSource> ().Stop ();
 
 		if (rockCoroutine != null) StopCoroutine (rockCoroutine);
 	}
@@ -198,6 +206,8 @@ public class DragonControl : MonoBehaviour {
 		//stop dropping rocks
 		rockCoroutine =  StartCoroutine (SpawnRocks ());
 
+		GetComponent<AudioSource> ().Play ();
+
 	}
 
 	IEnumerator SpawnRocks ()
@@ -207,7 +217,7 @@ public class DragonControl : MonoBehaviour {
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				Vector3 spawnPosition = new Vector3 (Random.Range (42f, 52f), -3f, 0f);
+				Vector3 spawnPosition = new Vector3 (Random.Range (42f, 52f), -4f, 0f);
 				Instantiate (rock, spawnPosition, rock.transform.rotation);
 				yield return new WaitForSeconds (0.1f);
 			}
@@ -222,7 +232,7 @@ public class DragonControl : MonoBehaviour {
 		anim.SetBool ("Ulti", true);
 		Vector3 shieldPos = new Vector3 ();
 		shieldPos.x = player.position.x + Random.Range (-0.3f, 0.3f);
-		shieldPos.y = ground.position.y + 0.45f;
+		shieldPos.y = ground.position.y + 1.0f;
 		shieldPos.z = 0.0f;
 		tempShield = Instantiate (shield, shieldPos, shield.transform.rotation) as GameObject;
 	}

@@ -12,7 +12,7 @@ public class MonkeyControl : MonoBehaviour
 
 
 	public GameController gameController;
-
+	public SpriteRenderer healthBar;
 //	public GameController gameController;
 
 
@@ -26,7 +26,7 @@ public class MonkeyControl : MonoBehaviour
 	private bool move = false;
 	private bool isDead = false;
 	private float curMonkeyHealth;
-
+	private Vector3 healthScale;
 	private bool missionOver;
 	private bool jumpButtonClicked = false;
 
@@ -42,6 +42,7 @@ public class MonkeyControl : MonoBehaviour
 		isDead = false;
 		curMonkeyHealth = monkeyHealth;
 		missionOver = false;
+		healthScale = healthBar.transform.localScale;
 	}
 	void Update()
 	{
@@ -61,6 +62,7 @@ public class MonkeyControl : MonoBehaviour
 		if((Input.GetButtonDown("Jump") || jumpButtonClicked) && grounded){
 			jump = true;
 			jumpButtonClicked = false;
+			GetComponent<AudioSource> ().Play ();
 		}
 
 		if(Input.GetButtonDown("Death")){
@@ -146,6 +148,7 @@ public class MonkeyControl : MonoBehaviour
 
 	public void hurt(){
 		curMonkeyHealth = curMonkeyHealth - 1.0f;
+		updateHealth ();
 		if (curMonkeyHealth < 0.0f) {
 			
 			death ();
@@ -172,10 +175,16 @@ public class MonkeyControl : MonoBehaviour
 		isDead = false;
 		animator.SetBool("Dead", false);
 		curMonkeyHealth = monkeyHealth;
+		updateHealth ();
 	}
 
 	public void missionComplete(){
 		missionOver = true;
 		//cheer
+	}
+
+	public void updateHealth(){
+		healthBar.material.color = Color.Lerp (Color.green, Color.red, 1 - curMonkeyHealth * 0.1f);
+		healthBar.transform.localScale = new Vector3 (healthScale.x * curMonkeyHealth * 0.1f, healthScale.y, 1);
 	}
 }
