@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour {
 
@@ -108,6 +109,7 @@ public class GameController : MonoBehaviour {
 		playerPos.gameObject.GetComponentInChildren<Weapon> ().enabled = false;
 
 		missionCompleteTitle.SetActive (true);
+		GetComponent<AudioSource> ().Play ();
 
 		// set the text
 		//missionComplete.GetComponent<Text> ().text = "MissionComplete!";
@@ -180,6 +182,10 @@ public class GameController : MonoBehaviour {
 		mc.enabled = true;
 		mc.reset ();
 		rebornDialog.SetActive (false);
+	}
+
+	public void backToMissionSelect(){
+		SceneManager.LoadScene ("LevelSelect");
 	}
 
 

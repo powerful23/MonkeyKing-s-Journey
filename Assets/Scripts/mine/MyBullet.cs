@@ -20,6 +20,7 @@ public class MyBullet : MonoBehaviour {
 		else if (col.tag.Equals("DragonBoss")){
 			col.gameObject.GetComponent<DragonControl>().hurt();
 		}
-		Destroy (gameObject);
+
+		if (!col.tag.Equals("Obstacle")) Destroy (gameObject);
 	}
 }

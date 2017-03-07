@@ -6,9 +6,11 @@ public class Weapon : MonoBehaviour {
 	public Rigidbody2D bullet;				// Prefab of the rocket.
 	public float speed = 20f;				// The speed the rocket will fire at.
 
+
 	private MonkeyControl playerCtrl;		// Reference to the PlayerControl script.
 	private Animator anim;					// Reference to the Animator component.
 	private bool fireButtonClicked = false;
+	private 
 
 	void Awake()
 	{
@@ -30,6 +32,8 @@ public class Weapon : MonoBehaviour {
 
 			fireButtonClicked = false;
 			anim.SetTrigger("Shoot");
+
+			GetComponent<AudioSource> ().Play ();
 
 			// If the player is facing right...
 			if(playerCtrl.facingRight)
