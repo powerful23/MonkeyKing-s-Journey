@@ -81,9 +81,10 @@
      <Compile Include="Assets\Scripts\UIScript\ImageSelected.cs" />
      <Compile Include="Assets\Scripts\UIScript\LoadScene.cs" />
      <Compile Include="Assets\Scripts\UIScript\MissionSelect.cs" />
+     <Compile Include="Assets\Scripts\Weapons\FlameBulletController.cs" />
+     <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
      <Compile Include="Assets\Scripts\herodesign\BulletEater.cs" />
      <Compile Include="Assets\Scripts\herodesign\MonkeyControl.cs" />
-     <Compile Include="Assets\Scripts\herodesign\Weapon.cs" />
      <Compile Include="Assets\Scripts\mine\DeadlyRock.cs" />
      <Compile Include="Assets\Scripts\mine\DeathLayer.cs" />
      <Compile Include="Assets\Scripts\mine\DownBound.cs" />
