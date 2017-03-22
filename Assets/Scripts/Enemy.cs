@@ -127,10 +127,15 @@ public class Enemy : MonoBehaviour
 			c.isTrigger = true;
 		}
 
+		explode ();
+
+
 		Destroy (gameObject, 2);
 	}
 
-
+	void explode(){
+		
+	}
 	public void Flip()
 	{
 		// Multiply the x component of localScale by -1.
