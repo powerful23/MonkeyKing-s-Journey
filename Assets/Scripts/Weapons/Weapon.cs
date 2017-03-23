@@ -50,6 +50,10 @@ public class Weapon : MonoBehaviour {
 
 	void Update ()
 	{
+		if (Input.GetButtonDown ("SwitchWeapon")) {
+			weaponMode = (weaponMode + 1) % 4;
+		}
+			
 		// in normal mode
 		if (weaponMode == 0) {
 			bullet = normalBullet;

@@ -41,7 +41,7 @@ GameObject:
   - component: {fileID: 114403590055304190}
   - component: {fileID: 58123996258621166}
   - component: {fileID: 61159518627047614}
-  m_Layer: 10
+  m_Layer: 14
   m_Name: enemy_ken
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -111,7 +111,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1433200601796574}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 11.53, y: -0.51, z: 0}
+  m_LocalPosition: {x: -1.67, y: -0.612, z: 0}
   m_LocalScale: {x: 0.3, y: 0.3, z: 1}
   m_Children:
   - {fileID: 4851625212312516}
@@ -211,6 +211,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bullet: {fileID: 50378408273857652, guid: 243392a744fb44e7e9d9426957a5b6ae, type: 2}
   speed: 2
+  attackCoolDown: 2
 --- !u!114 &114403590055304190
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -222,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef474d77e998d4890bff85103fb4c947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 1
+  moveSpeed: 0
   HP: 2
   deadEnemy: {fileID: 21300096, guid: 1a1a31a1ca87d4047a7b6178157b8213, type: 3}
   damagedEnemy: {fileID: 21300050, guid: 1a1a31a1ca87d4047a7b6178157b8213, type: 3}
@@ -231,6 +232,7 @@ MonoBehaviour:
   - {fileID: 8300000, guid: 85020549641fa452d9136ac2fc852efd, type: 3}
   deathSpinMin: -100
   deathSpinMax: 100
+  collisionDead: 0
 --- !u!212 &212666408546923428
 SpriteRenderer:
   m_ObjectHideFlags: 1
@@ -260,7 +262,7 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1783731295
+  m_SortingLayerID: 2003205785
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300018, guid: 1a1a31a1ca87d4047a7b6178157b8213, type: 3}
   m_Color: {r: 0.9191176, g: 0.2703287, b: 0.2703287, a: 1}

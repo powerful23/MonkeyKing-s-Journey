@@ -52,7 +52,10 @@
      <Compile Include="Assets\Scripts\BombPickup.cs" />
      <Compile Include="Assets\Scripts\CameraFollow.cs" />
      <Compile Include="Assets\Scripts\Destroyer.cs" />
-     <Compile Include="Assets\Scripts\Enemy.cs" />
+     <Compile Include="Assets\Scripts\DragonBoss\DragonControl.cs" />
+     <Compile Include="Assets\Scripts\DragonBoss\DragonMove.cs" />
+     <Compile Include="Assets\Scripts\DragonBoss\HeadCollision.cs" />
+     <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
      <Compile Include="Assets\Scripts\EnemyBullet.cs" />
      <Compile Include="Assets\Scripts\EnemyChase.cs" />
      <Compile Include="Assets\Scripts\EnemyGun.cs" />
@@ -83,12 +86,12 @@
      <Compile Include="Assets\Scripts\UIScript\MissionSelect.cs" />
      <Compile Include="Assets\Scripts\Weapons\FlameBulletController.cs" />
      <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
+     <Compile Include="Assets\Scripts\Weapons\bombBulletController.cs" />
      <Compile Include="Assets\Scripts\herodesign\BulletEater.cs" />
      <Compile Include="Assets\Scripts\herodesign\MonkeyControl.cs" />
      <Compile Include="Assets\Scripts\mine\DeadlyRock.cs" />
      <Compile Include="Assets\Scripts\mine\DeathLayer.cs" />
      <Compile Include="Assets\Scripts\mine\DownBound.cs" />
-     <Compile Include="Assets\Scripts\mine\DragonControl.cs" />
      <Compile Include="Assets\Scripts\mine\GameController.cs" />
      <Compile Include="Assets\Scripts\mine\GameManager.cs" />
      <Compile Include="Assets\Scripts\mine\LaserEmitter.cs" />
@@ -103,8 +106,6 @@
      <Compile Include="Assets\Scripts\mine\ShootingSpawner.cs" />
      <Compile Include="Assets\Scripts\mine\TailRotator.cs" />
      <Compile Include="Assets\Scripts\mine\WheelSpawner.cs" />
-     <Compile Include="Assets\Scripts\mine\dragon\DragonMove.cs" />
-     <Compile Include="Assets\Scripts\mine\dragon\HeadCollision.cs" />
      <Compile Include="Assets\Scripts\timer.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

@@ -32,6 +32,7 @@ public class PlayerControl : MonoBehaviour
 	private bool move = false;
 	private bool jumpButtonClicked = false;
 
+	private bool wudiMode = false;
 
 	void Awake()
 	{
@@ -44,6 +45,9 @@ public class PlayerControl : MonoBehaviour
 
 	void Update()
 	{
+		if (Input.GetButtonDown ("wudi")) {
+			wudiMode = !wudiMode;
+		}
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
 		grounded = Physics2D.Linecast(transform.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"))
 			|| Physics2D.Linecast(transform.position, groundCheck2.position, 1 << LayerMask.NameToLayer("Ground"));  
@@ -125,7 +129,8 @@ public class PlayerControl : MonoBehaviour
 
 
 	public void death(){
-		gameController.RebornPlayer ();
+		if (!wudiMode)
+			gameController.RebornPlayer ();
 	}
 
 	public void death_testMode(){

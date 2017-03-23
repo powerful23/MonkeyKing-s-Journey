@@ -30,6 +30,8 @@ public class MonkeyControl : MonoBehaviour
 	private bool missionOver;
 	private bool jumpButtonClicked = false;
 
+	private bool wudiMode = false;
+
 
 	void Awake()
 	{
@@ -46,6 +48,10 @@ public class MonkeyControl : MonoBehaviour
 	}
 	void Update()
 	{
+
+		if (Input.GetButtonDown ("wudi")) {
+			wudiMode = !wudiMode;
+		}
 		
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
 		grounded = Physics2D.Linecast(transform.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"))
@@ -147,17 +153,19 @@ public class MonkeyControl : MonoBehaviour
 	}
 
 	public void hurt(){
+		if (wudiMode)
+			return;
+		
 		curMonkeyHealth = curMonkeyHealth - 1.0f;
 		updateHealth ();
 		if (curMonkeyHealth < 0.0f) {
-			
 			death ();
 		}
 		
 	}
 
 	public void death(){
-		if (!isDead) {
+		if (!wudiMode && !isDead) {
 			GetComponent<MonkeyControl> ().enabled = false;
 			animator.SetTrigger ("Die");
 			animator.SetBool ("Dead", true);
