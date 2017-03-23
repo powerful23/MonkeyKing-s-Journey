@@ -25,7 +25,7 @@ GameObject:
   - component: {fileID: 50573042191768212}
   - component: {fileID: 61658264330959558}
   - component: {fileID: 58651789549159122}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Enemy_little_dragon
   m_TagString: Enemy
   m_Icon: {fileID: 0}

@@ -260,8 +260,8 @@ public class DragonControl : MonoBehaviour {
 		facingRight = !facingRight;
 	}
 
-	public void hurt(){
-		dragonHealth = dragonHealth - 1.0f;
+	public void hurt(float damage){
+		dragonHealth = dragonHealth - damage;
 
 		if (dragonHealth < 0.0f) {
 			death ();

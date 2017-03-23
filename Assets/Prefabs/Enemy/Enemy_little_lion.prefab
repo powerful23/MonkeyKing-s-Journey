@@ -57,7 +57,7 @@ GameObject:
   - component: {fileID: 114078543698553062}
   - component: {fileID: 58026697472530316}
   - component: {fileID: 58017790815677662}
-  m_Layer: 0
+  m_Layer: 14
   m_Name: Enemy_little_lion
   m_TagString: ChaseEnemy
   m_Icon: {fileID: 0}
@@ -215,6 +215,7 @@ MonoBehaviour:
   deathClips: []
   deathSpinMin: -100
   deathSpinMax: 100
+  collisionDead: 0
 --- !u!212 &212612361074341870
 SpriteRenderer:
   m_ObjectHideFlags: 1
