@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 82683478287599358}
   m_Layer: 13
   m_Name: gun
-  m_TagString: Untagged
+  m_TagString: Weapon
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -761,13 +761,19 @@ MonoBehaviour:
   speed: 15
   normalBullet: {fileID: 50000012332419770, guid: 08d0d05bc561c234084d25f9fe0e75be,
     type: 2}
-  superBullet: {fileID: 0}
-  bombBullet: {fileID: 0}
+  superBullet: {fileID: 50041154987269468, guid: e687f9e6a42410a4f9f54bc051a104d6,
+    type: 2}
+  bombBullet: {fileID: 50538555247658008, guid: 9c4fcfe3e0e3982499b7070f3789bc67,
+    type: 2}
   flameBullet: {fileID: 50845610764761326, guid: 446c59f141b4c644cbe763afbfc0c6a5,
     type: 2}
+  normalBulletAudio: {fileID: 8300000, guid: 7735c0ad3172c4a4d83e730788630932, type: 3}
+  superBulletAudio: {fileID: 8300000, guid: 6ecd6b8e90e3b9b4db4f09b4cb8c731c, type: 3}
+  bombBulletAudio: {fileID: 8300000, guid: 8b4e61c51941a46d1aac273472c814fd, type: 3}
+  flameBulletAudio: {fileID: 8300000, guid: 734b489b580e2ff41b9c3489c029a569, type: 3}
+  changeWeapon: {fileID: 8300000, guid: 3284ef8ffd12bbd459cd9afeae9d7b7d, type: 3}
   superFireCoolDown: 0.1
-  bombForce: {x: 100, y: 100}
-  weaponMode: 4
+  bombForce: {x: 200, y: 200}
 --- !u!212 &212095733795168604
 SpriteRenderer:
   m_ObjectHideFlags: 1

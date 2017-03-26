@@ -9,6 +9,11 @@ public class Weapon : MonoBehaviour {
 	public Rigidbody2D superBullet;
 	public Rigidbody2D bombBullet;
 	public Rigidbody2D flameBullet;
+	public AudioClip normalBulletAudio;
+	public AudioClip superBulletAudio;
+	public AudioClip bombBulletAudio;
+	public AudioClip flameBulletAudio;
+	public AudioClip changeWeapon;
 
 	public float superFireCoolDown;
 
@@ -19,17 +24,27 @@ public class Weapon : MonoBehaviour {
 	private bool fireButtonClicked = false;
 	private Rigidbody2D bullet;				// Prefab of the rocket.
 	// 0: normal, 1: super, 2:bomb, 3:flame
-	public int weaponMode;
+	private int weaponMode;
 	private bool isHoldFire = false;
 	private float lastFireTime = 0.0f;
 	private Rigidbody2D currentFlameBullet;
+	private AudioClip curAudio;
+
+	private int curBulletNum = 0;
 
 	void Awake()
 	{
 		// Setting up the references.
 		anim = transform.parent.gameObject.GetComponent<Animator>();
 		playerCtrl = transform.parent.GetComponent<MonkeyControl> ();
+		initWeapon ();
+	}
 
+	public void initWeapon(){
+		curBulletNum = 0;
+		weaponMode = 0;
+		curAudio = normalBulletAudio;
+		switchWeapon (weaponMode, 20);
 	}
 
 	public void pressFire(){
@@ -44,16 +59,40 @@ public class Weapon : MonoBehaviour {
 		isHoldFire = false;
 	}
 
-	public void switchWeapon(int mode){
+	public void switchWeapon(int mode, int bullets){
+		GetComponent<AudioSource> ().clip = changeWeapon;
+		GetComponent<AudioSource> ().Play ();
+
+		if (weaponMode == mode) {
+			curBulletNum += bullets;
+			return;
+		} else
+			curBulletNum = bullets;
+
 		weaponMode = mode;
+		if (mode == 0) {
+			curAudio = normalBulletAudio;
+		} else if (mode == 1) {
+			curAudio = superBulletAudio;
+		} else if (mode == 2) {
+			curAudio = bombBulletAudio;
+		} else if (mode == 3) {
+			curAudio = flameBulletAudio;
+		}
 	}
 
 	void Update ()
 	{
-		if (Input.GetButtonDown ("SwitchWeapon")) {
-			weaponMode = (weaponMode + 1) % 4;
+		if (curBulletNum <= 0) {
+			switchWeapon (0, 20);
+			return;
 		}
-			
+
+		if (Input.GetButtonDown ("SwitchWeapon")) {
+			switchWeapon((weaponMode + 1) % 4, 20);
+		}
+
+
 		// in normal mode
 		if (weaponMode == 0) {
 			bullet = normalBullet;
@@ -62,7 +101,9 @@ public class Weapon : MonoBehaviour {
 				// ... set the animator Shoot trigger parameter and play the audioclip.
 				fireButtonClicked = false;
 				anim.SetTrigger ("Shoot");
+				GetComponent<AudioSource> ().clip = curAudio;
 				GetComponent<AudioSource> ().Play ();
+				--curBulletNum;
 
 				// If the player is facing right...
 				if (playerCtrl.facingRight) {
@@ -82,7 +123,9 @@ public class Weapon : MonoBehaviour {
 			if (Input.GetButton ("Fire1") || isHoldFire) {
 				if (Time.time - lastFireTime > superFireCoolDown) {
 					anim.SetTrigger ("Shoot");
+					GetComponent<AudioSource> ().clip = curAudio;
 					GetComponent<AudioSource> ().Play ();
+					--curBulletNum;
 
 					// If the player is facing right...
 					if (playerCtrl.facingRight) {
@@ -107,7 +150,9 @@ public class Weapon : MonoBehaviour {
 				// ... set the animator Shoot trigger parameter and play the audioclip.
 				fireButtonClicked = false;
 				anim.SetTrigger ("Shoot");
+				GetComponent<AudioSource> ().clip = curAudio;
 				GetComponent<AudioSource> ().Play ();
+				--curBulletNum;
 
 				// If the player is facing right...
 				if (playerCtrl.facingRight) {
@@ -130,6 +175,10 @@ public class Weapon : MonoBehaviour {
 				fireButtonClicked = false;
 
 				currentFlameBullet = Instantiate (bullet, transform.GetChild (0).position, Quaternion.Euler (new Vector3 (0, 0, 0))) as Rigidbody2D;
+
+				GetComponent<AudioSource> ().clip = curAudio;
+				GetComponent<AudioSource> ().Play ();
+
 			}
 			if (!Input.GetButton ("Fire1")) {
 				if (currentFlameBullet != null) {
@@ -147,11 +196,6 @@ public class Weapon : MonoBehaviour {
 					currentFlameBullet.transform.rotation = Quaternion.Euler (new Vector3 (0, 0, 270));
 				}
 			}
-
-
-
-
-
 		}
 
 	}

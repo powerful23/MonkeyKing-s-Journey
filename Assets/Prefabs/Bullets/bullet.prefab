@@ -88,6 +88,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67b299df9d41b48498d8ead3753f3abd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  explosion: {fileID: 1949862800690492, guid: 8cfb51e7ba09d104f8ee78363a58b595, type: 2}
+  bulletDamage: 1
 --- !u!212 &212000010691139500
 SpriteRenderer:
   m_ObjectHideFlags: 1
