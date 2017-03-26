@@ -37,7 +37,7 @@ public class bombBulletController : MonoBehaviour {
 				col.gameObject.GetComponent<Enemy> ().Hurt (bombDamage);
 			} else if (col.tag.Equals ("DragonBoss")) {
 				col.gameObject.GetComponent<DragonControl> ().hurt (bombDamage);
-			}
+			} 
 		}
 	}
 

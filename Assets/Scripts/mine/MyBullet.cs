@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class MyBullet : MonoBehaviour {
-	
+	public GameObject explosion;		// Prefab of explosion effect.
+	public float bulletDamage;
 
 	// Use this for initialization
 	void Start () {
@@ -14,14 +15,27 @@ public class MyBullet : MonoBehaviour {
 		
 	}
 
+	void explode(){
+		// Create a quaternion with a random rotation in the z-axis.
+		Quaternion randomRotation = Quaternion.Euler(0f, 0f, Random.Range(0f, 360f));
+
+		// Instantiate the explosion where the rocket is with the random rotation.
+		Instantiate(explosion, transform.position, randomRotation);
+	}
+
 	void OnTriggerEnter2D(Collider2D col){
-		if (col.tag.Equals("Enemy")){
-			col.gameObject.GetComponent<Enemy>().Hurt(1);
-		}
-		else if (col.tag.Equals("DragonBoss")){
-			col.gameObject.GetComponent<DragonControl>().hurt(1);
+		if (col.tag.Equals ("Enemy")) {
+			col.gameObject.GetComponent<Enemy> ().Hurt (bulletDamage);
+		} else if (col.tag.Equals ("DragonBoss")) {
+			col.gameObject.GetComponent<DragonControl> ().hurt (bulletDamage);
+		} else if (col.tag.Equals ("Surprise")) {
+			col.gameObject.GetComponent <Surprise> ().hurt (bulletDamage);
 		}
 
-		if (!col.tag.Equals("Obstacle")) Destroy (gameObject);
+
+		if (!col.tag.Equals ("Obstacle") && !col.tag.Equals("WeaponBox")) {
+			explode ();
+			Destroy (gameObject);
+		}
 	}
 }
