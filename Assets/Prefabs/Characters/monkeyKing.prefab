@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 58899610006910762}
   - component: {fileID: 58130787673454232}
   - component: {fileID: 82572820184150900}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: monkeyKing
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -772,6 +772,7 @@ MonoBehaviour:
   bombBulletAudio: {fileID: 8300000, guid: 8b4e61c51941a46d1aac273472c814fd, type: 3}
   flameBulletAudio: {fileID: 8300000, guid: 734b489b580e2ff41b9c3489c029a569, type: 3}
   changeWeapon: {fileID: 8300000, guid: 3284ef8ffd12bbd459cd9afeae9d7b7d, type: 3}
+  normalFireCoolDown: 0
   superFireCoolDown: 0.1
   bombForce: {x: 200, y: 200}
 --- !u!212 &212095733795168604
