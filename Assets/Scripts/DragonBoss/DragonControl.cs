@@ -26,7 +26,11 @@ public class DragonControl : MonoBehaviour {
 
 	public Transform ground;
 
+	public bool test;
+
 	public float timer;	// the timer of the overall battle
+
+	public LaserBeam lb;
 	private float ultiStandByTimer;
 
 	private Animator anim;	// the animator controls the dragon boss
@@ -60,7 +64,7 @@ public class DragonControl : MonoBehaviour {
 
 		headLR = headLaserEmitter.GetComponent<LineRenderer> ();
 
-		gameObject.GetComponent<DragonControl> ().enabled = false;
+		gameObject.GetComponent<DragonControl> ().enabled = test;
 		dead = false;
 
 	}
@@ -85,20 +89,20 @@ public class DragonControl : MonoBehaviour {
 
 				int rnd = Random.Range (0, 100);
 				// normal attack
-				if (rnd >= 0 && rnd < 30) {
+				if (rnd >= 0 && rnd < 100) {
 					mode = 0;
 					attacking = true;
 					ultiStandByTimer = Time.time;
 					ultiReady ();
 				}
 			// rush mode
-			else if (rnd >= 30 && rnd < 60) {
+			else if (rnd >= 0 && rnd < 0) {
 					mode = 1;
 					rush ();
 					attacking = true;
 				}
 			// roar mode
-			else if (rnd >= 60 && rnd < 90) {
+			else if (rnd >= 0 && rnd < 0) {
 					mode = 2;
 					roar ();
 					attacking = true;
@@ -124,37 +128,7 @@ public class DragonControl : MonoBehaviour {
 
 	void FixedUpdate(){
 		if (attacking) {
-			// if in the ulti mode, emit the laser
-			if (mode == 0 && ultiStandByTimer < 0) {
-				Vector3 emitterPos = headLaserEmitter.transform.position;
-				// set the head emitter
-				headLR.SetPosition (0, emitterPos);
-
-				headLR.sortingLayerName = "ForeGround";
-
-
-				// detect the position of the ray hitting the ground layer
-				RaycastHit2D hit = Physics2D.Raycast (new Vector2 (emitterPos.x, emitterPos.y), new Vector2 (angle, -1), 100);
-				// if hit something, form a laser
-				if (hit.collider != null && Mathf.Abs (angle) < 8.0f) {
-					headLR.SetPosition (1, hit.point);
-					headLaserPartical.transform.position = hit.point;
-					if (!facingRight)
-						angle -= Time.deltaTime * 2f;
-					else
-						angle += Time.deltaTime * 2f;
-
-					if (hit.collider.tag.Equals ("Player")) {
-						player.gameObject.GetComponent<MonkeyControl> ().death ();
-						stopUlti ();
-					}
-
-				}
-				// if hit nothing, stop laser
-				else {
-					stopUlti ();
-				}
-			} 
+			
 		}
 
 
@@ -189,12 +163,11 @@ public class DragonControl : MonoBehaviour {
 	}
 
 	// stop the laser mode, disable the particle system, destroy the shield
-	void stopUlti(){
+	public void stopUlti(){
 		attacking = false;
 		anim.SetBool ("Ulti", false);
 		timer = Time.time;
-		headLR.enabled = false;
-		headLaserPartical.GetComponent<ParticleSystem> ().Stop ();
+
 		if (tempShield != null)
 			Destroy (tempShield);
 	}
@@ -236,10 +209,8 @@ public class DragonControl : MonoBehaviour {
 		shieldPos.z = 0.0f;
 		tempShield = Instantiate (shield, shieldPos, shield.transform.rotation) as GameObject;
 	}
-	void ulti(){		
-		angle = 0.2f;
-		headLR.enabled = true;
-		headLaserPartical.GetComponent<ParticleSystem> ().Play ();
+	void ulti(){
+		lb.FireLaser ();
 	}
 
 	void rush(){
@@ -258,6 +229,8 @@ public class DragonControl : MonoBehaviour {
 		enemyScale.x *= -1;
 		transform.localScale = enemyScale;
 		facingRight = !facingRight;
+		lb.setFacing (facingRight);
+
 	}
 
 	public void hurt(float damage){

@@ -89,6 +89,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   explosion: {fileID: 1949862800690492, guid: 8cfb51e7ba09d104f8ee78363a58b595, type: 2}
+  bulletDamage: 1
 --- !u!212 &212828816950028832
 SpriteRenderer:
   m_ObjectHideFlags: 1

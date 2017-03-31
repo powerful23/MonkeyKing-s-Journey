@@ -15,7 +15,9 @@ public class Weapon : MonoBehaviour {
 	public AudioClip flameBulletAudio;
 	public AudioClip changeWeapon;
 
+	public float normalFireCoolDown;
 	public float superFireCoolDown;
+
 
 	public Vector2 bombForce;
 
@@ -97,7 +99,7 @@ public class Weapon : MonoBehaviour {
 		if (weaponMode == 0) {
 			bullet = normalBullet;
 			// If the fire button is pressed...
-			if (Input.GetButtonDown ("Fire1") || fireButtonClicked) {
+			if (Time.time - lastFireTime > normalFireCoolDown && (Input.GetButtonDown ("Fire1") || fireButtonClicked)) {
 				// ... set the animator Shoot trigger parameter and play the audioclip.
 				fireButtonClicked = false;
 				anim.SetTrigger ("Shoot");
@@ -115,6 +117,8 @@ public class Weapon : MonoBehaviour {
 					Rigidbody2D bulletInstance = Instantiate (bullet, transform.GetChild (0).position, Quaternion.Euler (new Vector3 (0, 0, 180f))) as Rigidbody2D;
 					bulletInstance.velocity = new Vector2 (-speed, 0);
 				}
+
+				lastFireTime = Time.time;
 			}
 		}
 		// in super mode
