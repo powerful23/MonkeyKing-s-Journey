@@ -635,7 +635,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013343790570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 48.1, y: -4.78, z: 0}
+  m_LocalPosition: {x: 0.81, y: 0.16, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 4000013010513896}
@@ -808,7 +808,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1492942507973878}
   m_LocalRotation: {x: -0, y: -0, z: 0.22495107, w: 0.9743701}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.551, y: 0.154, z: 0}
   m_LocalScale: {x: 0.4166668, y: 0.4166668, z: 1}
   m_Children:
   - {fileID: 4091169365583616}
@@ -1160,7 +1160,9 @@ MonoBehaviour:
   explosion: {fileID: 1915618311281074, guid: 2cc4a630fe6784bb5abd50883432421e, type: 2}
   rock: {fileID: 1673288033958158, guid: c8de87da385df194c90c1dfe389fa673, type: 2}
   ground: {fileID: 0}
-  timer: 0
+  test: 1
+  timer: 1
+  lb: {fileID: 114373359764415068}
 --- !u!114 &114000012756436244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1219,7 +1221,7 @@ MonoBehaviour:
   rayBeginPos: {fileID: 4669638190495678}
   enemyHitLayer:
     serializedVersion: 2
-    m_Bits: 512
+    m_Bits: 33280
   maxLaserSize: 10
   laserGlowMultiplier: 3.4
   laserHitEmitter: {fileID: 1968772582922628, guid: d9ee5ad76b299fd4cb61da013525d0ce,

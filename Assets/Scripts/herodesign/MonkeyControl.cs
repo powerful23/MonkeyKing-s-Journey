@@ -31,6 +31,7 @@ public class MonkeyControl : MonoBehaviour
 	private bool jumpButtonClicked = false;
 
 	private bool wudiMode = false;
+	private Vector2 input_axis;
 
 
 	void Awake()
@@ -112,6 +113,20 @@ public class MonkeyControl : MonoBehaviour
 	public void jbuttonClick(){
 		jumpButtonClicked = true;
 
+	}
+
+	public void Move(Vector2 axis) {
+		if (axis.x > 0.2f)
+			moveCharacterRight();
+		else if (axis.x < -0.2f)
+			moveCharacterLeft ();
+		else stopCharacter ();
+		
+
+		if (axis.y > 0.5f) {
+			jbuttonClick ();
+		}
+		
 	}
 
 

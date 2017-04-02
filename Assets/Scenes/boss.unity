@@ -135,45 +135,6 @@ Prefab:
       propertyPath: ground
       value: 
       objectReference: {fileID: 582629837}
-    - target: {fileID: 114000012475620028, guid: 0675d28392b5c87499fe487bf8d96b34,
-        type: 2}
-      propertyPath: test
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012475620028, guid: 0675d28392b5c87499fe487bf8d96b34,
-        type: 2}
-      propertyPath: timer
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 114000012475620028, guid: 0675d28392b5c87499fe487bf8d96b34,
-        type: 2}
-      propertyPath: lb
-      value: 
-      objectReference: {fileID: 625075011}
-    - target: {fileID: 114373359764415068, guid: 0675d28392b5c87499fe487bf8d96b34,
-        type: 2}
-      propertyPath: enemyHitLayer.m_Bits
-      value: 33280
-      objectReference: {fileID: 0}
-    - target: {fileID: 114373359764415068, guid: 0675d28392b5c87499fe487bf8d96b34,
-        type: 2}
-      propertyPath: laserHitEmitter
-      value: 
-      objectReference: {fileID: 1968772582922628, guid: d9ee5ad76b299fd4cb61da013525d0ce,
-        type: 2}
-    - target: {fileID: 114373359764415068, guid: 0675d28392b5c87499fe487bf8d96b34,
-        type: 2}
-      propertyPath: laserMeltEmitter
-      value: 
-      objectReference: {fileID: 102582, guid: c0fa668a6517c31499ecb99025e0b158, type: 2}
-    - target: {fileID: 4028387516756636, guid: 0675d28392b5c87499fe487bf8d96b34, type: 2}
-      propertyPath: m_LocalPosition.x
-      value: -0.551
-      objectReference: {fileID: 0}
-    - target: {fileID: 4028387516756636, guid: 0675d28392b5c87499fe487bf8d96b34, type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0.154
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 0675d28392b5c87499fe487bf8d96b34, type: 2}
   m_IsPrefabParent: 0
@@ -360,12 +321,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &625075011 stripped
-MonoBehaviour:
-  m_PrefabParentObject: {fileID: 114373359764415068, guid: 0675d28392b5c87499fe487bf8d96b34,
-    type: 2}
-  m_PrefabInternal: {fileID: 77613712}
-  m_Script: {fileID: 11500000, guid: 533558231fb4666418479e9ea1d8b732, type: 3}
 --- !u!1 &817840645
 GameObject:
   m_ObjectHideFlags: 0
