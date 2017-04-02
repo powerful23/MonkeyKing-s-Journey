@@ -94,6 +94,7 @@ public class LaserBeam : MonoBehaviour {
             //Debug.DrawLine(rayBeginPos.position, endPos, Color.black);     
 
             lineRenderer.enabled = true;
+			lineRenderer.sortingLayerName = "ForeGround";
             //RaycastHit2D hit = Physics2D.Raycast(rayBeginPos.position, laserDir, currentLaserSize, enemyHitLayer); // cast ray
 			// detect the position of the ray hitting the ground layer
 			RaycastHit2D hit = Physics2D.Raycast (rayBeginPos.position, new Vector2 (angle, -1), currentLaserSize, enemyHitLayer);
