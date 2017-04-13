@@ -33,7 +33,7 @@ public class MyBullet : MonoBehaviour {
 		}
 
 
-		if (!col.tag.Equals ("Obstacle") && !col.tag.Equals("WeaponBox")) {
+		if (!col.tag.Equals ("Obstacle") && !col.tag.Equals("WeaponBox") && !col.tag.Equals("Money") && !col.tag.Equals("EnemyBullet") && !col.tag.Equals("CheckPoint")) {
 			explode ();
 			Destroy (gameObject);
 		}

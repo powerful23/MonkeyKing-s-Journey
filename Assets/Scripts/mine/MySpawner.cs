@@ -6,7 +6,7 @@ public class MySpawner : MonoBehaviour
 	public float spawnTime = 5f;		// The amount of time between each spawn.
 	public float spawnDelay = 3f;		// The amount of time before spawning starts.
 	public GameObject[] enemies;		// Array of enemy prefabs.
-	public int numToSpawn = 1;			// num of enemies to be spawned
+	public int numToSpawn;			// num of enemies to be spawned
 	public GameObject gameCtrl;			// reference to the gameControl script
 
 

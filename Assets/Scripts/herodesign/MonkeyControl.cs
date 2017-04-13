@@ -13,6 +13,8 @@ public class MonkeyControl : MonoBehaviour
 
 	public GameController gameController;
 	public SpriteRenderer healthBar;
+	public AudioClip jumpClip;
+	public AudioClip collectCoinClip;
 //	public GameController gameController;
 
 
@@ -32,6 +34,8 @@ public class MonkeyControl : MonoBehaviour
 
 	private bool wudiMode = false;
 	private Vector2 input_axis;
+
+	private int score;
 
 
 	void Awake()
@@ -69,6 +73,7 @@ public class MonkeyControl : MonoBehaviour
 		if((Input.GetButtonDown("Jump") || jumpButtonClicked) && grounded){
 			jump = true;
 			jumpButtonClicked = false;
+			GetComponent<AudioSource> ().clip = jumpClip;
 			GetComponent<AudioSource> ().Play ();
 		}
 
@@ -123,7 +128,7 @@ public class MonkeyControl : MonoBehaviour
 		else stopCharacter ();
 		
 
-		if (axis.y > 0.5f) {
+		if (axis.y > 0.3f) {
 			jbuttonClick ();
 		}
 		
@@ -209,5 +214,11 @@ public class MonkeyControl : MonoBehaviour
 	public void updateHealth(){
 		healthBar.material.color = Color.Lerp (Color.green, Color.red, 1 - curMonkeyHealth * 0.1f);
 		healthBar.transform.localScale = new Vector3 (healthScale.x * curMonkeyHealth * 0.1f, healthScale.y, 1);
+	}
+
+	public void updateScore(int s){
+		GetComponent<AudioSource> ().clip = collectCoinClip;
+		GetComponent<AudioSource> ().Play ();
+		score += s;
 	}
 }

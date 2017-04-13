@@ -223,7 +223,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef474d77e998d4890bff85103fb4c947, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveSpeed: 0
+  moveSpeed: 2
   HP: 2
   deadEnemy: {fileID: 21300096, guid: 1a1a31a1ca87d4047a7b6178157b8213, type: 3}
   damagedEnemy: {fileID: 21300050, guid: 1a1a31a1ca87d4047a7b6178157b8213, type: 3}

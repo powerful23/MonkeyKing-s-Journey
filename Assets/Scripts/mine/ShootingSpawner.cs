@@ -4,7 +4,7 @@ using System.Collections;
 public class ShootingSpawner : MonoBehaviour {
 
 	public Rigidbody2D rocket;				// Prefab of the rocket.
-	public int spawnTime = 1;
+	public float spawnTime = 1;
 	public float speed = 2f;				// The speed the rocket will fire at.
 	public int direction = 3;
 
