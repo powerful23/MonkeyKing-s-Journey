@@ -7,6 +7,7 @@ public class GameController : MonoBehaviour {
 
 	public GameObject camera;				// get the MainCamera
 	public Transform playerPos;				// get the player's transform
+
 	public Transform[] checkPoints;			// get the transforms of all checkPoints
 	public Transform[] rebornPoints;		// get the transforms of the rebornPoints
 	public Transform[] previewPoints;
@@ -36,7 +37,7 @@ public class GameController : MonoBehaviour {
 		int n = checkPoints.Length;
 		checkPointPass = new bool[n];		
 		curCP = 0;
-		cameraWidth = camera.GetComponent<Camera> ().aspect * camera.GetComponent<Camera> ().orthographicSize;
+
 		inCheckPoint = false;
 		enemySurvivedNum = 0;
 		pendingRebornPoint = 0;
@@ -56,7 +57,7 @@ public class GameController : MonoBehaviour {
 		// if there are remaining checkPoints
 		if (curCP < checkPointPass.Length) {
 			// if the player arrives the checkPoint and hasn't passed the checkPoint
-			if (playerPos.position.x > checkPoints [curCP].position.x && !checkPointPass [curCP]) {
+			if (checkPoints [curCP].GetComponent<CheckPoint>().isActivated() && !checkPointPass [curCP]) {
 				// at first, set the enemyNum to be destroyed and stop the camera
 				if (!inCheckPoint) {
 					GetEnemyNum ();
@@ -64,7 +65,7 @@ public class GameController : MonoBehaviour {
 				}
 			}
 			// if the player arrives the checkPoint and has passed the checkPoint
-			else if (playerPos.position.x > checkPoints [curCP].position.x && checkPointPass [curCP]) {
+			else if (checkPoints [curCP].GetComponent<CheckPoint>().isActivated() && checkPointPass [curCP]) {
 				// make camera move
 				ResumeCameraMoving ();
 				// set current checkPoint to the next
@@ -76,16 +77,16 @@ public class GameController : MonoBehaviour {
 			}
 		}
 
-		if (pendingRebornPoint < rebornPoints.Length && playerPos.position.x > rebornPoints [pendingRebornPoint].position.x) {
+		if (pendingRebornPoint < rebornPoints.Length && rebornPoints [pendingRebornPoint].GetComponent<CheckPoint>().isActivated()) {
 			++pendingRebornPoint;
 		}
 
-		if (!inCheckPoint && pendingPreviewPoint < previewPoints.Length && playerPos.position.x > previewPoints [pendingPreviewPoint].position.x) {
+		if (!inCheckPoint && pendingPreviewPoint < previewPoints.Length && previewPoints [pendingPreviewPoint].GetComponent<CheckPoint>().isActivated()) {
 			camera.GetComponent<MyCamera> ().previewMoving (previewPoints [pendingPreviewPoint].GetChild (0), 3.0f);
 			++pendingPreviewPoint;
 		}
 
-		if (!inBossFight && playerPos.position.x > bossCheck.position.x) {
+		if (!inBossFight && bossCheck.GetComponent<CheckPoint>().isActivated()) {
 			GameObject boss = GameObject.FindGameObjectWithTag ("DragonBoss");
 			boss.GetComponent<DragonControl> ().enabled = true;
 			boss.GetComponent<DragonControl> ().timer = Time.time;
@@ -116,6 +117,8 @@ public class GameController : MonoBehaviour {
 	}
 
 	private void SetInvisWall(){
+		cameraWidth = camera.GetComponent<Camera> ().aspect * camera.GetComponent<Camera> ().orthographicSize;
+
 		// the the position of this invisWall
 		Vector3 tmp = new Vector3 (camera.transform.position.x + cameraWidth, 0, 0);
 		// instantiate the invisWall
@@ -133,6 +136,7 @@ public class GameController : MonoBehaviour {
 		foreach (MySpawner sp in list){
 			sp.StartSpawn ();
 			enemySurvivedNum += sp.numToSpawn;
+
 		}
 
 	}
@@ -146,6 +150,7 @@ public class GameController : MonoBehaviour {
 
 	// if enemy destroyed, decrease the enemyNum
 	public void DecreaseEnemy(){
+		Debug.Log ("used");
 		--enemySurvivedNum;
 
 	}

@@ -24,6 +24,7 @@ public class Weapon : MonoBehaviour {
 	private MonkeyControl playerCtrl;		// Reference to the PlayerControl script.
 	private Animator anim;					// Reference to the Animator component.
 	private bool fireButtonClicked = false;
+	private bool fireButtonClickedDown = false;
 	private Rigidbody2D bullet;				// Prefab of the rocket.
 	// 0: normal, 1: super, 2:bomb, 3:flame
 	private int weaponMode;
@@ -55,6 +56,7 @@ public class Weapon : MonoBehaviour {
 
 	public void holdFire(){
 		isHoldFire = true;
+		fireButtonClickedDown = true;
 	}
 
 	public void releaseFire(){
@@ -174,9 +176,10 @@ public class Weapon : MonoBehaviour {
 		else if (weaponMode == 3) {
 			bullet = flameBullet;
 			// If the fire button is pressed...
-			if (Input.GetButtonDown ("Fire1") || fireButtonClicked) {
+			if (Input.GetButtonDown ("Fire1") || fireButtonClickedDown) {
+				
 				// ... set the animator Shoot trigger parameter and play the audioclip.
-				fireButtonClicked = false;
+				fireButtonClickedDown = false;
 
 				currentFlameBullet = Instantiate (bullet, transform.GetChild (0).position, Quaternion.Euler (new Vector3 (0, 0, 0))) as Rigidbody2D;
 
@@ -184,14 +187,15 @@ public class Weapon : MonoBehaviour {
 				GetComponent<AudioSource> ().Play ();
 
 			}
-			if (!Input.GetButton ("Fire1")) {
+			if (!Input.GetButton ("Fire1") && !isHoldFire) {
+				
 				if (currentFlameBullet != null) {
 					Destroy (currentFlameBullet.gameObject);
 					currentFlameBullet = null;
 				}
 			} else {
 				Vector3 targetPos = gameObject.transform.position;
-
+			
 				if (playerCtrl.facingRight) {
 					currentFlameBullet.transform.position = new Vector3 (targetPos.x + 0.6f, targetPos.y, targetPos.z);
 					currentFlameBullet.transform.rotation = Quaternion.Euler (new Vector3 (0, 0, 90));

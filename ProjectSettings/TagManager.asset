@@ -20,6 +20,9 @@ TagManager:
   - Weapon
   - WeaponBox
   - Surprise
+  - Money
+  - Bubble
+  - CheckPoint
   layers:
   - Default
   - TransparentFX
@@ -32,15 +35,15 @@ TagManager:
   - ForeGround
   - Ground
   - 
-  - bodyFront
-  - bodyBack
-  - bodyMiddle
+  - 
+  - 
+  - 
   - Enemy
   - Player
-  - 
-  - 
-  - 
-  - 
+  - EnemyBullet
+  - PlayerBullet
+  - Tools
+  - Traps
   - 
   - 
   - 

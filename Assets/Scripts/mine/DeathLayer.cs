@@ -15,8 +15,6 @@ public class DeathLayer : MonoBehaviour {
 		if (col.tag == "Player") {
 			col.GetComponent<MonkeyControl> ().death ();
 			//	playerControl.death ();
-		} else if (col.tag == "Enemy" || col.tag == "ChaseEnemy") {
-			col.GetComponent<Enemy> ().Death ();
 		}
 	}
 }

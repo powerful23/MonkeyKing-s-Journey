@@ -65,6 +65,7 @@
      <Compile Include="Assets\Scripts\Enemy_Phoenix.cs" />
      <Compile Include="Assets\Scripts\FireBallCtrl.cs" />
      <Compile Include="Assets\Scripts\FollowPlayer.cs" />
+     <Compile Include="Assets\Scripts\GearBox\MoneyCtrl.cs" />
      <Compile Include="Assets\Scripts\GearBox\Surprise.cs" />
      <Compile Include="Assets\Scripts\Gun.cs" />
      <Compile Include="Assets\Scripts\Gun_Phoenix.cs" />
@@ -94,6 +95,7 @@
      <Compile Include="Assets\Scripts\Weapons\bombBulletController.cs" />
      <Compile Include="Assets\Scripts\herodesign\BulletEater.cs" />
      <Compile Include="Assets\Scripts\herodesign\MonkeyControl.cs" />
+     <Compile Include="Assets\Scripts\mine\CheckPoint.cs" />
      <Compile Include="Assets\Scripts\mine\DeadlyRock.cs" />
      <Compile Include="Assets\Scripts\mine\DeathLayer.cs" />
      <Compile Include="Assets\Scripts\mine\DownBound.cs" />
@@ -112,6 +114,9 @@
      <Compile Include="Assets\Scripts\mine\TailRotator.cs" />
      <Compile Include="Assets\Scripts\mine\WheelSpawner.cs" />
      <Compile Include="Assets\Scripts\timer.cs" />
+     <Compile Include="Assets\Scripts\traps\Bubble.cs" />
+     <Compile Include="Assets\Scripts\traps\RockSpawner.cs" />
+     <Compile Include="Assets\Scripts\traps\RollingRockCtrl.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
