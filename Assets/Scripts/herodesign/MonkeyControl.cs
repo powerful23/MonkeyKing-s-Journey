@@ -13,8 +13,12 @@ public class MonkeyControl : MonoBehaviour
 
 	public GameController gameController;
 	public SpriteRenderer healthBar;
+	public GameObject immutable_shield;
+
 	public AudioClip jumpClip;
 	public AudioClip collectCoinClip;
+
+
 //	public GameController gameController;
 
 
@@ -34,6 +38,8 @@ public class MonkeyControl : MonoBehaviour
 
 	private bool wudiMode = false;
 	private Vector2 input_axis;
+
+
 
 	private int score;
 
@@ -55,9 +61,13 @@ public class MonkeyControl : MonoBehaviour
 	{
 
 		if (Input.GetButtonDown ("wudi")) {
-			wudiMode = !wudiMode;
+			if (!wudiMode)
+				startWudi ();
+			else
+				stopWudi ();
 		}
-		
+
+
 		// The player is grounded if a linecast to the groundcheck position hits anything on the ground layer.
 		grounded = Physics2D.Linecast(transform.position, groundCheck1.position, 1 << LayerMask.NameToLayer("Ground"))
 			|| Physics2D.Linecast(transform.position, groundCheck2.position, 1 << LayerMask.NameToLayer("Ground"));  
@@ -78,7 +88,7 @@ public class MonkeyControl : MonoBehaviour
 		}
 
 		if(Input.GetButtonDown("Death")){
-			death ();
+			death (true);
 		}
 
 		if (Input.GetButtonDown ("MoveRight")) {
@@ -179,31 +189,36 @@ public class MonkeyControl : MonoBehaviour
 		curMonkeyHealth = curMonkeyHealth - 1.0f;
 		updateHealth ();
 		if (curMonkeyHealth < 0.0f) {
-			death ();
+			death (false);
 		}
 		
 	}
 
-	public void death(){
-		if (!wudiMode && !isDead) {
+	public void death(bool ignoreWudiMode){
+		if ((ignoreWudiMode || !wudiMode) && !isDead) {
 			GetComponent<MonkeyControl> ().enabled = false;
 			animator.SetTrigger ("Die");
 			animator.SetBool ("Dead", true);
 			rigidbody2d.velocity = new Vector2 (0.0f, 0.0f);
+			//rigidbody2d.simulated = false;
 			move = false;
 			jump = false;
 			grounded = false;
+			isDead = true;
 			gameController.RebornPlayer ();
 
-			isDead = true;
 		}
 	}
 
-	public void reset(){
+	public void reset(Vector3 rebornPos){
 		isDead = false;
+		transform.position = rebornPos;
+		rigidbody2d.velocity = new Vector2 (0.0f, 0.0f);
 		animator.SetBool("Dead", false);
 		curMonkeyHealth = monkeyHealth;
 		updateHealth ();
+		startWudi ();
+		Invoke ("stopWudi", 2.0f);
 	}
 
 	public void missionComplete(){
@@ -220,5 +235,16 @@ public class MonkeyControl : MonoBehaviour
 		GetComponent<AudioSource> ().clip = collectCoinClip;
 		GetComponent<AudioSource> ().Play ();
 		score += s;
+	}
+
+	public void startWudi(){
+		wudiMode = true;
+		immutable_shield.SetActive (true);
+	}
+
+	public void stopWudi(){
+		wudiMode = false;
+		immutable_shield.SetActive (false);
+
 	}
 }

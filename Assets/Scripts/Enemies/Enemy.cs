@@ -168,7 +168,7 @@ public class Enemy : MonoBehaviour
 			Flip ();
 		}
 		else if (col.tag.Equals("Player") && collisionDead){
-			GameObject.FindGameObjectWithTag ("Player").GetComponent<MonkeyControl> ().death ();
+			GameObject.FindGameObjectWithTag ("Player").GetComponent<MonkeyControl> ().death (false);
 		}
 	}
 

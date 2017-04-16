@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour {
 			camera.GetComponent<MyCamera> ().previewMoving (previewPoints [pendingPreviewPoint].GetChild (0), 3.0f);
 			++pendingPreviewPoint;
 		}
-
+		/*
 		if (!inBossFight && bossCheck.GetComponent<CheckPoint>().isActivated()) {
 			GameObject boss = GameObject.FindGameObjectWithTag ("DragonBoss");
 			boss.GetComponent<DragonControl> ().enabled = true;
@@ -93,6 +93,7 @@ public class GameController : MonoBehaviour {
 			playerPos.gameObject.GetComponent<MonkeyControl> ().jumpForce = 250f;
 			inBossFight = true;
 		}
+		*/
 	}
 
 	public void disablePlayer(){
@@ -173,19 +174,17 @@ public class GameController : MonoBehaviour {
 
 	public void RebornPlayer(){
 		rebornDialog.SetActive (true);
-
+		camera.GetComponent<MyCamera> ().fixedPos = true;
 
 	//	Transform tmp = rebornPoints [pendingRebornPoint - 1];
 	//	playerPos.position = tmp.position;
 	}
 
 	public void StartReborn(){
-		Transform tmp = rebornPoints [pendingRebornPoint - 1];
-		playerPos.position = tmp.position;
-
+		camera.GetComponent<MyCamera> ().fixedPos = false;
 		MonkeyControl mc = playerPos.gameObject.GetComponent<MonkeyControl> ();
 		mc.enabled = true;
-		mc.reset ();
+		mc.reset (rebornPoints [pendingRebornPoint - 1].position);
 		rebornDialog.SetActive (false);
 	}
 
