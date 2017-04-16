@@ -2,6 +2,9 @@
 using System.Collections;
 
 public class DeathLayer : MonoBehaviour {
+
+	public bool ignoreWudiMode = false;
+
 	void Start () {
 	
 	}
@@ -13,7 +16,7 @@ public class DeathLayer : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.tag == "Player") {
-			col.GetComponent<MonkeyControl> ().death ();
+			col.GetComponent<MonkeyControl> ().death (ignoreWudiMode);
 			//	playerControl.death ();
 		}
 	}

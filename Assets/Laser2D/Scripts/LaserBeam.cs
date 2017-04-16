@@ -126,7 +126,7 @@ public class LaserBeam : MonoBehaviour {
 
                 // give enemy damage
                 if (hit.collider.tag == "Player") {
-					hit.collider.gameObject.GetComponent<MonkeyControl> ().death ();
+					hit.collider.gameObject.GetComponent<MonkeyControl> ().death (false);
 					dc.stopUlti ();
 					deactiveLaser ();
                 }

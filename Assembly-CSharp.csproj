@@ -93,6 +93,8 @@
      <Compile Include="Assets\Scripts\Weapons\FlameBulletController.cs" />
      <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
      <Compile Include="Assets\Scripts\Weapons\bombBulletController.cs" />
+     <Compile Include="Assets\Scripts\environment\FishMove.cs" />
+     <Compile Include="Assets\Scripts\environment\FishSpawner.cs" />
      <Compile Include="Assets\Scripts\herodesign\BulletEater.cs" />
      <Compile Include="Assets\Scripts\herodesign\MonkeyControl.cs" />
      <Compile Include="Assets\Scripts\mine\CheckPoint.cs" />
