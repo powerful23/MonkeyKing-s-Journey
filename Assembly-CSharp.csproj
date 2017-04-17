@@ -59,8 +59,10 @@
      <Compile Include="Assets\Scripts\DragonBoss\DragonMove.cs" />
      <Compile Include="Assets\Scripts\DragonBoss\HeadCollision.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyChase.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyHealth.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyPatrol.cs" />
      <Compile Include="Assets\Scripts\EnemyBullet.cs" />
-     <Compile Include="Assets\Scripts\EnemyChase.cs" />
      <Compile Include="Assets\Scripts\EnemyGun.cs" />
      <Compile Include="Assets\Scripts\Enemy_Phoenix.cs" />
      <Compile Include="Assets\Scripts\FireBallCtrl.cs" />
@@ -91,6 +93,7 @@
      <Compile Include="Assets\Scripts\UIScript\MissionSelect.cs" />
      <Compile Include="Assets\Scripts\Weapons\ChangeWeapon.cs" />
      <Compile Include="Assets\Scripts\Weapons\FlameBulletController.cs" />
+     <Compile Include="Assets\Scripts\Weapons\MyBullet.cs" />
      <Compile Include="Assets\Scripts\Weapons\Weapon.cs" />
      <Compile Include="Assets\Scripts\Weapons\bombBulletController.cs" />
      <Compile Include="Assets\Scripts\environment\FishMove.cs" />
@@ -107,7 +110,6 @@
      <Compile Include="Assets\Scripts\mine\MovePunch.cs" />
      <Compile Include="Assets\Scripts\mine\MoveWheel.cs" />
      <Compile Include="Assets\Scripts\mine\MovingGround.cs" />
-     <Compile Include="Assets\Scripts\mine\MyBullet.cs" />
      <Compile Include="Assets\Scripts\mine\MyCamera.cs" />
      <Compile Include="Assets\Scripts\mine\MyEnemy.cs" />
      <Compile Include="Assets\Scripts\mine\MySpawner.cs" />

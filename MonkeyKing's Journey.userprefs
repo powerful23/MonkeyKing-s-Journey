@@ -1,19 +1,21 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\traps\RollingRockCtrl.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\mine\WheelSpawner.cs">
     <Files>
       <File FileName="Assets\Scripts\Weapons\Weapon.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\GearBox\Surprise.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\Weapons\bombBulletController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\MySpawner.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\GameController.cs" Line="187" Column="59" />
-      <File FileName="Assets\Scripts\herodesign\MonkeyControl.cs" Line="215" Column="34" />
-      <File FileName="Assets\Scripts\mine\CheckPoint.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\MyBullet.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DragonBoss\HeadCollision.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\environment\FishSpawner.cs" Line="17" Column="2" />
-      <File FileName="Assets\Scripts\environment\FishMove.cs" Line="25" Column="3" />
-      <File FileName="Assets\Scripts\traps\RollingRockCtrl.cs" Line="24" Column="2" />
+      <File FileName="Assets\Scripts\EnemyBullet.cs" Line="17" Column="34" />
+      <File FileName="Assets\Scripts\DragonBoss\DragonControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\herodesign\MonkeyControl.cs" Line="214" Column="18" />
+      <File FileName="Assets\Scripts\mine\GameController.cs" Line="163" Column="4" />
+      <File FileName="Assets\Scripts\Weapons\MyBullet.cs" Line="34" Column="3" />
+      <File FileName="Assets\Scripts\Weapons\bombBulletController.cs" Line="45" Column="3" />
+      <File FileName="Assets\Scripts\EnemyGun.cs" Line="19" Column="13" />
+      <File FileName="Assets\Scripts\mine\MySpawner.cs" Line="54" Column="3" />
+      <File FileName="Assets\Scripts\mine\WheelSpawner.cs" Line="26" Column="78" />
+      <File FileName="Assets\Scripts\Enemies\Enemy.cs" Line="72" Column="31" NotebookId="1" />
+      <File FileName="Assets\Scripts\Enemies\EnemyPatrol.cs" Line="35" Column="6" NotebookId="1" />
+      <File FileName="Assets\Scripts\Enemies\EnemyChase.cs" Line="88" Column="31" NotebookId="1" />
+      <File FileName="Assets\Scripts\Enemies\EnemyHealth.cs" Line="44" Column="16" NotebookId="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

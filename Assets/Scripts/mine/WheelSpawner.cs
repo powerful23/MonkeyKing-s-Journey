@@ -21,8 +21,9 @@ public class WheelSpawner : MonoBehaviour {
 
 	void Spawn ()
 	{
+		
 		// Instantiate a rocket
-		Rigidbody2D bulletInstance = Instantiate(rocket, transform.position, transform.rotation) as Rigidbody2D;
+		Rigidbody2D bulletInstance = Instantiate(rocket, transform.position, parent.rotation) as Rigidbody2D;
 		bulletInstance.velocity = new Vector2 ((transform.position.x - parent.position.x)*speed, (transform.position.y - parent.position.y)*speed);
 
 	}

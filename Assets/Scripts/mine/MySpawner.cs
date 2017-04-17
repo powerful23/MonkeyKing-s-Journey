@@ -10,6 +10,7 @@ public class MySpawner : MonoBehaviour
 	public GameObject gameCtrl;			// reference to the gameControl script
 
 
+	private bool stopped = false;
 	private int curSpawns;				// the currentNum of the enemies spawned
 	void Start ()
 	{
@@ -32,16 +33,24 @@ public class MySpawner : MonoBehaviour
 
 	void Spawn ()
 	{
+		if (!stopped) {
+			// Instantiate a random enemy.
+			int enemyIndex = Random.Range (0, enemies.Length);
 
-		// Instantiate a random enemy.
-		int enemyIndex = Random.Range(0, enemies.Length);
+			GameObject obj = Instantiate (enemies [enemyIndex], transform.position, transform.rotation) as GameObject;
+			if (obj != null)
+				Debug.Log ("spawned");
+			obj.GetComponent<EnemyHealth> ().SetGameCtrl (gameCtrl);
+			++curSpawns;
+		}
+	}
 
-		GameObject obj = Instantiate(enemies[enemyIndex], transform.position, transform.rotation) as GameObject;
-		if (obj != null)
-			Debug.Log ("spawned");
-		obj.GetComponent<Enemy> ().SetGameCtrl (gameCtrl);
+	public void stopSpawn(){
+		stopped = true;
+	}
 
-		++curSpawns;
+	public void resumeSpawn(){
+		stopped = false;
 	}
 
 
