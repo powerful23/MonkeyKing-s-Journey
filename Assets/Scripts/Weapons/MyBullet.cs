@@ -25,7 +25,7 @@ public class MyBullet : MonoBehaviour {
 
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.tag.Equals ("Enemy")) {
-			col.gameObject.GetComponent<Enemy> ().Hurt (bulletDamage);
+			col.gameObject.GetComponent<EnemyHealth> ().Hurt (bulletDamage);
 		} else if (col.tag.Equals ("DragonBoss")) {
 			col.gameObject.GetComponent<DragonControl> ().hurt (bulletDamage);
 		} else if (col.tag.Equals ("Surprise")) {

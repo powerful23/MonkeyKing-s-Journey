@@ -34,7 +34,7 @@ public class bombBulletController : MonoBehaviour {
 		Collider2D[] objs = Physics2D.OverlapCircleAll (transform.position, bombRadius, 1 << LayerMask.NameToLayer("Enemy"));
 		foreach (Collider2D col in objs){
 			if (col.tag.Equals ("Enemy")) {
-				col.gameObject.GetComponent<Enemy> ().Hurt (bombDamage);
+				col.gameObject.GetComponent<EnemyHealth> ().Hurt (bombDamage);
 			} else if (col.tag.Equals ("DragonBoss")) {
 				col.gameObject.GetComponent<DragonControl> ().hurt (bombDamage);
 			} else if (col.tag.Equals ("Surprise")) {

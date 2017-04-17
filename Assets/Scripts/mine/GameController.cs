@@ -118,6 +118,7 @@ public class GameController : MonoBehaviour {
 	}
 
 	private void SetInvisWall(){
+		Debug.Log ("set wall");
 		cameraWidth = camera.GetComponent<Camera> ().aspect * camera.GetComponent<Camera> ().orthographicSize;
 
 		// the the position of this invisWall
@@ -142,6 +143,25 @@ public class GameController : MonoBehaviour {
 
 	}
 
+	private void stopEnemySpawn(){
+		if (inCheckPoint) {
+			MySpawner[] list = checkPoints [curCP].GetComponentsInChildren<MySpawner> ();
+			// sum the enemies up
+			foreach (MySpawner sp in list){
+				sp.stopSpawn ();
+			}
+		}
+	}
+
+	private void resumeEnemySpawn(){
+		if (inCheckPoint) {
+			MySpawner[] list = checkPoints [curCP].GetComponentsInChildren<MySpawner> ();
+			// sum the enemies up
+			foreach (MySpawner sp in list){
+				sp.resumeSpawn ();
+			}
+		}
+	}
 
 	// not used yet
 	public void IncreaseEnemy(){
@@ -151,41 +171,42 @@ public class GameController : MonoBehaviour {
 
 	// if enemy destroyed, decrease the enemyNum
 	public void DecreaseEnemy(){
-		Debug.Log ("used");
 		--enemySurvivedNum;
-
 	}
 
 	// make the camera move
 	void ResumeCameraMoving(){
 		// destroy the invisWall
 		if (invisWall != null) {
+			Debug.Log ("destroy wall");
 			Destroy (invisWall);
 			invisWall = null;
 		}
+		Debug.Log ("camera resume");
 		camera.GetComponent<MyCamera> ().fixedPos = false;
 	}
 
 	// set the invisWall and make the camera stop
 	void StopCameraMoving(){
 		SetInvisWall ();
+		Debug.Log ("camera stop");
 		camera.GetComponent<MyCamera> ().fixedPos = true;
 	}
 
 	public void RebornPlayer(){
+		stopEnemySpawn ();
 		rebornDialog.SetActive (true);
-		camera.GetComponent<MyCamera> ().fixedPos = true;
+		//camera.GetComponent<MyCamera> ().fixedPos = true;
 
-	//	Transform tmp = rebornPoints [pendingRebornPoint - 1];
-	//	playerPos.position = tmp.position;
 	}
 
 	public void StartReborn(){
-		camera.GetComponent<MyCamera> ().fixedPos = false;
+		//camera.GetComponent<MyCamera> ().fixedPos = false;
 		MonkeyControl mc = playerPos.gameObject.GetComponent<MonkeyControl> ();
 		mc.enabled = true;
 		mc.reset (rebornPoints [pendingRebornPoint - 1].position);
 		rebornDialog.SetActive (false);
+		resumeEnemySpawn ();
 	}
 
 	public void backToMissionSelect(){

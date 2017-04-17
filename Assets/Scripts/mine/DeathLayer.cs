@@ -5,19 +5,14 @@ public class DeathLayer : MonoBehaviour {
 
 	public bool ignoreWudiMode = false;
 
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
-
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.tag == "Player") {
 			col.GetComponent<MonkeyControl> ().death (ignoreWudiMode);
 			//	playerControl.death ();
+		} else{
+			if (col.GetComponent<EnemyHealth> () != null) {
+				col.GetComponent<EnemyHealth> ().Death ();
+			}
 		}
 	}
 }

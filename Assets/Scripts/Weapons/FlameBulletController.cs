@@ -33,7 +33,7 @@ public class FlameBulletController : MonoBehaviour {
 
 			foreach (RaycastHit2D hit in hits) {
 				if (hit.collider.tag.Equals ("Enemy")) {
-					hit.collider.gameObject.GetComponent<Enemy> ().Hurt (flameDamage);
+					hit.collider.gameObject.GetComponent<EnemyHealth> ().Hurt (flameDamage);
 				}else if (hit.collider.tag.Equals("Surprise")){
 					hit.collider.gameObject.GetComponent<Surprise> ().hurt (flameDamage);
 				}

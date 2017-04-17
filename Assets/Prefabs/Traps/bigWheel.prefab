@@ -112,7 +112,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013942817248}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 38.7, y: -4.577216, z: 0}
+  m_LocalPosition: {x: -3.06, y: 0.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4000011757249652}
@@ -145,7 +145,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27437648b464884fb90713648d4cfdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocket: {fileID: 50000012332419770, guid: 08d0d05bc561c234084d25f9fe0e75be, type: 2}
+  rocket: {fileID: 50837114918570496, guid: 2d209739f1bb99b489b8cf7394898bb4, type: 2}
   spawnTime: 2
   speed: 3
   parent: {fileID: 4000011791746584}
@@ -160,7 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27437648b464884fb90713648d4cfdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocket: {fileID: 50000012332419770, guid: 08d0d05bc561c234084d25f9fe0e75be, type: 2}
+  rocket: {fileID: 50837114918570496, guid: 2d209739f1bb99b489b8cf7394898bb4, type: 2}
   spawnTime: 2
   speed: 10
   parent: {fileID: 4000011791746584}
@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f27437648b464884fb90713648d4cfdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rocket: {fileID: 50000012332419770, guid: 08d0d05bc561c234084d25f9fe0e75be, type: 2}
+  rocket: {fileID: 50837114918570496, guid: 2d209739f1bb99b489b8cf7394898bb4, type: 2}
   spawnTime: 2
   speed: 3
   parent: {fileID: 4000011791746584}
