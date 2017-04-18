@@ -1,22 +1,16 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Scripts\mine\GameController.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\gameUI\Scripts\PauseMenu.cs">
     <Files>
-      <File FileName="Assets\Scripts\Weapons\Weapon.cs" Line="212" Column="25" />
-      <File FileName="Assets\Scripts\EnemyBullet.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\DragonBoss\DragonControl.cs" Line="93" Column="28" />
-      <File FileName="Assets\Scripts\herodesign\MonkeyControl.cs" Line="41" Column="8" />
-      <File FileName="Assets\Scripts\mine\GameController.cs" Line="96" Column="3" />
-      <File FileName="Assets\Scripts\Weapons\MyBullet.cs" Line="40" Column="3" />
+      <File FileName="Assets\Scripts\Weapons\Weapon.cs" Line="80" Column="38" />
+      <File FileName="Assets\Scripts\DragonBoss\DragonControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\herodesign\MonkeyControl.cs" Line="1" Column="1" />
+      <File FileName="Assets\Scripts\mine\GameController.cs" Line="50" Column="20" />
+      <File FileName="Assets\Scripts\Weapons\MyBullet.cs" Line="1" Column="1" />
       <File FileName="Assets\Scripts\Weapons\bombBulletController.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\EnemyGun.cs" Line="1" Column="1" />
-      <File FileName="Assets\Scripts\mine\MySpawner.cs" Line="54" Column="3" />
-      <File FileName="Assets\Laser2D\Scripts\LaserBeam.cs" Line="141" Column="21" />
-      <File FileName="Assets\Scripts\mine\MyCamera.cs" Line="126" Column="63" />
-      <File FileName="Assets\Scripts\Enemies\Enemy.cs" Line="72" Column="31" NotebookId="1" />
-      <File FileName="Assets\Scripts\Enemies\EnemyPatrol.cs" Line="1" Column="1" NotebookId="1" />
-      <File FileName="Assets\Scripts\Enemies\EnemyChase.cs" Line="1" Column="1" NotebookId="1" />
-      <File FileName="Assets\Scripts\Enemies\EnemyHealth.cs" Line="1" Column="1" NotebookId="1" />
+      <File FileName="Assets\Scripts\mine\MySpawner.cs" Line="1" Column="1" />
+      <File FileName="Assets\gameUI\Scripts\PauseMenu.cs" Line="24" Column="18" />
+      <File FileName="Assets\gameUI\Scripts\BarScript.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

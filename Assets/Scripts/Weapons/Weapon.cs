@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour {
 	
@@ -20,6 +21,7 @@ public class Weapon : MonoBehaviour {
 
 
 	public Vector2 bombForce;
+	public GameObject[] ui_weapons;
 
 	private MonkeyControl playerCtrl;		// Reference to the PlayerControl script.
 	private Animator anim;					// Reference to the Animator component.
@@ -34,12 +36,17 @@ public class Weapon : MonoBehaviour {
 	private AudioClip curAudio;
 
 	private int curBulletNum = 0;
+	private Text ui_weapon_num;
+	private string infiniteStr = "∞";
+
 
 	void Awake()
 	{
 		// Setting up the references.
 		anim = transform.parent.gameObject.GetComponent<Animator>();
 		playerCtrl = transform.parent.GetComponent<MonkeyControl> ();
+		ui_weapon_num = GameObject.FindGameObjectWithTag ("UI_Weapon_num").GetComponent<Text> ();
+
 		initWeapon ();
 	}
 
@@ -48,6 +55,8 @@ public class Weapon : MonoBehaviour {
 		weaponMode = 0;
 		curAudio = normalBulletAudio;
 		switchWeapon (weaponMode, 20);
+		ui_weapon_num.text = "x " + infiniteStr;
+		ui_weapons [0].SetActive (true);
 	}
 
 	public void pressFire(){
@@ -67,6 +76,8 @@ public class Weapon : MonoBehaviour {
 		GetComponent<AudioSource> ().clip = changeWeapon;
 		GetComponent<AudioSource> ().Play ();
 
+		ui_weapons [weaponMode].SetActive (false);
+		ui_weapons [mode].SetActive (true);
 		if (weaponMode == mode) {
 			curBulletNum += bullets;
 			return;
@@ -76,12 +87,17 @@ public class Weapon : MonoBehaviour {
 		weaponMode = mode;
 		if (mode == 0) {
 			curAudio = normalBulletAudio;
+			ui_weapon_num.text = "x " + infiniteStr;
+
 		} else if (mode == 1) {
 			curAudio = superBulletAudio;
+			ui_weapon_num.text = "x " + bullets.ToString();
 		} else if (mode == 2) {
 			curAudio = bombBulletAudio;
+			ui_weapon_num.text = "x " + bullets.ToString();
 		} else if (mode == 3) {
 			curAudio = flameBulletAudio;
+			ui_weapon_num.text = "x " + infiniteStr;
 		}
 	}
 
@@ -132,7 +148,7 @@ public class Weapon : MonoBehaviour {
 					GetComponent<AudioSource> ().clip = curAudio;
 					GetComponent<AudioSource> ().Play ();
 					--curBulletNum;
-
+					ui_weapon_num.text = "x " + curBulletNum.ToString();
 					// If the player is facing right...
 					if (playerCtrl.facingRight) {
 						// ... instantiate the rocket facing right and set it's velocity to the right. 
@@ -159,7 +175,7 @@ public class Weapon : MonoBehaviour {
 				GetComponent<AudioSource> ().clip = curAudio;
 				GetComponent<AudioSource> ().Play ();
 				--curBulletNum;
-
+				ui_weapon_num.text = "x " + curBulletNum.ToString();
 				// If the player is facing right...
 				if (playerCtrl.facingRight) {
 					// ... instantiate the rocket facing right and set it's velocity to the right. 
