@@ -122,6 +122,10 @@
      <Compile Include="Assets\Scripts\traps\Bubble.cs" />
      <Compile Include="Assets\Scripts\traps\RockSpawner.cs" />
      <Compile Include="Assets\Scripts\traps\RollingRockCtrl.cs" />
+     <Compile Include="Assets\gameUI\Scripts\BarScript.cs" />
+     <Compile Include="Assets\gameUI\Scripts\PauseBtnCall.cs" />
+     <Compile Include="Assets\gameUI\Scripts\PauseMenu.cs" />
+     <Compile Include="Assets\gameUI\Scripts\Stat.cs" />
      <None Include="Assets\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

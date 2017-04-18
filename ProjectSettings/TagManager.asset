@@ -24,6 +24,10 @@ TagManager:
   - Bubble
   - CheckPoint
   - PatrolEnemy
+  - HealthBar
+  - UI_Life
+  - UI_Weapon_num
+  - UI_Weapon_type
   layers:
   - Default
   - TransparentFX

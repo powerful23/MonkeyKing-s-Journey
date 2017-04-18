@@ -12,12 +12,12 @@ public class MonkeyControl : MonoBehaviour
 
 
 	public GameController gameController;
-	public SpriteRenderer healthBar;
+
 	public GameObject immutable_shield;
 
 	public AudioClip jumpClip;
 	public AudioClip collectCoinClip;
-
+	public bool wudiMode = false;
 
 
 
@@ -38,8 +38,10 @@ public class MonkeyControl : MonoBehaviour
 	private bool missionOver;
 	private bool jumpButtonClicked = false;
 
-	public bool wudiMode = false;
+
 	private Vector2 input_axis;
+
+	private BarScript healthBar;
 
 
 
@@ -57,7 +59,9 @@ public class MonkeyControl : MonoBehaviour
 		isDead = false;
 		curMonkeyHealth = monkeyHealth;
 		missionOver = false;
-		healthScale = healthBar.transform.localScale;
+		//healthScale = healthBar.transform.localScale;
+		healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<BarScript>();
+		healthBar.MaxValue = monkeyHealth;
 	}
 	void Update()
 	{
@@ -190,7 +194,7 @@ public class MonkeyControl : MonoBehaviour
 		
 		curMonkeyHealth = curMonkeyHealth - 1.0f;
 		updateHealth ();
-		if (curMonkeyHealth < 0.0f) {
+		if (curMonkeyHealth <= 0.0f) {
 			death (false);
 		}
 		
@@ -230,8 +234,9 @@ public class MonkeyControl : MonoBehaviour
 	}
 
 	public void updateHealth(){
-		healthBar.material.color = Color.Lerp (Color.green, Color.red, 1 - curMonkeyHealth * 0.1f);
-		healthBar.transform.localScale = new Vector3 (healthScale.x * curMonkeyHealth * 0.1f, healthScale.y, 1);
+		//healthBar.material.color = Color.Lerp (Color.green, Color.red, 1 - curMonkeyHealth * 0.1f);
+	//	healthBar.transform.localScale = new Vector3 (healthScale.x * curMonkeyHealth * 0.1f, healthScale.y, 1);
+		healthBar.Value = curMonkeyHealth;
 	}
 
 	public void updateScore(int s){

@@ -18,6 +18,8 @@ public class GameController : MonoBehaviour {
 	public GameObject rebornDialog;
 	public Transform bossCheck;
 
+	public float playerLifes = 6;
+
 
 	private bool[] checkPointPass;			// decide whether checkPoints are passed
 	private int curCP;						// current checkPoint
@@ -30,7 +32,7 @@ public class GameController : MonoBehaviour {
 	private int pendingPreviewPoint;
 	private bool inBossFight;
 
-
+	private Text ui_life;
 
 	// Use this for initialization
 	void Start () {
@@ -43,6 +45,10 @@ public class GameController : MonoBehaviour {
 		pendingRebornPoint = 0;
 		pendingPreviewPoint = 0;
 		inBossFight = false;
+		ui_life = GameObject.FindGameObjectWithTag ("UI_Life").GetComponent<Text> ();
+		//Debug.Log (ui_life.text);
+		ui_life.text = "x " +playerLifes.ToString();
+
 	}
 		
 	// Update is called once per frame
@@ -196,6 +202,7 @@ public class GameController : MonoBehaviour {
 
 	public void RebornPlayer(){
 		stopEnemySpawn ();
+		playerLifes--;
 		rebornDialog.SetActive (true);
 		//camera.GetComponent<MyCamera> ().fixedPos = true;
 
@@ -208,6 +215,7 @@ public class GameController : MonoBehaviour {
 		mc.reset (rebornPoints [pendingRebornPoint - 1].position);
 		rebornDialog.SetActive (false);
 		resumeEnemySpawn ();
+		ui_life.text = "x " +playerLifes.ToString();
 	}
 
 	public void backToMissionSelect(){
