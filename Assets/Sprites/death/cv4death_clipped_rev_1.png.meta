@@ -1,0 +1,400 @@
+fileFormatVersion: 2
+guid: bbe30b7bd286e44358bc85687e959466
+timeCreated: 1492536102
+licenseType: Free
+TextureImporter:
+  fileIDToRecycleName:
+    21300000: deathMove1
+    21300002: deathMove2
+    21300004: deathMove3
+    21300006: deathMove4
+    21300008: deathMove5
+    21300010: deathMove6
+    21300012: deathAttack1
+    21300014: deathAttack2
+    21300016: deathAttack3
+    21300018: deathAttack4
+    21300020: deathAttack5
+    21300022: deathAttack6
+    21300024: deathDie
+    21300026: deathCrash1
+    21300028: deathCrash2
+    21300030: deathIdel1
+    21300032: deathIdel2
+    21300034: deathDie1
+    21300036: deathDie2
+    21300038: deathDie3
+    21300040: cv4death_clipped_rev_1_21
+    21300042: cv4death_clipped_rev_1_22
+    21300044: deathFireBall
+    21300046: cv4death_clipped_rev_1_24
+    21300048: cv4death_clipped_rev_1_25
+    21300050: cv4death_clipped_rev_1_26
+    21300052: cv4death_clipped_rev_1_27
+  serializedVersion: 4
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    filterMode: -1
+    aniso: -1
+    mipBias: -1
+    wrapMode: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spritePixelsToUnits: 100
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  platformSettings:
+  - buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Standalone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: iPhone
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: Android
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  - buildTarget: WebGL
+    maxTextureSize: 2048
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: deathMove1
+      rect:
+        serializedVersion: 2
+        x: 7
+        y: 215
+        width: 65
+        height: 75
+      alignment: 9
+      pivot: {x: 0.5788764, y: 0.47544324}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathMove2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 215
+        width: 60
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathMove3
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 215
+        width: 59
+        height: 75
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathMove4
+      rect:
+        serializedVersion: 2
+        x: 200
+        y: 212
+        width: 63
+        height: 78
+      alignment: 9
+      pivot: {x: 0.7185891, y: 0.38058555}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathMove5
+      rect:
+        serializedVersion: 2
+        x: 262
+        y: 211
+        width: 67
+        height: 79
+      alignment: 9
+      pivot: {x: 0.65065336, y: 0.37396368}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathMove6
+      rect:
+        serializedVersion: 2
+        x: 331
+        y: 211
+        width: 64
+        height: 79
+      alignment: 9
+      pivot: {x: 0.55692923, y: 0.41890755}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathAttack1
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 134
+        width: 46
+        height: 77
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathAttack2
+      rect:
+        serializedVersion: 2
+        x: 47
+        y: 135
+        width: 45
+        height: 76
+      alignment: 9
+      pivot: {x: 0.49683177, y: 0.37070966}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathAttack3
+      rect:
+        serializedVersion: 2
+        x: 94
+        y: 136
+        width: 44
+        height: 72
+      alignment: 9
+      pivot: {x: 0.48604253, y: 0.42323366}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathAttack4
+      rect:
+        serializedVersion: 2
+        x: 142
+        y: 137
+        width: 54
+        height: 72
+      alignment: 9
+      pivot: {x: 0.6364738, y: 0.4573523}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathAttack5
+      rect:
+        serializedVersion: 2
+        x: 197
+        y: 138
+        width: 54
+        height: 72
+      alignment: 9
+      pivot: {x: 0.681965, y: 0.4147042}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathAttack6
+      rect:
+        serializedVersion: 2
+        x: 253
+        y: 138
+        width: 56
+        height: 72
+      alignment: 9
+      pivot: {x: 0.67546624, y: 0.44882265}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathDie
+      rect:
+        serializedVersion: 2
+        x: 318
+        y: 139
+        width: 62
+        height: 73
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathCrash1
+      rect:
+        serializedVersion: 2
+        x: 3
+        y: 53
+        width: 67
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathCrash2
+      rect:
+        serializedVersion: 2
+        x: 75
+        y: 55
+        width: 69
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathIdel1
+      rect:
+        serializedVersion: 2
+        x: 145
+        y: 55
+        width: 51
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathIdel2
+      rect:
+        serializedVersion: 2
+        x: 199
+        y: 55
+        width: 49
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathDie1
+      rect:
+        serializedVersion: 2
+        x: 251
+        y: 56
+        width: 48
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathDie2
+      rect:
+        serializedVersion: 2
+        x: 299
+        y: 56
+        width: 44
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathDie3
+      rect:
+        serializedVersion: 2
+        x: 345
+        y: 56
+        width: 50
+        height: 72
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: deathFireBall
+      rect:
+        serializedVersion: 2
+        x: 137
+        y: 12
+        width: 56
+        height: 35
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      tessellationDetail: 0
+    outline: []
+  spritePackingTag: 
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

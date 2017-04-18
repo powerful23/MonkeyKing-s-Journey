@@ -9,6 +9,10 @@ public class MyCamera : MonoBehaviour {
 	public Vector2 minXAndY;		// The minimum x and y coordinates the camera can have.
 
 	public bool fixedPos = false;   // whether the camera is stopped or not
+	public bool shake = false;
+	public float shakeAmount = 0.01f;
+
+
 	private Transform player;		// Reference to the player's transform.
 
 	private float xSmooth;		// How smoothly the camera catches up with it's target movement in the x axis.
@@ -19,6 +23,8 @@ public class MyCamera : MonoBehaviour {
 	private Transform previewTarget;
 	private float previewStartTime;
 	private float previewTime;
+
+	private float biasY = 0.0f;
 
 	// Use this for initialization
 	void Start()
@@ -73,7 +79,7 @@ public class MyCamera : MonoBehaviour {
 		fixedPos = false;
 		inPreviewMode = false;
 		smoothFactor = 2.0f / 75.0f;
-		xSmooth = smoothFactor * player.gameObject.GetComponent<PlayerControl> ().maxSpeed;
+		xSmooth = smoothFactor * player.gameObject.GetComponent<MonkeyControl> ().maxSpeed;
 	}
 
 	bool CheckXMargin()
@@ -117,15 +123,22 @@ public class MyCamera : MonoBehaviour {
 
 		// The target x and y coordinates should not be larger than the maximum or smaller than the minimum.
 		targetX = Mathf.Clamp(targetX, minXAndY.x, maxXAndY.x);
-		targetY = Mathf.Clamp(targetY, minXAndY.y, maxXAndY.y);
+		targetY = Mathf.Clamp(targetY, minXAndY.y, maxXAndY.y) + 0.03f;
 
 		// Set the camera's position to the target position with the same z component.
 		transform.position = new Vector3(targetX, targetY, transform.position.z);
+
+		if (shake) {
+			transform.position = new Vector3 (targetX + Random.Range (-1f, 1f) * shakeAmount, targetY + Random.Range (-1f, 1f) * shakeAmount + biasY, transform.position.z); 
+		} else {
+			transform.position = new Vector3 (targetX, targetY + biasY, transform.position.z);
+		}
+
 	}
 
 	public void previewMoving(Transform target, float ptime){
 		inPreviewMode = true;
-		player.gameObject.GetComponent<PlayerControl> ().enabled = false;
+		player.gameObject.GetComponent<MonkeyControl> ().enabled = false;
 		previewTarget = target;
 		previewStartTime = Time.time;
 		previewTime = ptime;
@@ -134,7 +147,7 @@ public class MyCamera : MonoBehaviour {
 	void moveCameraInPreviewMode (){
 		if (Time.time - previewStartTime > previewTime) {
 			inPreviewMode = false;
-			player.gameObject.GetComponent<PlayerControl> ().enabled = true;
+			player.gameObject.GetComponent<MonkeyControl> ().enabled = true;
 		}
 		float targetX = transform.position.x;
 		float targetY = transform.position.y;
@@ -144,4 +157,5 @@ public class MyCamera : MonoBehaviour {
 
 		transform.position = new Vector3 (targetX, targetY, transform.position.z);
 	}
+		
 }

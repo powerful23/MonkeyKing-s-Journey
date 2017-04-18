@@ -6,21 +6,15 @@ public class MySpawner : MonoBehaviour
 	public float spawnTime = 5f;		// The amount of time between each spawn.
 	public float spawnDelay = 3f;		// The amount of time before spawning starts.
 	public GameObject[] enemies;		// Array of enemy prefabs.
-	public int numToSpawn = 1;			// num of enemies to be spawned
+	public int numToSpawn;			// num of enemies to be spawned
 	public GameObject gameCtrl;			// reference to the gameControl script
 
 
+	private bool stopped = false;
 	private int curSpawns;				// the currentNum of the enemies spawned
-
-
-
-
-
 	void Start ()
 	{
-		// Start calling the Spawn function repeatedly after a delay .
 		curSpawns = 0;
-
 
 	}
 
@@ -39,18 +33,24 @@ public class MySpawner : MonoBehaviour
 
 	void Spawn ()
 	{
+		if (!stopped) {
+			// Instantiate a random enemy.
+			int enemyIndex = Random.Range (0, enemies.Length);
 
-		// Instantiate a random enemy.
-		int enemyIndex = Random.Range(0, enemies.Length);
-		GameObject obj = Instantiate(enemies[enemyIndex], transform.position, transform.rotation) as GameObject;
-		obj.GetComponent<MyEnemy> ().SetGameCtrl (gameCtrl);
-
-		// Play the spawning effect from all of the particle systems.
-		foreach(ParticleSystem p in GetComponentsInChildren<ParticleSystem>())
-		{
-			p.Play();
+			GameObject obj = Instantiate (enemies [enemyIndex], transform.position, transform.rotation) as GameObject;
+			if (obj != null)
+				Debug.Log ("spawned");
+			obj.GetComponent<EnemyHealth> ().SetGameCtrl (gameCtrl);
+			++curSpawns;
 		}
-		++curSpawns;
+	}
+
+	public void stopSpawn(){
+		stopped = true;
+	}
+
+	public void resumeSpawn(){
+		stopped = false;
 	}
 
 
