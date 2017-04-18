@@ -19,6 +19,8 @@ public class MonkeyControl : MonoBehaviour
 	public AudioClip collectCoinClip;
 
 
+
+
 //	public GameController gameController;
 
 
@@ -36,7 +38,7 @@ public class MonkeyControl : MonoBehaviour
 	private bool missionOver;
 	private bool jumpButtonClicked = false;
 
-	private bool wudiMode = false;
+	public bool wudiMode = false;
 	private Vector2 input_axis;
 
 
@@ -219,6 +221,7 @@ public class MonkeyControl : MonoBehaviour
 		updateHealth ();
 		startWudi ();
 		Invoke ("stopWudi", 2.0f);
+		GetComponentInChildren<Weapon> ().resetWeapon ();
 	}
 
 	public void missionComplete(){

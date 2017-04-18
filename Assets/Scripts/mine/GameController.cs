@@ -85,7 +85,7 @@ public class GameController : MonoBehaviour {
 			camera.GetComponent<MyCamera> ().previewMoving (previewPoints [pendingPreviewPoint].GetChild (0), 3.0f);
 			++pendingPreviewPoint;
 		}
-		/*
+
 		if (!inBossFight && bossCheck.GetComponent<CheckPoint>().isActivated()) {
 			GameObject boss = GameObject.FindGameObjectWithTag ("DragonBoss");
 			boss.GetComponent<DragonControl> ().enabled = true;
@@ -93,7 +93,7 @@ public class GameController : MonoBehaviour {
 			playerPos.gameObject.GetComponent<MonkeyControl> ().jumpForce = 250f;
 			inBossFight = true;
 		}
-		*/
+
 	}
 
 	public void disablePlayer(){
@@ -138,7 +138,7 @@ public class GameController : MonoBehaviour {
 		foreach (MySpawner sp in list){
 			sp.StartSpawn ();
 			enemySurvivedNum += sp.numToSpawn;
-
+			sp.transform.GetChild (0).gameObject.SetActive (true);
 		}
 
 	}
@@ -159,6 +159,7 @@ public class GameController : MonoBehaviour {
 			// sum the enemies up
 			foreach (MySpawner sp in list){
 				sp.resumeSpawn ();
+
 			}
 		}
 	}

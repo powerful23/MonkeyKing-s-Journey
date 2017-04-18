@@ -635,7 +635,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1000013343790570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.81, y: 0.16, z: 0}
+  m_LocalPosition: {x: 42.36, y: 5.76, z: 0}
   m_LocalScale: {x: 1.2, y: 1.2, z: 1}
   m_Children:
   - {fileID: 4000013010513896}
@@ -1149,7 +1149,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a2feaa181a17010458b67f6db131e54e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rushSpeed: 150
+  rushSpeed: 100
   roarTime: 5
   headLaserEmitter: {fileID: 1530831726703288}
   headLaserPartical: {fileID: 1702667545509710}
@@ -1160,8 +1160,9 @@ MonoBehaviour:
   explosion: {fileID: 1915618311281074, guid: 2cc4a630fe6784bb5abd50883432421e, type: 2}
   rock: {fileID: 1673288033958158, guid: c8de87da385df194c90c1dfe389fa673, type: 2}
   ground: {fileID: 0}
-  test: 1
+  test: 0
   timer: 1
+  rockSpawnPos: {fileID: 0}
   lb: {fileID: 114373359764415068}
 --- !u!114 &114000012756436244
 MonoBehaviour:

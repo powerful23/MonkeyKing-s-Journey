@@ -29,6 +29,7 @@ public class DragonControl : MonoBehaviour {
 	public bool test;
 
 	public float timer;	// the timer of the overall battle
+	public Transform rockSpawnPos;
 
 	public LaserBeam lb;
 	private float ultiStandByTimer;
@@ -89,20 +90,20 @@ public class DragonControl : MonoBehaviour {
 
 				int rnd = Random.Range (0, 100);
 				// normal attack
-				if (rnd >= 0 && rnd < 100) {
+				if (rnd >= 0 && rnd < 20) {
 					mode = 0;
 					attacking = true;
 					ultiStandByTimer = Time.time;
 					ultiReady ();
 				}
 			// rush mode
-			else if (rnd >= 0 && rnd < 0) {
+			else if (rnd >= 20 && rnd < 50) {
 					mode = 1;
 					rush ();
 					attacking = true;
 				}
 			// roar mode
-			else if (rnd >= 0 && rnd < 0) {
+			else if (rnd >= 50 && rnd < 100) {
 					mode = 2;
 					roar ();
 					attacking = true;
@@ -190,7 +191,7 @@ public class DragonControl : MonoBehaviour {
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				Vector3 spawnPosition = new Vector3 (Random.Range (42f, 52f), -4f, 0f);
+				Vector3 spawnPosition = new Vector3 (Random.Range (rockSpawnPos.position.x, rockSpawnPos.position.x + 6f), rockSpawnPos.position.y, 0f);
 				Instantiate (rock, spawnPosition, rock.transform.rotation);
 				yield return new WaitForSeconds (0.1f);
 			}
@@ -205,7 +206,7 @@ public class DragonControl : MonoBehaviour {
 		anim.SetBool ("Ulti", true);
 		Vector3 shieldPos = new Vector3 ();
 		shieldPos.x = player.position.x + Random.Range (-0.3f, 0.3f);
-		shieldPos.y = ground.position.y + 1.0f;
+		shieldPos.y = ground.position.y + 1.3f;
 		shieldPos.z = 0.0f;
 		tempShield = Instantiate (shield, shieldPos, shield.transform.rotation) as GameObject;
 	}

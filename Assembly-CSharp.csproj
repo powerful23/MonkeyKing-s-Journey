@@ -114,6 +114,7 @@
      <Compile Include="Assets\Scripts\mine\MyEnemy.cs" />
      <Compile Include="Assets\Scripts\mine\MySpawner.cs" />
      <Compile Include="Assets\Scripts\mine\RopeRender.cs" />
+     <Compile Include="Assets\Scripts\mine\SetRenderLayer.cs" />
      <Compile Include="Assets\Scripts\mine\ShootingSpawner.cs" />
      <Compile Include="Assets\Scripts\mine\TailRotator.cs" />
      <Compile Include="Assets\Scripts\mine\WheelSpawner.cs" />
@@ -121,6 +122,7 @@
      <Compile Include="Assets\Scripts\traps\Bubble.cs" />
      <Compile Include="Assets\Scripts\traps\RockSpawner.cs" />
      <Compile Include="Assets\Scripts\traps\RollingRockCtrl.cs" />
+     <None Include="Assets\KY_effects\MagicEffectsPackFree\ReadMe.txt" />
  <Reference Include="UnityEngine.UI">
  <HintPath>D:/unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>
