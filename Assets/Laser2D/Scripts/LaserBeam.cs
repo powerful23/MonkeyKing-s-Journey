@@ -32,6 +32,8 @@ public class LaserBeam : MonoBehaviour {
     [Tooltip("The Laser Glow Sprite")]
     public Transform laserGlow;
 
+	public float laserSpeed = 1f;
+
 	private DragonControl dc;
 
     private bool laserOn = false; // switching variable 
@@ -66,9 +68,8 @@ public class LaserBeam : MonoBehaviour {
     /// <summary>
     ///  get call from animation event 
     /// </summary>
-    void actvieLaser(){
+    void activeLaser(){
 		laserOn = true;
-     //   Invoke("deactiveLaser", rayDuration);
 	}
 
     /// <summary>
@@ -131,20 +132,19 @@ public class LaserBeam : MonoBehaviour {
 					deactiveLaser ();
                 }
 				if (!facingRight)
-					angle -= Time.deltaTime * 2f;
+					angle -= Time.deltaTime * laserSpeed;
 				else
-					angle += Time.deltaTime * 2f;
+					angle += Time.deltaTime * laserSpeed;
 
-				Debug.Log (angle);
 
-				if (Mathf.Abs (angle) > 5f) {
+				if (Mathf.Abs (angle) > 3f) {
 					dc.stopUlti ();
 					deactiveLaser ();
 				}
 
             }
             else {
-
+				
                 if (hitParticle != null) {
                     Destroy(hitParticle);
                 }
@@ -199,8 +199,11 @@ public class LaserBeam : MonoBehaviour {
         // switching laser and player power
 
         theAnimator.SetBool("startLaser", true);
-		angle = 0.2f;
-		actvieLaser ();
+		if (facingRight)
+			angle = 0.2f;
+		else
+			angle = -0.2f;
+		activeLaser ();
     }
 
 

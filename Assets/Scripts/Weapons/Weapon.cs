@@ -207,5 +207,9 @@ public class Weapon : MonoBehaviour {
 		}
 
 	}
+
+	public void resetWeapon(){
+		switchWeapon (0, 100);
+	}
 }
 
