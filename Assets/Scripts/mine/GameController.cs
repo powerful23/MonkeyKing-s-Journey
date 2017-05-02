@@ -14,11 +14,15 @@ public class GameController : MonoBehaviour {
 
 	public GameObject wall;					// the "PREFAB" wall which will be instantiated when player arrives the checkPoint
 	public GameObject missionCompleteTitle;		// mission complete title
-
+	public GameObject UI_gameOver;
 	public GameObject rebornDialog;
+	public Text ui_life_reborn;
+
+
 	public Transform bossCheck;
 
 	public float playerLifes = 6;
+	public float totalScore = 2900;
 
 
 	private bool[] checkPointPass;			// decide whether checkPoints are passed
@@ -33,6 +37,12 @@ public class GameController : MonoBehaviour {
 	private bool inBossFight;
 
 	private Text ui_life;
+	private Text ui_time;
+	private float used_time;
+
+	private bool needReborn = false;
+	private float dieTime;
+	private float curPlayerLifes;
 
 	// Use this for initialization
 	void Start () {
@@ -46,13 +56,17 @@ public class GameController : MonoBehaviour {
 		pendingPreviewPoint = 0;
 		inBossFight = false;
 		ui_life = GameObject.FindGameObjectWithTag ("UI_Life").GetComponent<Text> ();
-		//Debug.Log (ui_life.text);
 		ui_life.text = "x " +playerLifes.ToString();
-
+		ui_time = GameObject.FindGameObjectWithTag ("UI_Time").GetComponent<Text> ();
+		ui_time.text = "time: 00:00";
+		used_time = 0f;
+		curPlayerLifes = playerLifes;
 	}
 		
 	// Update is called once per frame
 	void Update () {
+		updateTimer ();
+
 		// if a player is in a checkPoint and find that all enemies are destroyed
 		// current checkPoint pass
 		if (inCheckPoint && enemySurvivedNum == 0) {
@@ -102,6 +116,14 @@ public class GameController : MonoBehaviour {
 
 	}
 
+	private void updateTimer(){
+		used_time += Time.deltaTime;
+		var minutes = used_time / 60;
+		var seconds = used_time % 60;
+
+		ui_time.text = string.Format ("Time: {0:00}:{1:00}", minutes, seconds);
+	}
+
 	public void disablePlayer(){
 		playerPos.gameObject.GetComponent<MonkeyControl> ().enabled = false;
 	}
@@ -119,8 +141,23 @@ public class GameController : MonoBehaviour {
 		missionCompleteTitle.SetActive (true);
 		GetComponent<AudioSource> ().Play ();
 
+
+		missionCompleteTitle.GetComponent<CompleteMenu> ().setStars (calculateStars ());
+		missionCompleteTitle.GetComponent<CompleteMenu> ().setScore ();
 		// set the text
 		//missionComplete.GetComponent<Text> ().text = "MissionComplete!";
+	}
+
+	private int calculateStars(){
+		int curScore = playerPos.gameObject.GetComponent<MonkeyControl> ().getScore ();
+		float res = (curScore * 1.0f / totalScore + curPlayerLifes * 1.0f / playerLifes) / 2;
+		if (res < 0.4f) {
+			return 1;
+		} else if (res < 0.7f) {
+			return 2;
+		} else {
+			return 3;
+		}
 	}
 
 	private void SetInvisWall(){
@@ -202,20 +239,29 @@ public class GameController : MonoBehaviour {
 
 	public void RebornPlayer(){
 		stopEnemySpawn ();
-		playerLifes--;
-		rebornDialog.SetActive (true);
-		//camera.GetComponent<MyCamera> ().fixedPos = true;
+		curPlayerLifes--;
+		if (curPlayerLifes <= 0) {
+			UI_gameOver.SetActive (true);
+
+		} else {
+			ui_life.text = "x " + curPlayerLifes.ToString ();
+
+			rebornDialog.SetActive (true);
+
+			ui_life_reborn.text = "x  " + curPlayerLifes.ToString ();
+			Invoke ("StartReborn", 1f);
+		}
+
 
 	}
 
 	public void StartReborn(){
-		//camera.GetComponent<MyCamera> ().fixedPos = false;
+		rebornDialog.SetActive (false);
 		MonkeyControl mc = playerPos.gameObject.GetComponent<MonkeyControl> ();
 		mc.enabled = true;
 		mc.reset (rebornPoints [pendingRebornPoint - 1].position);
 		rebornDialog.SetActive (false);
 		resumeEnemySpawn ();
-		ui_life.text = "x " +playerLifes.ToString();
 	}
 
 	public void backToMissionSelect(){

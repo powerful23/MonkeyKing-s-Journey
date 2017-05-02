@@ -22,6 +22,7 @@ GameObject:
   - component: {fileID: 212551148011737664}
   - component: {fileID: 61776554626301228}
   - component: {fileID: 114761819818402616}
+  - component: {fileID: 50694169989454126}
   m_Layer: 14
   m_Name: somethingInside
   m_TagString: Surprise
@@ -42,6 +43,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50694169989454126
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1782240888896196}
+  m_BodyType: 0
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0
 --- !u!61 &61776554626301228
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -69,7 +90,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   surpriseList:
   - {fileID: 1935765675400160, guid: 613dc897ca07416489624596856ff441, type: 2}
-  - {fileID: 1223166564143868, guid: 6b77240a29d506544b8df32bfbe0369e, type: 2}
   - {fileID: 1352077282955006, guid: 71b4460e7691b8942b7c751a918749f6, type: 2}
   health: 2
   explosion: {fileID: 1057968850725376, guid: 1d4b06504ec89b14fac10a7a84ff402e, type: 2}

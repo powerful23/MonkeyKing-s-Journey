@@ -23,6 +23,7 @@ public class DragonControl : MonoBehaviour {
 	public GameObject explosion;
 
 	public GameObject rock;
+	public GameObject weaponBox;
 
 	public Transform ground;
 
@@ -50,7 +51,10 @@ public class DragonControl : MonoBehaviour {
 	private Coroutine rockCoroutine = null;
 	private bool dead;
 
-
+	private float[] attack_modes;
+	private float laser_mode = 40f;
+	private float rush_mode = 30f;
+	private float roar_mode = 30f;
 
 
 	// Use this for initialization
@@ -67,6 +71,10 @@ public class DragonControl : MonoBehaviour {
 
 		gameObject.GetComponent<DragonControl> ().enabled = test;
 		dead = false;
+		attack_modes = new float[3];
+		attack_modes [0] = laser_mode;
+		attack_modes [1] = rush_mode;
+		attack_modes [2] = roar_mode;
 
 	}
 
@@ -87,40 +95,33 @@ public class DragonControl : MonoBehaviour {
 			//if not attacking and not in the cooldown
 			if (!attacking && Time.time - timer > attackCoolDown) {
 				// randomly select the mod
+				mode = getAttackMode();
 
-				int rnd = Random.Range (0, 100);
 				// normal attack
-				if (rnd >= 0 && rnd < 20) {
-					mode = 0;
+				if (mode == 0) {
 					attacking = true;
 					ultiStandByTimer = Time.time;
 					ultiReady ();
-				}
-			// rush mode
-			else if (rnd >= 20 && rnd < 50) {
-					mode = 1;
-					rush ();
-					attacking = true;
-				}
-			// roar mode
-			else if (rnd >= 50 && rnd < 100) {
-					mode = 2;
-					roar ();
-					attacking = true;
-				}
-			// ulti mode
-			else {
-					mode = 3;
-				}
+					}
+				// rush mode
+				else if (mode == 1) {
+						rush ();
+						attacking = true;
+					}
+				// roar mode
+				else if (mode == 2) {
+						roar ();
+						attacking = true;
+					}
 			} else if (attacking) {
-				// if in roar mode and exceeds the roar time limitation, stop the roar mode;
-				if (mode == 2 && Time.time - startRoar > roarTime) {
-					stopRoar ();
-				} 
-			// if in the laser mode and exceeds the standby time, start emit laser
-			else if (mode == 0 && ultiStandByTimer > 0 && Time.time - ultiStandByTimer > ultiStandBy) {
-					ultiStandByTimer = -ultiStandByTimer;
-					ulti ();
+					// if in roar mode and exceeds the roar time limitation, stop the roar mode;
+					if (mode == 2 && Time.time - startRoar > roarTime) {
+						stopRoar ();
+					} 
+				// if in the laser mode and exceeds the standby time, start emit laser
+				else if (mode == 0 && ultiStandByTimer > 0 && Time.time - ultiStandByTimer > ultiStandBy) {
+						ultiStandByTimer = -ultiStandByTimer;
+						ulti ();
 				}
 			}
 		}
@@ -141,6 +142,33 @@ public class DragonControl : MonoBehaviour {
 			Vector3 rndPos = new Vector3 (transform.position.x + Random.Range (-1f, 1f) * scale, transform.position.y + Random.Range (-1f, 1f) * scale, 0);
 			Instantiate (explosion, rndPos , randomRotation);
 		}
+	}
+
+	int getAttackMode(){
+		float sum = 0;
+		for (int i = 0; i < 3; i++) {
+			sum += attack_modes [i];
+		}
+
+		int ret = 0;
+		float rnd = Random.Range (0f,sum);
+		if (rnd < attack_modes [0]) {
+			ret = 0;
+			attack_modes [1] *= 2;
+			attack_modes [2] *= 2;
+			attack_modes [0] = laser_mode;
+		} else if (rnd < attack_modes [0] + attack_modes [1]) {
+			ret = 1;
+			attack_modes [0] *= 2;
+			attack_modes [2] *= 2;
+			attack_modes [1] = rush_mode;
+		} else {
+			ret = 2;
+			attack_modes [0] *= 2;
+			attack_modes [1] *= 2;
+			attack_modes [2] = roar_mode;
+		}
+		return ret;
 	}
 
 	// stop the roar mode, stop the animation and reset timer, stop camera shake
@@ -189,13 +217,17 @@ public class DragonControl : MonoBehaviour {
 		yield return new WaitForSeconds (0);
 		while (true)
 		{
-			for (int i = 0; i < 5; i++)
+			for (int i = 0; i < 3; i++)
 			{
 				Vector3 spawnPosition = new Vector3 (Random.Range (rockSpawnPos.position.x, rockSpawnPos.position.x + 6f), rockSpawnPos.position.y, 0f);
-				Instantiate (rock, spawnPosition, rock.transform.rotation);
-				yield return new WaitForSeconds (0.1f);
+				float tmp = Random.Range (0f, 1f);
+				if (tmp < 0.93f)
+					Instantiate (rock, spawnPosition, rock.transform.rotation);
+				else
+					Instantiate (weaponBox, spawnPosition, rock.transform.rotation);
+				yield return new WaitForSeconds (0.2f);
 			}
-			yield return new WaitForSeconds (0.5f);
+			yield return new WaitForSeconds (1f);
 		}
 	}
 
@@ -204,14 +236,20 @@ public class DragonControl : MonoBehaviour {
 	// in the ready stage, instantiate a shield for player to hide
 	void ultiReady(){
 		anim.SetBool ("Ulti", true);
+
+		Invoke ("produceShield", 1f);
+
+	}
+	void ulti(){
+		lb.FireLaser ();
+	}
+
+	void produceShield(){
 		Vector3 shieldPos = new Vector3 ();
 		shieldPos.x = player.position.x + Random.Range (-0.3f, 0.3f);
 		shieldPos.y = ground.position.y + 1.3f;
 		shieldPos.z = 0.0f;
 		tempShield = Instantiate (shield, shieldPos, shield.transform.rotation) as GameObject;
-	}
-	void ulti(){
-		lb.FireLaser ();
 	}
 
 	void rush(){

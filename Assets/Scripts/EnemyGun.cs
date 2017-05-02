@@ -13,7 +13,7 @@ public class EnemyGun : MonoBehaviour
 	void Start ()
 	{
 		//StartCoroutine (Fire ());
-		InvokeRepeating ("Fire", 2f, attackCoolDown);
+		InvokeRepeating ("Fire", 0.5f, attackCoolDown);
 	}
 		
 	void Fire()

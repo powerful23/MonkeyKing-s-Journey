@@ -136,6 +136,10 @@ MonoBehaviour:
   playerPos: {fileID: 0}
   checkPoints:
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   rebornPoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -143,9 +147,13 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  previewPoints:
   - {fileID: 0}
+  - {fileID: 0}
+  previewPoints: []
   wall: {fileID: 1000013247328130, guid: c8d1d1dd3ca792846872179dd23481ca, type: 2}
   missionCompleteTitle: {fileID: 0}
+  UI_gameOver: {fileID: 0}
   rebornDialog: {fileID: 0}
+  ui_life_reborn: {fileID: 0}
   bossCheck: {fileID: 0}
+  playerLifes: 20

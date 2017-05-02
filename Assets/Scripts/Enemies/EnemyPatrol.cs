@@ -80,11 +80,6 @@ public class EnemyPatrol : MonoBehaviour {
 	}
 
 
-	void OnTriggerEnter2D(Collider2D col){
-		if (col.tag.Equals ("Player") && collisionDead) {
-			col.GetComponent<MonkeyControl> ().death (false);
-	
-		}
-	}
+
 
 }

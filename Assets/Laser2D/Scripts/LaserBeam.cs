@@ -34,9 +34,12 @@ public class LaserBeam : MonoBehaviour {
 
 	public float laserSpeed = 1f;
 
+	public float max_angle;
+
 	private DragonControl dc;
 
     private bool laserOn = false; // switching variable 
+
 
 	private LineRenderer lineRenderer; 
 	private Animator theAnimator; // to animate laser beginning animation 
@@ -70,6 +73,8 @@ public class LaserBeam : MonoBehaviour {
     /// </summary>
     void activeLaser(){
 		laserOn = true;
+		GetComponent<AudioSource> ().Play ();
+
 	}
 
     /// <summary>
@@ -79,6 +84,7 @@ public class LaserBeam : MonoBehaviour {
         theAnimator.SetBool("startLaser", false);
         laserOn = false;
 		lineRenderer.enabled = false;
+		GetComponent<AudioSource> ().Stop ();
     }
 
 
@@ -137,7 +143,7 @@ public class LaserBeam : MonoBehaviour {
 					angle += Time.deltaTime * laserSpeed;
 
 
-				if (Mathf.Abs (angle) > 3f) {
+				if (Mathf.Abs (angle) > max_angle) {
 					dc.stopUlti ();
 					deactiveLaser ();
 				}
@@ -203,7 +209,8 @@ public class LaserBeam : MonoBehaviour {
 			angle = 0.2f;
 		else
 			angle = -0.2f;
-		activeLaser ();
+		Invoke("activeLaser", 1.5f);
+
     }
 
 

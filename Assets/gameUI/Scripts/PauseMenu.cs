@@ -11,6 +11,8 @@ public class PauseMenu : MonoBehaviour {
 
 	public bool isPaused;
 
+	public int levelSelect;
+
 	public GameObject pauseMenuCanvas;
 
 	public Button pauseBtn;
@@ -46,6 +48,14 @@ public class PauseMenu : MonoBehaviour {
 
 	public void MainMenu() {
 		SceneManager.LoadScene (mainMenu);
+	}
+
+	public void LevelSelect(){
+		SceneManager.LoadScene (levelSelect);
+	}
+
+	public void NextLevel(int nextLevel){
+		SceneManager.LoadScene (nextLevel);
 	}
 
 	void TurnIsPaused() {

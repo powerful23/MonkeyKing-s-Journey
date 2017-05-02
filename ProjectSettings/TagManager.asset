@@ -28,6 +28,9 @@ TagManager:
   - UI_Life
   - UI_Weapon_num
   - UI_Weapon_type
+  - UI_Score
+  - UI_Time
+  - UI_LifeReborn
   layers:
   - Default
   - TransparentFX

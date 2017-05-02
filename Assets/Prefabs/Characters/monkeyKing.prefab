@@ -177,7 +177,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1638769492810122
 GameObject:
   m_ObjectHideFlags: 0
@@ -359,7 +359,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1472608406781666}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.52, y: 0.21, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.08, y: 0.08, z: 1}
   m_Children:
   - {fileID: 4990811589882056}
@@ -663,7 +663,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 8b4e61c51941a46d1aac273472c814fd, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.695
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -762,13 +762,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   facingRight: 1
   maxSpeed: 100
-  jumpForce: 200
-  monkeyHealth: 10
+  jumpForce: 230
+  monkeyHealth: 5
   gameController: {fileID: 0}
-  healthBar: {fileID: 212772616291696328}
   immutable_shield: {fileID: 1185437923289400}
   jumpClip: {fileID: 8300000, guid: 50a8d8a939a0f4e77a0dac6ecd2e582b, type: 3}
   collectCoinClip: {fileID: 8300000, guid: 6fcba97eb27e01c4cbf909ecd916ff72, type: 3}
+  deathClip: {fileID: 8300000, guid: 3b49f3d70b47d264a8639826ab710da4, type: 3}
+  wudiMode: 0
 --- !u!114 &114816730789867872
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -791,7 +792,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c2da1133d50b8145b731bd87e9172f4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 15
+  speed: 5
   normalBullet: {fileID: 50000012332419770, guid: 08d0d05bc561c234084d25f9fe0e75be,
     type: 2}
   superBullet: {fileID: 50041154987269468, guid: e687f9e6a42410a4f9f54bc051a104d6,
@@ -805,9 +806,14 @@ MonoBehaviour:
   bombBulletAudio: {fileID: 8300000, guid: 8b4e61c51941a46d1aac273472c814fd, type: 3}
   flameBulletAudio: {fileID: 8300000, guid: 734b489b580e2ff41b9c3489c029a569, type: 3}
   changeWeapon: {fileID: 8300000, guid: 3284ef8ffd12bbd459cd9afeae9d7b7d, type: 3}
-  normalFireCoolDown: 0.5
+  normalFireCoolDown: 0.2
   superFireCoolDown: 0.1
-  bombForce: {x: 100, y: 100}
+  bombForce: {x: 300, y: 90}
+  ui_weapons:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!212 &212095733795168604
 SpriteRenderer:
   m_ObjectHideFlags: 1
