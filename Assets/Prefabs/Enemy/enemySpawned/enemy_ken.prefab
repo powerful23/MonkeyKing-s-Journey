@@ -211,7 +211,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bullet: {fileID: 50378408273857652, guid: 243392a744fb44e7e9d9426957a5b6ae, type: 2}
-  speed: 150
+  speed: 75
   attackCoolDown: 2
   body: {fileID: 0}
   enemyAnim: {fileID: 0}
@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 215c6af142aacb142b1f8212db577286, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  HP: 5
+  HP: 3
 --- !u!212 &212666408546923428
 SpriteRenderer:
   m_ObjectHideFlags: 1

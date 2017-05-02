@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MoneyCtrl : MonoBehaviour {
 	public float rotateSpeed;
 	public int score = 100;
+
+
 
 	// Use this for initialization
 	void Start () {
@@ -24,6 +27,7 @@ public class MoneyCtrl : MonoBehaviour {
 	void OnTriggerEnter2D(Collider2D col){
 		if (col.tag.Equals ("Player")) {
 			col.gameObject.GetComponent<MonkeyControl> ().updateScore (score);
+
 			Destroy (gameObject);
 		}
 	}

@@ -380,8 +380,8 @@ MonoBehaviour:
     UnLocked: 1
     IsInteractable: 1
   - LevelText: 2
-    UnLocked: 0
-    IsInteractable: 0
+    UnLocked: 1
+    IsInteractable: 1
   - LevelText: 3
     UnLocked: 0
     IsInteractable: 0

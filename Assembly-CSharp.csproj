@@ -58,8 +58,10 @@
      <Compile Include="Assets\Scripts\DragonBoss\DragonControl.cs" />
      <Compile Include="Assets\Scripts\DragonBoss\DragonMove.cs" />
      <Compile Include="Assets\Scripts\DragonBoss\HeadCollision.cs" />
+     <Compile Include="Assets\Scripts\DragonBoss\MeteorCtrl.cs" />
      <Compile Include="Assets\Scripts\Enemies\Enemy.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyChase.cs" />
+     <Compile Include="Assets\Scripts\Enemies\EnemyDeathZone.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyHealth.cs" />
      <Compile Include="Assets\Scripts\Enemies\EnemyPatrol.cs" />
      <Compile Include="Assets\Scripts\EnemyBullet.cs" />
@@ -86,6 +88,7 @@
      <Compile Include="Assets\Scripts\ScoreShadow.cs" />
      <Compile Include="Assets\Scripts\SetParticleSortingLayer.cs" />
      <Compile Include="Assets\Scripts\Spawner.cs" />
+     <Compile Include="Assets\Scripts\UI\CompleteMenu.cs" />
      <Compile Include="Assets\Scripts\UI\LevelButton.cs" />
      <Compile Include="Assets\Scripts\UI\LevelManager.cs" />
      <Compile Include="Assets\Scripts\UIScript\ImageSelected.cs" />

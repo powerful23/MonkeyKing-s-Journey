@@ -24,7 +24,7 @@ public class MyCamera : MonoBehaviour {
 	private float previewStartTime;
 	private float previewTime;
 
-	private float biasY = 0.0f;
+	public float biasY = 0.0f;
 
 	// Use this for initialization
 	void Start()
@@ -99,7 +99,7 @@ public class MyCamera : MonoBehaviour {
 	void FixedUpdate ()
 	{
 		//if the camera is not stopped, track the player
-		if (!fixedPos && !inPreviewMode)	TrackPlayer();
+		if (!inPreviewMode)	TrackPlayer();
 		if (inPreviewMode)
 			moveCameraInPreviewMode ();
 	}
@@ -110,6 +110,8 @@ public class MyCamera : MonoBehaviour {
 		// By default the target x and y coordinates of the camera are it's current x and y coordinates.
 		float targetX = transform.position.x;
 		float targetY = transform.position.y;
+
+		float fixedX = transform.position.x;
 
 		// If the player has moved beyond the x margin...
 		if(CheckXMargin())
@@ -123,16 +125,22 @@ public class MyCamera : MonoBehaviour {
 
 		// The target x and y coordinates should not be larger than the maximum or smaller than the minimum.
 		targetX = Mathf.Clamp(targetX, minXAndY.x, maxXAndY.x);
-		targetY = Mathf.Clamp(targetY, minXAndY.y, maxXAndY.y) + 0.03f;
+		targetY = Mathf.Clamp(targetY, minXAndY.y, maxXAndY.y) + biasY;
 
 		// Set the camera's position to the target position with the same z component.
-		transform.position = new Vector3(targetX, targetY, transform.position.z);
-
-		if (shake) {
-			transform.position = new Vector3 (targetX + Random.Range (-1f, 1f) * shakeAmount, targetY + Random.Range (-1f, 1f) * shakeAmount + biasY, transform.position.z); 
-		} else {
-			transform.position = new Vector3 (targetX, targetY + biasY, transform.position.z);
+		if (!fixedPos) {
+			if (shake) {
+				transform.position = new Vector3 (targetX + Random.Range (-1f, 1f) * shakeAmount, targetY + Random.Range (-1f, 1f) * shakeAmount, transform.position.z); 
+			} else {
+				transform.position = new Vector3 (targetX, targetY, transform.position.z);
+			}
 		}
+		else {
+			
+			transform.position = new Vector3 (fixedX, targetY, transform.position.z);
+		}
+		
+
 
 	}
 

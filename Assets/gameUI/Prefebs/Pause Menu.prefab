@@ -440,9 +440,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c5d1517e37f742dcb25dfcaf0002c7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentScene: 0
+  currentScene: 2
   mainMenu: 0
   isPaused: 0
+  levelSelect: 1
   pauseMenuCanvas: {fileID: 1854752903224082}
   pauseBtn: {fileID: 0}
 --- !u!114 &114361076332247880

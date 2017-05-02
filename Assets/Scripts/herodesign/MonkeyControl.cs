@@ -17,11 +17,8 @@ public class MonkeyControl : MonoBehaviour
 
 	public AudioClip jumpClip;
 	public AudioClip collectCoinClip;
+	public AudioClip deathClip;
 	public bool wudiMode = false;
-
-
-
-//	public GameController gameController;
 
 
 	private Transform groundCheck;
@@ -37,15 +34,13 @@ public class MonkeyControl : MonoBehaviour
 	private Vector3 healthScale;
 	private bool missionOver;
 	private bool jumpButtonClicked = false;
-
-
 	private Vector2 input_axis;
-
 	private BarScript healthBar;
-
-
-
 	private int score;
+	private Text ui_score;
+
+	private float jumpCD = 0.4f;
+	private float lastJumpTime;
 
 
 	void Awake()
@@ -62,6 +57,8 @@ public class MonkeyControl : MonoBehaviour
 		//healthScale = healthBar.transform.localScale;
 		healthBar = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<BarScript>();
 		healthBar.MaxValue = monkeyHealth;
+
+		ui_score = GameObject.FindGameObjectWithTag ("UI_Score").GetComponent<Text> ();
 	}
 	void Update()
 	{
@@ -132,7 +129,10 @@ public class MonkeyControl : MonoBehaviour
 	}
 
 	public void jbuttonClick(){
-		jumpButtonClicked = true;
+		if (Time.time - lastJumpTime > jumpCD) {
+			lastJumpTime = Time.time;
+			jumpButtonClicked = true;
+		}
 
 	}
 
@@ -143,10 +143,12 @@ public class MonkeyControl : MonoBehaviour
 			moveCharacterLeft ();
 		else stopCharacter ();
 		
-
-		if (axis.y > 0.3f) {
+		/*
+		if (axis.y > 0.3f && Time.time - lastJumpTime > jumpCD) {
+			lastJumpTime = Time.time;
 			jbuttonClick ();
 		}
+		*/
 		
 	}
 
@@ -211,6 +213,9 @@ public class MonkeyControl : MonoBehaviour
 			jump = false;
 			grounded = false;
 			isDead = true;
+			GetComponent<AudioSource> ().clip = deathClip;
+			GetComponent<AudioSource> ().Play ();
+
 			gameController.RebornPlayer ();
 
 		}
@@ -243,6 +248,8 @@ public class MonkeyControl : MonoBehaviour
 		GetComponent<AudioSource> ().clip = collectCoinClip;
 		GetComponent<AudioSource> ().Play ();
 		score += s;
+
+		ui_score.text = "Score: " + score.ToString ();
 	}
 
 	public void startWudi(){
@@ -254,5 +261,9 @@ public class MonkeyControl : MonoBehaviour
 		wudiMode = false;
 		immutable_shield.SetActive (false);
 
+	}
+
+	public int getScore(){
+		return score;
 	}
 }

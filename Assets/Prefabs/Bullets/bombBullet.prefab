@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7b7dcc48e9c5fc5448b99a3256b06a5d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timeToBomb: 2
+  timeToBomb: 0.3
   explosion: {fileID: 1057968850725376, guid: 1d4b06504ec89b14fac10a7a84ff402e, type: 2}
   bombRadius: 0.5
   bombDamage: 2

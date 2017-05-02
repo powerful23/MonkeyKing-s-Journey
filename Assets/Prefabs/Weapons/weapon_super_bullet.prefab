@@ -68,7 +68,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponType: 1
-  bulletNum: 30
+  bulletNum: 60
 --- !u!212 &212921022906801374
 SpriteRenderer:
   m_ObjectHideFlags: 1
